@@ -1,0 +1,8 @@
+.item {
+  transition: all 200ms ease-in;
+
+  &__deleted {
+    composes: item;
+    opacity: 0;
+  }
+}
