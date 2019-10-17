@@ -1,0 +1,6 @@
+export const FIELD_TITLE = 'FIELD_TITLE'
+export const FIELD_ANNOTATION = 'FIELD_ANNOTATION'
+export const FIELD_TEXT = 'FIELD_TEXT'
+export const FIELD_BANNER = 'FIELD_BANNER'
+export const FIELD_STATUS = 'FIELD_STATUS'
+export const FIELD_DATA = 'FIELD_DATA'
