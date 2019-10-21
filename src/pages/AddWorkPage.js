@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Field, Form as FinalForm } from 'react-final-form'
 import { Container, Form, Button } from 'react-bootstrap'
-import { submitWork } from '../axios'
+import { submitWork } from '../axios/work'
 import SectionStatus from '../components/SectionStatus/SectionStatus'
 import Padding from '../components/Padding/Padding'
 import { FAIL } from '../constants/STATUSES'
@@ -9,19 +9,21 @@ import { withRouter } from 'react-router'
 import arrayMutators from 'final-form-arrays'
 import InputEditor from '../components/InputEditor/InputEditor'
 import InputImage from '../components/InputImage/InputImage'
-import { FIELD_ANNOTATION, FIELD_BANNER, FIELD_STATUS, FIELD_TEXT, FIELD_TITLE } from '../constants/WORK_FIELDS_NAME'
+const { FIELD_ANNOTATION, FIELD_BANNER, FIELD_STATUS, FIELD_TEXT, FIELD_TITLE, FORM_ADD_WORK, FIELD_TAGS } = require('../constants/WORK_FIELDS_NAME')
 
-const AddWorkPage = ({ location }) => {
+const AddWorkPage = ({ location, history }) => {
   const prevData = location.state || {}
   const [ status, setStatus ] = useState(null)
   const [ pending, setPending ] = useState(false)
   const submit = data => {
     setPending(true)
     setStatus(null)
-    console.log(data)
     submitWork(data, prevData.id)
       .then(res => {
         setStatus(res)
+        setTimeout(() => {
+          history.goBack()
+        }, 1000)
         setPending(false)
       })
       .catch(e => {
@@ -33,6 +35,7 @@ const AddWorkPage = ({ location }) => {
   return (
     <Container style={{marginTop: '5vh', minHeight: '120vh'}}>
       <FinalForm
+        form={FORM_ADD_WORK}
         mutators={arrayMutators}
         onSubmit={submit}
         initialValues={prevData}
@@ -63,6 +66,12 @@ const AddWorkPage = ({ location }) => {
               <label>Аннотация</label>
               <Field name={FIELD_ANNOTATION} >
                 {({input}) => <Form.Control as="textarea" rows="3"  placeholder="Аннотация" {...input} />}
+              </Field>
+            </Form.Group>
+            <Form.Group>
+              <label>Теги</label>
+              <Field name={FIELD_TAGS} >
+                {({input}) => <Form.Control as="textarea" rows="3"  placeholder="#Что-то" {...input} />}
               </Field>
             </Form.Group>
             <Form.Group>

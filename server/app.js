@@ -1,28 +1,18 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var getTariffs = require('./routes/getTariffs')
 var works = require('./routes/works')
+var report = require('./routes/report')
 var cors = require('cors')
+const connectionConfig = require('./constants/index')
 
 
 var app = express();
 
 const mysql = require("mysql2");
 
-const pool = mysql.createPool({
-  connectionLimit: 5,
-  host: "unclespace.beget.tech",
-  user: "unclespace_test",
-  database: "unclespace_test",
-  password: "Rooom131!"
-});
-
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'pug');
+const pool = mysql.createPool(connectionConfig);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -32,8 +22,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors())
 
-getTariffs(app, pool)
 works(app, pool)
+report(app, pool)
 
 // error handler
 app.use(function(err, req, res, next) {

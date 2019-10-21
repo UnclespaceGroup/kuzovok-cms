@@ -1,11 +1,15 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useMemo } from 'react'
 
 import 'jodit/build/jodit.min.css'
 import JoditEditor from 'jodit-react'
 
 const InputEditor = ({ input }) => {
-
+  const [ val, setVal ] = useState()
   const editor = useRef(null)
+
+  useMemo(() => {
+    setVal(input.value)
+  }, [input.value])
 
   const config = {
     uploader: {
@@ -13,17 +17,18 @@ const InputEditor = ({ input }) => {
     },
     minHeight: 500,
     language: 'ru',
+    readonly: false,
     toolbarSticky: false,
     disablePlugins: 'hotkeys'
   }
 
   return (
-    <JoditEditor
-      ref={editor}
-      value={input.value}
-      config={config}
-      onBlur={newContent => input.onChange(newContent)}
-    />
+    <div onBlur={() => {input.onChange(editor.current.state.value)}}>
+      <JoditEditor
+        value={val}
+        ref={editor}
+      />
+    </div>
   )
 }
-export default InputEditor
+export default React.memo(InputEditor)

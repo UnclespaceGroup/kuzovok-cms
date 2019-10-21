@@ -1,33 +1,42 @@
 const {
-  FIELD_ANNOTATION, FIELD_BANNER,
-  FIELD_STATUS,
+  FIELD_ANNOTATION,
+  FIELD_IMAGES,
   FIELD_TEXT,
   FIELD_TITLE,
   FIELD_DATE,
-  FIELD_DATA,
-  FIELD_TAGS
+  FIELD_PARENT_ID
 } = require('../../src/constants/WORK_FIELDS_NAME')
 
-const workPath = '/work/'
+const workPath = '/report/'
 const bodyParser = require('body-parser')
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-const createWorkArray = (data = {}) => ([
-  data[FIELD_TITLE] || '',
-  data[FIELD_ANNOTATION] || '',
-  data[FIELD_TEXT] || '',
-  data[FIELD_STATUS] || '',
-  data[FIELD_DATE] || new Date().toString(),
-  data[FIELD_BANNER] || '',
-  data[FIELD_DATA] || '',
-  data[FIELD_TAGS] || ''
-])
+const ARRAY = [
+  FIELD_DATE, FIELD_TITLE, FIELD_ANNOTATION, FIELD_TEXT, FIELD_IMAGES, FIELD_PARENT_ID
+]
+
+const createWorkArray = (data = {}) => {
+  const arr = ARRAY.map(item => data[item] || '')
+  arr[0] = new Date().toString()
+  return arr
+}
 const createWorkString = (data) => {
   const keys = Object.keys(data)
   let str = ''
   keys.forEach((key) => {
-    if (data[key] && key !== 'id') str += `${key}="${data[key]}", `
+    if (data[key] && key !== 'id') {
+      str += `${key}='${data[key]}', `
+    }
+  })
+  return str.substring(0, str.length - 2)
+}
+
+const createFilterParams = (data) => {
+  const keys = Object.keys(data)
+  let str = ''
+  keys.forEach(key => {
+    str += `${key}='${data[key]}', `
   })
   return str.substring(0, str.length - 2)
 }
@@ -35,7 +44,10 @@ const createWorkString = (data) => {
 module.exports = function (app, pool) {
   // GET ALL
   app.get(workPath, (req, res) => {
-    pool.query('SELECT * FROM works', function (err, data) {
+    console.log(req.query)
+    const params = Object.keys(req.query).length ? `WHERE ${createFilterParams(req.query)}` : ''
+    console.log(params)
+    pool.query(`SELECT * FROM reports ${params}`, function (err, data) {
       if (err) return console.log(err)
       res.send(data)
     })
@@ -44,18 +56,20 @@ module.exports = function (app, pool) {
   // ADD NEW
   app.post(workPath, urlencodedParser, (req, res) => {
     const data = req.body
-    const sql = `INSERT INTO works(${FIELD_TITLE}, ${FIELD_ANNOTATION}, ${FIELD_TEXT}, ${FIELD_STATUS}, ${FIELD_DATE}, ${FIELD_BANNER}, ${FIELD_DATA}, ${FIELD_TAGS}) VALUES(?,?,?,?,?,?,?,?)`
     const resData = createWorkArray(data)
+    const listResData = ARRAY.join(', ')
+    const sql = `INSERT INTO reports (${listResData}) VALUES(?,?,?,?,?,?)`
+    console.log(resData)
     pool.query(sql, resData, function (err, data) {
       if (err) return console.log(err)
       res.send(data)
     })
   })
 
-  // update
+  // UPDATE
   app.post(workPath + ':id', urlencodedParser, (req, res) => {
     const data = req.body
-    const sql = `UPDATE works SET ${createWorkString(data)} WHERE id LIKE ${req.params.id}`
+    const sql = `UPDATE reports SET ${createWorkString(data)} WHERE id LIKE ${req.params.id}`
     console.log(sql)
     pool.query(sql, function (err, data) {
       if (err) return console.log(err)
@@ -65,17 +79,7 @@ module.exports = function (app, pool) {
 
   // GET SINGLE
   app.get(workPath + ':id', (req, res) => {
-    const sql = `SELECT * FROM works WHERE id = ${req.params.id} LIMIT 1`
-    pool.query(sql, function (err, data) {
-      if (err) return console.log(err)
-      data.content && console.log(JSON.parse(data.content))
-      res.send(data)
-    })
-  })
-
-  // GET ALL
-  app.get(workPath, (req, res) => {
-    const sql = `SELECT * FROM works`
+    const sql = `SELECT * FROM reports WHERE id = ${req.params.id} LIMIT 1`
     pool.query(sql, function (err, data) {
       if (err) return console.log(err)
       data.content && console.log(JSON.parse(data.content))
@@ -85,7 +89,7 @@ module.exports = function (app, pool) {
 
   // DELETE
   app.delete(workPath + ':id', (req, res) => {
-    const sql = `DELETE FROM works WHERE id=${req.params.id}`
+    const sql = `DELETE FROM reports WHERE id=${req.params.id}`
     pool.query(sql, function (err, data) {
       if (err) return console.log(err)
       res.send(data)

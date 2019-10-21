@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Field, Form as FinalForm } from 'react-final-form'
 import { Container, Form, Button } from 'react-bootstrap'
-import { submitArticle, submitWork } from '../axios'
+import { submitArticle, submitWork } from '../axios/work'
 import SectionStatus from '../components/SectionStatus/SectionStatus'
 import Padding from '../components/Padding/Padding'
 import { FAIL } from '../constants/STATUSES'
