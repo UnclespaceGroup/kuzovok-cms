@@ -11,16 +11,16 @@ const InputEditor = ({ input }) => {
     setVal(input.value)
   }, [input.value])
 
-  const config = {
-    uploader: {
-      insertImageAsBase64URI: true
-    },
-    minHeight: 500,
-    language: 'ru',
-    readonly: false,
-    toolbarSticky: false,
-    disablePlugins: 'hotkeys'
-  }
+  // const config = {
+  //   uploader: {
+  //     insertImageAsBase64URI: true
+  //   },
+  //   minHeight: 500,
+  //   language: 'ru',
+  //   readonly: false,
+  //   toolbarSticky: false,
+  //   disablePlugins: 'hotkeys'
+  // }
 
   return (
     <div onBlur={() => {input.onChange(editor.current.state.value)}}>

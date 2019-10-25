@@ -4,6 +4,7 @@ import css from './InputImage.module.scss'
 import Padding from '../Padding/Padding'
 
 const InputImage = ({ input, remove }) => {
+  const removeImage = remove || input.onChange
   return (
     <div className={css.container}>
       <div>{ input.value && <img className={css.image} src={input.value} alt={'Не корректная картинка'} />}</div>
@@ -11,7 +12,7 @@ const InputImage = ({ input, remove }) => {
       <InputGroup className="mb-3">
         <Form.Control {...input} />
         <InputGroup.Prepend>
-          <Button variant={'danger'} onClick={() => { remove() }} >Удалить картинку</Button>
+          <Button variant={'danger'} onClick={() => {  removeImage('') }} >Удалить картинку</Button>
         </InputGroup.Prepend>
       </InputGroup>
       <Padding value={10} />

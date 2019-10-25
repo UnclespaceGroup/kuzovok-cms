@@ -1,5 +1,7 @@
 export const HOME_PAGE = '/'
 export const ADD_WORK_PAGE = '/add-work'
 export const ADD_REPORT_PAGE = '/add-report'
+export const ADD_SERVICE_PAGE = '/add-service'
 export const WORKS_PAGE = '/show-works'
 export const REPORTS_PAGE = '/show-reports'
+export const SERVICES_PAGE = '/show-services'

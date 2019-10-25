@@ -34,7 +34,7 @@ const createWorkString = (data) => {
 
 module.exports = function (app, pool) {
   // GET ALL
-  app.get(workPath, (req, res) => {
+  app.get(workPath, urlencodedParser, (req, res) => {
     pool.query('SELECT * FROM works', function (err, data) {
       if (err) return console.log(err)
       res.send(data)
