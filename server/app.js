@@ -7,9 +7,34 @@ var report = require('./routes/report')
 var services = require('./routes/services')
 var cors = require('cors')
 const connectionConfig = require('./constants/index')
-const auth = require('./routes/auth')
 const passport = require('passport')
 
+
+const whitelist = [
+  'http://localhost:3000',
+  'http://localhost:3002',
+  'http://localhost:3003',
+  'http://localhost:8060',
+];
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  optionsSuccessStatus: 200,
+};
+
+function authenticationMiddleware () {
+  return function (req, res, next) {
+    if (req.isAuthenticated()) {
+      return next()
+    }
+    res.redirect('/')
+  }
+}
 
 
 var app = express()
@@ -20,14 +45,13 @@ require('./config/passport');
 const pool = mysql.createPool(connectionConfig);
 
 app.use(passport.initialize());
-
+app.use(cors(corsOptions))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(cors())
+const authenticate = passport.authenticate('jwt', { session: false })
 
 require('./routes/auth/loginUser')(app);
 require('./routes/auth/registerUser')(app);
@@ -39,12 +63,10 @@ require('./routes/auth/findUsers')(app);
 require('./routes/auth/deleteUser')(app);
 require('./routes/auth/updateUser')(app);
 
-works(app, pool)
-report(app, pool)
-services(app, pool)
-auth(app, pool)
+works(app, pool, authenticate)
+report(app, pool, authenticate)
+services(app, pool, authenticate)
 
-require('./routes/auth')
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -58,7 +80,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(3003, function(){
+app.listen(3002, function(){
   console.log("Сервер ожидает подключения...");
 });
 

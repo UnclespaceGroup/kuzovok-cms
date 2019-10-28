@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { BASE_URL, METHOD_ARTICLE, METHOD_WORK } from '../constants/ADDRESS'
+import { JWT } from '../constants/OTHER'
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.post['Content-Type'] ='application/json';
@@ -23,7 +24,11 @@ export const submitArticle = async (data) => {
 }
 
 export const getWorks = async () => {
-  return await axios.get(METHOD_WORK)
+  const accessString = localStorage.getItem(JWT)
+  console.log(accessString)
+  return await axios.get(METHOD_WORK, {
+    headers: { Authorization: `JWT ${accessString}` },
+  })
     .then(res => {
       return res.data
     })

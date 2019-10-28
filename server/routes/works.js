@@ -7,7 +7,6 @@ const {
   FIELD_DATA,
   FIELD_TAGS
 } = require('../../src/constants/WORK_FIELDS_NAME')
-
 const workPath = '/work/'
 const bodyParser = require('body-parser')
 
@@ -32,7 +31,8 @@ const createWorkString = (data) => {
   return str.substring(0, str.length - 2)
 }
 
-module.exports = function (app, pool) {
+module.exports = function (app, pool, authenticate) {
+
   // GET ALL
   app.get(workPath, urlencodedParser, (req, res) => {
     pool.query('SELECT * FROM works', function (err, data) {
@@ -42,7 +42,7 @@ module.exports = function (app, pool) {
   })
 
   // ADD NEW
-  app.post(workPath, urlencodedParser, (req, res) => {
+  app.post(workPath, authenticate, (req, res) => {
     const data = req.body
     const sql = `INSERT INTO works(${FIELD_TITLE}, ${FIELD_ANNOTATION}, ${FIELD_TEXT}, ${FIELD_STATUS}, ${FIELD_DATE}, ${FIELD_BANNER}, ${FIELD_DATA}, ${FIELD_TAGS}) VALUES(?,?,?,?,?,?,?,?)`
     const resData = createWorkArray(data)
@@ -53,7 +53,7 @@ module.exports = function (app, pool) {
   })
 
   // update
-  app.post(workPath + ':id', urlencodedParser, (req, res) => {
+  app.post(workPath + ':id', authenticate, (req, res) => {
     const data = req.body
     const sql = `UPDATE works SET ${createWorkString(data)} WHERE id LIKE ${req.params.id}`
     console.log(sql)
@@ -84,7 +84,7 @@ module.exports = function (app, pool) {
   })
 
   // DELETE
-  app.delete(workPath + ':id', (req, res) => {
+  app.delete(workPath + ':id', authenticate, (req, res) => {
     const sql = `DELETE FROM works WHERE id=${req.params.id}`
     pool.query(sql, function (err, data) {
       if (err) return console.log(err)

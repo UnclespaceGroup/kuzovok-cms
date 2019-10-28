@@ -11,6 +11,10 @@ const FIELD_PARENT_ID = 'parentId'
 
 const FORM_ADD_WORK = 'FORM_ADD_WORK'
 const FORM_ADD_REPORT = 'FORM_ADD_REPORT'
+const FORM_LOGIN = 'FORM_LOGIN'
+
+const FIELD_LOGIN = 'username'
+const FIELD_PASSWORD = 'password'
 
 module.exports = {
   FIELD_TITLE,
@@ -24,5 +28,8 @@ module.exports = {
   FIELD_PARENT_ID,
   FORM_ADD_WORK,
   FORM_ADD_REPORT,
-  FIELD_TAGS
+  FIELD_TAGS,
+  FORM_LOGIN,
+  FIELD_LOGIN,
+  FIELD_PASSWORD
 }

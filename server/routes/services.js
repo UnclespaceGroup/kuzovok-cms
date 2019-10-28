@@ -42,7 +42,7 @@ const createFilterParams = (data) => {
   return str.substring(0, str.length - 2)
 }
 
-module.exports = function (app, pool) {
+module.exports = function (app, pool, authenticate) {
   // GET ALL
   app.get(workPath, (req, res) => {
     console.log(req.query)
@@ -58,7 +58,7 @@ module.exports = function (app, pool) {
   })
 
   // ADD NEW
-  app.post(workPath, urlencodedParser, (req, res) => {
+  app.post(workPath, authenticate, (req, res) => {
     const data = req.body
     const resData = createWorkArray(data)
     const listResData = ARRAY.join(', ')
@@ -73,7 +73,7 @@ module.exports = function (app, pool) {
   })
 
   // UPDATE
-  app.post(workPath + ':id', urlencodedParser, (req, res) => {
+  app.post(workPath + ':id', authenticate, (req, res) => {
     const data = req.body
     const sql = `UPDATE services SET ${createWorkString(data)} WHERE id LIKE ${req.params.id}`
     console.log(sql)
@@ -100,7 +100,7 @@ module.exports = function (app, pool) {
   })
 
   // DELETE
-  app.delete(workPath + ':id', (req, res) => {
+  app.delete(workPath + ':id', authenticate, (req, res) => {
     const sql = `DELETE FROM services WHERE id=${req.params.id}`
     pool.query(sql, function (err, data) {
       if (err) {

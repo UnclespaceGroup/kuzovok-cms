@@ -59,7 +59,7 @@ const ShowWorksPage = () => {
         }
         <Col xs={4}>
           <Card>
-            <AddCard />
+            <AddCard path={ADD_WORK_PAGE} />
           </Card>
         </Col>
       </Row>
