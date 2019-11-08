@@ -8,9 +8,6 @@ const {
   FIELD_TAGS
 } = require('../../src/constants/WORK_FIELDS_NAME')
 const workPath = '/work/'
-const bodyParser = require('body-parser')
-
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const createWorkArray = (data = {}) => ([
   data[FIELD_TITLE] || '',
@@ -34,9 +31,11 @@ const createWorkString = (data) => {
 module.exports = function (app, pool, authenticate) {
 
   // GET ALL
-  app.get(workPath, urlencodedParser, (req, res) => {
+  app.get(workPath, (req, res) => {
+    console.log('works')
     pool.query('SELECT * FROM works', function (err, data) {
       if (err) return console.log(err)
+      if (!data) return { message: 'return null, err' }
       res.send(data)
     })
   })
@@ -66,16 +65,6 @@ module.exports = function (app, pool, authenticate) {
   // GET SINGLE
   app.get(workPath + ':id', (req, res) => {
     const sql = `SELECT * FROM works WHERE id = ${req.params.id} LIMIT 1`
-    pool.query(sql, function (err, data) {
-      if (err) return console.log(err)
-      data.content && console.log(JSON.parse(data.content))
-      res.send(data)
-    })
-  })
-
-  // GET ALL
-  app.get(workPath, (req, res) => {
-    const sql = `SELECT * FROM works`
     pool.query(sql, function (err, data) {
       if (err) return console.log(err)
       data.content && console.log(JSON.parse(data.content))

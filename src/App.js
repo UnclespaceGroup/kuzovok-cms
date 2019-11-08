@@ -25,6 +25,7 @@ import { Provider } from 'react-redux'
 const store = configureStore()
 
 function App () {
+  console.log(process.env.REACT_APP_DEV)
   return (
     <Provider store={store}>
       <BrowserRouter>

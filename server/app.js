@@ -10,31 +10,6 @@ const connectionConfig = require('./constants/index')
 const passport = require('passport')
 
 
-const whitelist = [
-  'http://localhost:3000',
-  'http://localhost:3002',
-  'http://localhost:3003',
-  'http://localhost:8060',
-];
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  optionsSuccessStatus: 200,
-};
-
-function authenticationMiddleware () {
-  return function (req, res, next) {
-    if (req.isAuthenticated()) {
-      return next()
-    }
-    res.redirect('/')
-  }
-}
 
 
 var app = express()
@@ -44,13 +19,13 @@ require('./config/passport');
 
 const pool = mysql.createPool(connectionConfig);
 
+
 app.use(passport.initialize());
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 const authenticate = passport.authenticate('jwt', { session: false })
 
 require('./routes/auth/loginUser')(app);
@@ -78,7 +53,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   // res.render('error');
 });
-
 
 app.listen(3002, function(){
   console.log("Сервер ожидает подключения...");

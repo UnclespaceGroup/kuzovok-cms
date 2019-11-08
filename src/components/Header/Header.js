@@ -1,21 +1,20 @@
 import React, { useMemo } from 'react'
-import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { ADD_SERVICE_PAGE, ADD_WORK_PAGE, HOME_PAGE, SERVICES_PAGE, WORKS_PAGE } from '../../constants/ROUTES'
 import { NavLink, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoginForm from '../LoginForm/LoginForm'
 import { actionLogin } from '../../actions/actionLogin'
-import { JWT, USER_NAME } from '../../constants/OTHER'
+// import { JWT, USER_NAME } from '../../constants/OTHER'
 import { bindActionCreators } from 'redux'
 import LogoutForm from '../LogoutForm/LogoutForm'
 
 const Header = ({ user, actionLogin }) => {
   const userName = user
   useMemo(() => {
-    const token = localStorage.getItem(JWT)
-    const name = localStorage.getItem(USER_NAME)
-    console.log(token)
-    if (token || name) actionLogin({ name, token })
+    // const token = localStorage.getItem(JWT)
+    // const name = localStorage.getItem(USER_NAME)
+    // if (token || name) actionLogin({ name, token })
   }, [])
 
   return (

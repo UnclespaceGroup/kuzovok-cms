@@ -24,6 +24,7 @@ const Login = ({ actionLogin }) => {
         actionLogin(data)
         localStorage.setItem(JWT, data.token)
         localStorage.setItem(USER_NAME, data.name)
+        actionLogin({ name: data.name, token: data.token })
       })
       .catch(err => {
         console.log(err)
