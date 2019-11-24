@@ -9,7 +9,6 @@ import css from './LoginForm.module.scss'
 const { FORM_LOGIN, FIELD_PASSWORD, FIELD_LOGIN } = require('../../constants/WORK_FIELDS_NAME')
 
 const LoginForm = ({ actionLogin }) => {
-  const [status, setStatus] = useState(null)
   const [pending, setPending] = useState(false)
   const submit = data => {
     setPending(true)
@@ -22,7 +21,6 @@ const LoginForm = ({ actionLogin }) => {
         console.log(err)
         setPending(false)
       })
-    setStatus(null)
   }
 
   return (

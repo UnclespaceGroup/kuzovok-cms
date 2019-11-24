@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize')
 const UserModel = require('./models/user')
+const WorkModel = require('./models/work')
+const ReportModel = require('./models/report')
 const connectionConfig = require('./constants/index')
 
 const sequelize = new Sequelize(connectionConfig.database, connectionConfig.user, connectionConfig.password, {
@@ -8,10 +10,15 @@ const sequelize = new Sequelize(connectionConfig.database, connectionConfig.user
 });
 
 const User = UserModel(sequelize, Sequelize);
+const Work = WorkModel(sequelize, Sequelize);
+const Report = ReportModel(sequelize, Sequelize);
 
 sequelize.sync().then(() => {
-  // eslint-disable-next-line no-console
   console.log('Users db and user table have been created');
 });
 
-module.exports = User;
+module.exports = {
+  User,
+  Work,
+  Report
+};

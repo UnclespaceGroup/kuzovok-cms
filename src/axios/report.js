@@ -10,7 +10,7 @@ const CURRENT_METHOD = METHOD_REPORT
 
 export const submitReport = async (data, id) => {
   const accessString = localStorage.getItem(JWT)
-  const addr = id ? CURRENT_METHOD + id : CURRENT_METHOD
+  const addr = id ? `${CURRENT_METHOD}update/${id}`: `${CURRENT_METHOD}add`
   return await axios.post(addr, data, {
     headers: { Authorization: `JWT ${accessString}` }
   })

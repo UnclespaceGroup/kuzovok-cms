@@ -56,5 +56,4 @@ export default connect(
     return {
       actionLogin: bindActionCreators(actionLogin, dispatch)
     }
-  })
-(Header)
+  })(Header)

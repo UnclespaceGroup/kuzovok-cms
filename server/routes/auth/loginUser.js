@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const passport = require('passport')
 const jwtSecret = require('../../config/jwtConfig')
-const User = require('../../sequelize')
+const { User } = require('../../sequelize')
 
 module.exports = app => {
   app.post('/login', (req, res, next) => {

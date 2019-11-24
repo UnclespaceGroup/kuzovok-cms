@@ -1,32 +1,24 @@
 var express = require('express');
-var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var works = require('./routes/works')
-var report = require('./routes/report')
-var services = require('./routes/services')
 var cors = require('cors')
-const connectionConfig = require('./constants/index')
+const bodyParser = require('body-parser')
 const passport = require('passport')
-
-
-
+const ModelCRUD = require('./routes/ModelCRUD')
+const { Work, Report } = require('./sequelize')
 
 var app = express()
 
-const mysql = require("mysql2")
 require('./config/passport');
-
-const pool = mysql.createPool(connectionConfig);
-
-
-app.use(passport.initialize());
 app.use(cors())
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(passport.initialize());
+
 const authenticate = passport.authenticate('jwt', { session: false })
+
 
 require('./routes/auth/loginUser')(app);
 require('./routes/auth/registerUser')(app);
@@ -38,10 +30,8 @@ require('./routes/auth/findUsers')(app);
 require('./routes/auth/deleteUser')(app);
 require('./routes/auth/updateUser')(app);
 
-works(app, pool, authenticate)
-report(app, pool, authenticate)
-services(app, pool, authenticate)
-
+ModelCRUD(app, '/work/', Work, authenticate)
+ModelCRUD(app, '/report/', Report, authenticate)
 
 // error handler
 app.use(function(err, req, res, next) {

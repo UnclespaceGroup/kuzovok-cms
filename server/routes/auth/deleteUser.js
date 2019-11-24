@@ -1,5 +1,5 @@
 const passport = require('passport')
-const User = require('../../sequelize')
+const { User } = require('../../sequelize')
 
 module.exports = (app) => {
   app.delete('/deleteUser', (req, res, next) => {

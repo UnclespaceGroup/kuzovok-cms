@@ -7,7 +7,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
 export const submitWork = async (data, id) => {
-  const addr = id ? METHOD_WORK + id : METHOD_WORK
+  const addr = id ? METHOD_WORK + 'add/' + id : METHOD_WORK + 'add'
   const accessString = localStorage.getItem(JWT)
   return await axios.post(addr, data,
     {

@@ -1,6 +1,6 @@
 const passport = require('passport')
 const bcrypt = require('bcrypt')
-const User = require('../../sequelize')
+const { User } = require('../../sequelize')
 
 
 const BCRYPT_SALT_ROUNDS = 12;

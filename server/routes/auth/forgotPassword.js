@@ -1,5 +1,5 @@
 const crypto = require('crypto')
-const User = require('../../sequelize')
+const { User } = require('../../sequelize')
 
 require('dotenv').config();
 

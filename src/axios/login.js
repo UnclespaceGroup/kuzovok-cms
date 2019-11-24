@@ -22,17 +22,3 @@ export const logout = () => {
   localStorage.removeItem(JWT)
   localStorage.removeItem(USER_NAME);
 }
-
-export const getReports = async ({ parentId }) => {
-  return await axios.get(CURRENT_METHOD.slice(0, -1) + `?parentId=${parentId}`)
-    .then(res => {
-      return res.data
-    })
-}
-
-export const deleteReport = async (id) => {
-  return await axios.delete(CURRENT_METHOD + id, { data: { id } })
-    .then(res => {
-      return 'OK'
-    })
-}

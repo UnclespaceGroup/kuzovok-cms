@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const Sequelize = require('sequelize');
-const User = require('../../sequelize');
+const { User } = require('../../sequelize');
 
 const Op = Sequelize.Op;
 
