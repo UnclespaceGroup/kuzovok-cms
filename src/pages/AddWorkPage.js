@@ -9,12 +9,23 @@ import { withRouter } from 'react-router'
 import arrayMutators from 'final-form-arrays'
 import InputEditor from '../components/InputEditor/InputEditor'
 import InputImage from '../components/InputImage/InputImage'
-const { FIELD_ANNOTATION, FIELD_BANNER, FIELD_STATUS, FIELD_TEXT, FIELD_TITLE, FORM_ADD_WORK, FIELD_TAGS } = require('../constants/WORK_FIELDS_NAME')
+import {
+  FIELD_ANNOTATION,
+  FIELD_BANNER,
+  FIELD_STATUS,
+  FIELD_TEXT,
+  FIELD_TITLE,
+  FORM_ADD_WORK,
+  FIELD_TAGS,
+  FIELD_TYPE,
+  WORKS_TYPES,
+  STATUSES
+} from '../constants/WORK_FIELDS_NAME'
 
 const AddWorkPage = ({ location, history }) => {
   const prevData = location.state || {}
-  const [ status, setStatus ] = useState(null)
-  const [ pending, setPending ] = useState(false)
+  const [status, setStatus] = useState(null)
+  const [pending, setPending] = useState(false)
   const submit = data => {
     setPending(true)
     setStatus(null)
@@ -33,28 +44,42 @@ const AddWorkPage = ({ location, history }) => {
       })
   }
   return (
-    <Container style={{marginTop: '5vh', minHeight: '120vh'}}>
+    <Container style={{ marginTop: '5vh', minHeight: '120vh' }}>
       <FinalForm
         form={FORM_ADD_WORK}
         mutators={arrayMutators}
         onSubmit={submit}
         initialValues={prevData}
-        render={({handleSubmit}) => (
+        render={({ handleSubmit }) => (
           <Form onSubmit={handleSubmit}>
             <h2>Форма добавления работы</h2>
             <Form.Group>
               <label>Заголовок</label>
-              <Field name={FIELD_TITLE} >
-                {({input}) => <Form.Control placeholder="Заголовок" {...input} />}
+              <Field name={FIELD_TITLE}>
+                {({ input }) => <Form.Control placeholder="Заголовок" {...input} />}
+              </Field>
+            </Form.Group>
+            <Form.Group>
+              <label>Тип работы</label>
+              <Field name={FIELD_TYPE}>
+                {({ input }) => <Form.Control {...input} as="select">
+                  {
+                    WORKS_TYPES.map(({ id, title }, key) => (
+                      <option key={key} value={id}>{title}</option>
+                    ))
+                  }
+                </Form.Control>}
               </Field>
             </Form.Group>
             <Form.Group>
               <label>Статус</label>
               <Field name={FIELD_STATUS}>
-                {({ input }) => <Form.Control {...input} as="select" >
-                  <option>В работе</option>
-                  <option>Готово</option>
-                  <option>Архив</option>
+                {({ input }) => <Form.Control {...input} as="select">
+                  {
+                    STATUSES.map(({ id, title }, key) => (
+                      <option key={key} value={id}>{title}</option>
+                    ))
+                  }
                 </Form.Control>}
               </Field>
             </Form.Group>
@@ -64,14 +89,14 @@ const AddWorkPage = ({ location, history }) => {
             </Form.Group>
             <Form.Group>
               <label>Аннотация</label>
-              <Field name={FIELD_ANNOTATION} >
-                {({input}) => <Form.Control as="textarea" rows="3"  placeholder="Аннотация" {...input} />}
+              <Field name={FIELD_ANNOTATION}>
+                {({ input }) => <Form.Control as="textarea" rows="3" placeholder="Аннотация" {...input} />}
               </Field>
             </Form.Group>
             <Form.Group>
               <label>Теги</label>
-              <Field name={FIELD_TAGS} >
-                {({input}) => <Form.Control as="textarea" rows="3"  placeholder="#Что-то" {...input} />}
+              <Field name={FIELD_TAGS}>
+                {({ input }) => <Form.Control as="textarea" rows="3" placeholder="#Что-то" {...input} />}
               </Field>
             </Form.Group>
             <Form.Group>

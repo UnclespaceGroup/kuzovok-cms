@@ -11,7 +11,7 @@ import InputImage from '../components/InputImage/InputImage'
 import { submitService } from '../axios/service'
 import { FIELD_TAGS } from '../constants/WORK_FIELDS_NAME'
 
-const { FIELD_ANNOTATION, FIELD_TEXT, FIELD_TITLE, FIELD_BANNER, FORM_ADD_REPORT } = require('../constants/WORK_FIELDS_NAME')
+import { FIELD_ANNOTATION, FIELD_TEXT, FIELD_TITLE, FIELD_BANNER, FORM_ADD_REPORT } from '../constants/WORK_FIELDS_NAME'
 
 const AddServicePage = ({ location, history }) => {
   const prevData = location.state || {}

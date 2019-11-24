@@ -1,35 +1,57 @@
-const FIELD_TITLE = 'title'
-const FIELD_ANNOTATION = 'annotation'
-const FIELD_TAGS = 'tags'
-const FIELD_TEXT = 'text'
-const FIELD_BANNER = 'banner'
-const FIELD_STATUS = 'status'
-const FIELD_DATA = 'data'
-const FIELD_IMAGES = 'images'
-const FIELD_DATE = 'date'
-const FIELD_PARENT_ID = 'parentId'
+export const FIELD_TITLE = 'title'
+export const FIELD_ANNOTATION = 'annotation'
+export const FIELD_TAGS = 'tags'
+export const FIELD_TEXT = 'text'
+export const FIELD_BANNER = 'banner'
+export const FIELD_STATUS = 'status'
+export const FIELD_TYPE = 'type'
+export const FIELD_DATA = 'data'
+export const FIELD_IMAGES = 'images'
+export const FIELD_DATE = 'date'
+export const FIELD_PARENT_ID = 'parentId'
 
-const FORM_ADD_WORK = 'FORM_ADD_WORK'
-const FORM_ADD_REPORT = 'FORM_ADD_REPORT'
-const FORM_LOGIN = 'FORM_LOGIN'
+export const FORM_ADD_WORK = 'FORM_ADD_WORK'
+export const FORM_ADD_REPORT = 'FORM_ADD_REPORT'
+export const FORM_LOGIN = 'FORM_LOGIN'
 
-const FIELD_LOGIN = 'username'
-const FIELD_PASSWORD = 'password'
+export const FIELD_LOGIN = 'username'
+export const FIELD_PASSWORD = 'password'
 
-module.exports = {
-  FIELD_TITLE,
-  FIELD_ANNOTATION,
-  FIELD_TEXT,
-  FIELD_BANNER,
-  FIELD_STATUS,
-  FIELD_DATA,
-  FIELD_IMAGES,
-  FIELD_DATE,
-  FIELD_PARENT_ID,
-  FORM_ADD_WORK,
-  FORM_ADD_REPORT,
-  FIELD_TAGS,
-  FORM_LOGIN,
-  FIELD_LOGIN,
-  FIELD_PASSWORD
-}
+
+export const WORKS_TYPES = [
+  {
+    id: 1,
+    title: 'Сварочные работы'
+  },
+  {
+    id: 2,
+    title: 'Покраска'
+  },
+  {
+    id: 3,
+    title: 'Кузовной ремонт'
+  },
+  {
+    id: 4,
+    title: 'Обработка порогов и днища'
+  },
+  {
+    id: 5,
+    title: 'Замена повреждённых деталей'
+  }
+]
+
+export const STATUSES = [
+  {
+    id: '1',
+    title: 'В работе'
+  },
+  {
+    id: '2',
+    title: 'Выполнено'
+  },
+  {
+    id: '3',
+    title: 'Архив'
+  }
+]

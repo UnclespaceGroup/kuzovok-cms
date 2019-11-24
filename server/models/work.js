@@ -12,4 +12,5 @@ module.exports = (sequelize, type) => sequelize.define('workTest', {
   banner: type.STRING,
   data: type.STRING,
   tags: type.STRING,
+  type: type.STRING,
 })

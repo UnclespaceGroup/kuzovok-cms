@@ -20,7 +20,8 @@ module.exports = function (app, workPath, Model, authenticate) {
 
   // GET DATA WITH POST PARAMS
   app.post(workPath, (req, res) => {
-    const params = req.body.params
+    const params = req.body.params || {}
+    console.log(params)
 
     const where = Array.isArray(params.rangeDate) ? {
       createdAt: {
