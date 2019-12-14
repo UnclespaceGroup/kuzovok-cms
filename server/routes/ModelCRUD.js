@@ -1,17 +1,18 @@
 const Sequelize = require('sequelize')
-
+const CheckAuthorize = require('../services/checkAuthorize')
 const Op = Sequelize.Op
 
-module.exports = function (app, workPath, Model, authenticate) {
+module.exports = function (app, workPath, Model, passport) {
   // GET ALL DATA
-  app.get(workPath, (req, res) => {
+  app.get(workPath, (req, res, next) => {
     Model.findAll({ raw: true }).then(users => {
+      console.log('users length = ', users.length)
       res.send(users)
     }).catch(err => console.log(err))
   })
 
   // GET DATA WITH PARAMS
-  app.get(workPath, (req, res) => {
+  app.get(workPath, passport.authenticate('jwt', { session: false }), (req, res) => {
     const params = req.query.params
     Model.findAll({ where: { ...params }, raw: true }).then(users => {
       res.send(users)
@@ -47,7 +48,8 @@ module.exports = function (app, workPath, Model, authenticate) {
   })
 
   // ADD NEW
-  app.post(workPath + 'add', (req, res) => {
+  app.post(workPath + 'add', (req, res, next) => {
+    CheckAuthorize(req, res, next, passport)
     const data = req.body
     Model.create({
       date: new Date().toString(),
@@ -61,7 +63,8 @@ module.exports = function (app, workPath, Model, authenticate) {
   })
 
   // update
-  app.post(workPath + 'update/:id', (req, res) => {
+  app.post(workPath + 'update/:id', (req, res, next) => {
+    CheckAuthorize(req, res, next, passport)
     const data = req.body
     const id = req.params.id
     Model.update(data, {
@@ -74,7 +77,8 @@ module.exports = function (app, workPath, Model, authenticate) {
   })
 
   // DELETE
-  app.delete(workPath + ':id', (req, res) => {
+  app.delete(workPath + ':id', (req, res, next) => {
+    CheckAuthorize(req, res, next, passport)
     const id = req.params.id
     Model.destroy({
       where: {

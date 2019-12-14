@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const ModelCRUD = require('./routes/ModelCRUD')
 const { Work, Report } = require('./sequelize')
+const helmet = require('helmet')
 
 var app = express()
 
@@ -15,9 +16,8 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(helmet());
 app.use(passport.initialize());
-
-const authenticate = passport.authenticate('jwt', { session: false })
 
 
 require('./routes/auth/loginUser')(app);
@@ -30,8 +30,8 @@ require('./routes/auth/findUsers')(app);
 require('./routes/auth/deleteUser')(app);
 require('./routes/auth/updateUser')(app);
 
-ModelCRUD(app, '/work/', Work, authenticate)
-ModelCRUD(app, '/report/', Report, authenticate)
+ModelCRUD(app, '/work/', Work, passport)
+ModelCRUD(app, '/report/', Report, passport)
 
 // error handler
 app.use(function(err, req, res, next) {

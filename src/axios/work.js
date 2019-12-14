@@ -23,7 +23,11 @@ export const getWorks = async () => {
   const accessString = localStorage.getItem(JWT)
   return await axios.get(METHOD_WORK, { headers: { Authorization: `JWT ${accessString}` } })
     .then(res => {
+      console.log(res)
       return res.data
+    })
+    .catch(e => {
+      console.log(e)
     })
 }
 

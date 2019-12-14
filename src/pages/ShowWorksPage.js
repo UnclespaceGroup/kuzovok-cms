@@ -14,6 +14,9 @@ const ShowWorksPage = () => {
       .then(data => {
         Array.isArray(data) && setItems(data)
       })
+      .catch(e => {
+        console.log(e)
+      })
   }, [])
   const deleteItem = (id) => {
     const a = window.confirm('Точно удалить')
