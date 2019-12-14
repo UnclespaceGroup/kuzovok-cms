@@ -10,6 +10,24 @@ const helmet = require('helmet')
 
 var app = express()
 
+// const whitelist = [
+//   'http://cms.mdf-center.ru/',
+//   'http://test.mdf-center.ru/',
+//   'http://localhost:3000',
+//   'http://localhost:3003',
+// ];
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   optionsSuccessStatus: 200,
+// };
+
+
 require('./config/passport');
 app.use(cors())
 app.use(logger('dev'));

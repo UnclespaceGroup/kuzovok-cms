@@ -38,6 +38,7 @@ function App () {
           <Route component={ShowReportsPage} exact path={REPORTS_PAGE} />
           <Route component={ShowServicesPage} exact path={SERVICES_PAGE} />
           <Route component={Login} exact path={PAGE_LOGIN} />
+          <Route component={MainPage} exact path={'*'} />
         </Switch>
       </BrowserRouter>
     </Provider>
