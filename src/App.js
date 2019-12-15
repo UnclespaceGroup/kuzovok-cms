@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import MainPage from './pages/MainPage'
-import ShowWorksPage from './pages/ShowWorksPage'
+import ShowWorksPage from './pages/Work/ShowWorksPage'
 import {
   ADD_WORK_PAGE,
   HOME_PAGE,
@@ -13,11 +13,11 @@ import {
   SERVICES_PAGE, PAGE_LOGIN
 } from './constants/ROUTES'
 import Header from './components/Header/Header'
-import AddWorkPage from './pages/AddWorkPage'
-import AddReportPage from './pages/AddReportPage'
-import ShowReportsPage from './pages/ShowReportsPage'
-import AddServicePage from './pages/AddServicePage'
-import ShowServicesPage from './pages/ShowServicesPage'
+import AddWorkPage from './pages/Work/AddWorkPage'
+import AddReportPage from './pages/Report/AddReportPage'
+import ShowReportsPage from './pages/Report/ShowReportsPage'
+import AddServicePage from './pages/Services/AddServicePage'
+import ShowServicesPage from './pages/Services/ShowServicesPage'
 import Login from './pages/auth/Login'
 import configureStore from './store/configureStore'
 import { Provider } from 'react-redux'

@@ -1,35 +1,29 @@
 import React, { useState } from 'react'
 import { Field, Form as FinalForm } from 'react-final-form'
 import { Container, Form, Button } from 'react-bootstrap'
-import { submitWork } from '../axios/work'
-import SectionStatus from '../components/SectionStatus/SectionStatus'
-import Padding from '../components/Padding/Padding'
-import { FAIL } from '../constants/STATUSES'
+import SectionStatus from '../../components/SectionStatus/SectionStatus'
+import Padding from '../../components/Padding/Padding'
+import { FAIL } from '../../constants/STATUSES'
 import { withRouter } from 'react-router'
 import arrayMutators from 'final-form-arrays'
-import InputEditor from '../components/InputEditor/InputEditor'
-import InputImage from '../components/InputImage/InputImage'
-import {
-  FIELD_ANNOTATION,
-  FIELD_BANNER,
-  FIELD_STATUS,
-  FIELD_TEXT,
-  FIELD_TITLE,
-  FORM_ADD_WORK,
-  FIELD_TAGS,
-  FIELD_TYPE,
-  WORKS_TYPES,
-  STATUSES
-} from '../constants/WORK_FIELDS_NAME'
+import InputEditor from '../../components/InputEditor/InputEditor'
+import InputImage from '../../components/InputImage/InputImage'
+import { submitService } from '../../axios/service'
+import { FIELD_TAGS } from '../../constants/WORK_FIELDS_NAME'
 
-const AddWorkPage = ({ location, history }) => {
+import { FIELD_ANNOTATION, FIELD_TEXT, FIELD_TITLE, FIELD_BANNER, FORM_ADD_REPORT } from '../../constants/WORK_FIELDS_NAME'
+import useUserStore from '../../hooks/useUserStore'
+
+const AddServicePage = ({ location, history }) => {
+  const { accessString } = useUserStore()
+
   const prevData = location.state || {}
   const [status, setStatus] = useState(null)
   const [pending, setPending] = useState(false)
   const submit = data => {
     setPending(true)
     setStatus(null)
-    submitWork(data, prevData.id)
+    submitService({ data, id: prevData.id, accessString})
       .then(res => {
         setStatus(res)
         setTimeout(() => {
@@ -46,13 +40,16 @@ const AddWorkPage = ({ location, history }) => {
   return (
     <Container style={{ marginTop: '5vh', minHeight: '120vh' }}>
       <FinalForm
-        form={FORM_ADD_WORK}
+        form={FORM_ADD_REPORT}
         mutators={arrayMutators}
         onSubmit={submit}
-        initialValues={prevData}
+        initialValues={{
+          ...prevData,
+          images: prevData.images && JSON.parse(prevData.images)
+        }}
         render={({ handleSubmit }) => (
           <Form onSubmit={handleSubmit}>
-            <h2>Форма добавления работы</h2>
+            <h2>Форма добавления услуги</h2>
             <Form.Group>
               <label>Заголовок</label>
               <Field name={FIELD_TITLE}>
@@ -60,32 +57,10 @@ const AddWorkPage = ({ location, history }) => {
               </Field>
             </Form.Group>
             <Form.Group>
-              <label>Тип работы</label>
-              <Field name={FIELD_TYPE}>
-                {({ input }) => <Form.Control {...input} as="select">
-                  {
-                    WORKS_TYPES.map(({ id, title }, key) => (
-                      <option key={key} value={id}>{title}</option>
-                    ))
-                  }
-                </Form.Control>}
-              </Field>
-            </Form.Group>
-            <Form.Group>
-              <label>Статус</label>
-              <Field name={FIELD_STATUS}>
-                {({ input }) => <Form.Control {...input} as="select">
-                  {
-                    STATUSES.map(({ id, title }, key) => (
-                      <option key={key} value={id}>{title}</option>
-                    ))
-                  }
-                </Form.Control>}
-              </Field>
-            </Form.Group>
-            <Form.Group>
-              <label>Изображение баннера</label>
-              <Field name={FIELD_BANNER} component={InputImage} />
+              <label>Главный баннер</label>
+              <Field name={FIELD_BANNER}
+                     component={InputImage}
+              />
             </Form.Group>
             <Form.Group>
               <label>Аннотация</label>
@@ -96,7 +71,7 @@ const AddWorkPage = ({ location, history }) => {
             <Form.Group>
               <label>Теги</label>
               <Field name={FIELD_TAGS}>
-                {({ input }) => <Form.Control as="textarea" rows="3" placeholder="#Что-то" {...input} />}
+                {({ input }) => <Form.Control as="textarea" rows="1" placeholder="#покраска" {...input} />}
               </Field>
             </Form.Group>
             <Form.Group>
@@ -112,4 +87,4 @@ const AddWorkPage = ({ location, history }) => {
     </Container>
   )
 }
-export default withRouter(AddWorkPage)
+export default withRouter(AddServicePage)

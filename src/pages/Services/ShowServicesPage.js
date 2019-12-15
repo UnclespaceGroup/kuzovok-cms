@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Container, Card, Row, Col } from 'react-bootstrap'
-import { ADD_SERVICE_PAGE } from '../constants/ROUTES'
+import { ADD_SERVICE_PAGE } from '../../constants/ROUTES'
 import moment from 'moment'
-import CardLink from '../components/CardLink/CardLink'
-import AddCard from '../components/AddCard/AddCard'
-import Padding from '../components/Padding/Padding'
-import { deleteServices, getServices } from '../axios/service'
+import CardLink from '../../components/CardLink/CardLink'
+import AddCard from '../../components/AddCard/AddCard'
+import Padding from '../../components/Padding/Padding'
+import { deleteServices, getServices } from '../../axios/service'
+import useUserStore from '../../hooks/useUserStore'
 
 const ShowServicesPage = () => {
+  const { accessString } = useUserStore()
+
   const [mainItems, setMainItems] = useState([])
   const [items, setItems] = useState([])
   useEffect(() => {
@@ -20,7 +23,7 @@ const ShowServicesPage = () => {
   const deleteItem = (id) => {
     const a = window.confirm('Точно удалить')
     if (a) {
-      deleteServices(id)
+      deleteServices({id, accessString})
         .then(() => {
           const _items = Array.isArray(items) ? items.filter(item => item.id !== id) : []
           setItems(_items)

@@ -1,14 +1,18 @@
 import React from 'react'
+import useUserStore from '../../hooks/useUserStore'
 import css from './LogoutForm.module.scss'
 import { Button } from 'react-bootstrap'
 import { FaUser } from 'react-icons/fa'
 
-const LogoutForm = ({ userName, actionLogin }) => (
-  <div className={css.container}>
-    <div>{userName.name}</div>
-    <FaUser />
-    <Button variant="outline-success" onClick={() => { actionLogin() }}>Выход</Button>
-  </div>
-)
+const LogoutForm = () => {
+  const { logOut, user } = useUserStore()
+  return (
+    <div className={css.container}>
+      <div>{user.name}</div>
+      <FaUser />
+      <Button variant="outline-success" onClick={() => { logOut() }}>Выход</Button>
+    </div>
+  )
+}
 
 export default React.memo(LogoutForm)

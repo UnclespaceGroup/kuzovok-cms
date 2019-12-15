@@ -4,16 +4,16 @@ const Op = Sequelize.Op
 
 module.exports = function (app, workPath, Model, passport) {
   // GET ALL DATA
-  app.get(workPath, (req, res, next) => {
-    Model.findAll({ raw: true }).then(users => {
-      console.log('users length = ', users.length)
-      res.send(users)
-    }).catch(err => console.log(err))
-  })
+  // app.get(workPath, (req, res, next) => {
+  //   Model.findAll({ raw: true }).then(users => {
+  //     res.send(users)
+  //   }).catch(err => console.log(err))
+  // })
 
   // GET DATA WITH PARAMS
-  app.get(workPath, passport.authenticate('jwt', { session: false }), (req, res) => {
-    const params = req.query.params
+  app.get(workPath, (req, res) => {
+    const params = req.query
+
     Model.findAll({ where: { ...params }, raw: true }).then(users => {
       res.send(users)
     }).catch(err => console.log(err))
@@ -22,7 +22,6 @@ module.exports = function (app, workPath, Model, passport) {
   // GET DATA WITH POST PARAMS
   app.post(workPath, (req, res) => {
     const params = req.body.params || {}
-    console.log(params)
 
     const where = Array.isArray(params.rangeDate) ? {
       createdAt: {
@@ -38,12 +37,10 @@ module.exports = function (app, workPath, Model, passport) {
   // GET SINGLE DATA
   app.get(workPath + ':id', (req, res) => {
     const id = req.params.id
-    console.log('req.params', req.params)
     Model.findByPk(id)
       .then(result => {
         if (!result) return
         res.send(result)
-        console.log(result)
       }).catch(err => console.log(err))
   })
 
@@ -85,7 +82,7 @@ module.exports = function (app, workPath, Model, passport) {
         id
       }
     }).then((result) => {
-      res.send(result)
+      res.sendStatus(200)
       console.log(result)
     }).catch(err => console.log(err))
   })

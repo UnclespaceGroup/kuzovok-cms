@@ -7,20 +7,9 @@ const CheckAuthorize = (req, res, next, passport) => {
     }
     if (info !== undefined) {
       console.error(info.message);
-      res.status(403).send(info.message);
+      res.status(403).send('Ошибка авторизации', info.message);
     } else {
-      User.findOne({
-        where: {
-          username: req.body.username,
-        },
-      }).then((userInfo) => {
-        if (userInfo != null) {
-          console.log('user found in db');
-        } else {
-          console.error('no user exists in db to update');
-          res.status(404).json('no user exists in db to update');
-        }
-      });
+
     }
   })(req, res, next);
 }

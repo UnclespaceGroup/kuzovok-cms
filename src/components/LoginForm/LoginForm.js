@@ -3,19 +3,21 @@ import { Button, Form } from 'react-bootstrap'
 import { Field, Form as FinalForm } from 'react-final-form'
 import arrayMutators from 'final-form-arrays'
 import { login } from '../../axios/login'
-import { connect } from 'react-redux'
+import useUserStore from '../../hooks/useUserStore'
 import css from './LoginForm.module.scss'
 
 const { FORM_LOGIN, FIELD_PASSWORD, FIELD_LOGIN } = require('../../constants/WORK_FIELDS_NAME')
 
-const LoginForm = ({ actionLogin }) => {
+const LoginForm = () => {
   const [pending, setPending] = useState(false)
+  const { logIn } = useUserStore()
+
   const submit = data => {
     setPending(true)
     login(data)
       .then(data => {
         setPending(false)
-        actionLogin(data)
+        logIn(data)
       })
       .catch(err => {
         console.log(err)
@@ -44,11 +46,4 @@ const LoginForm = ({ actionLogin }) => {
   )
 }
 
-export default connect(
-  null
-  // dispatch => {
-  //   return {
-  //     actionLogin: (payload) => dispatch({ type: 'loginUser', payload })
-  //   }
-  // }
-)(LoginForm)
+export default LoginForm

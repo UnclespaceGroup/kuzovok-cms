@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { deleteWork, getWorks } from '../axios/work'
+import { deleteWork, getWorks } from '../../axios/work'
 import { Button, Container, Card, Row, Col } from 'react-bootstrap'
-import { ADD_REPORT_PAGE, ADD_WORK_PAGE, REPORTS_PAGE } from '../constants/ROUTES'
+import { ADD_REPORT_PAGE, ADD_WORK_PAGE, REPORTS_PAGE } from '../../constants/ROUTES'
 import moment from 'moment'
-import CardLink from '../components/CardLink/CardLink'
-import AddCard from '../components/AddCard/AddCard'
-import Padding from '../components/Padding/Padding'
+import CardLink from '../../components/CardLink/CardLink'
+import AddCard from '../../components/AddCard/AddCard'
+import Padding from '../../components/Padding/Padding'
+import useUserStore from '../../hooks/useUserStore'
 
 const ShowWorksPage = () => {
+  const { accessString } = useUserStore()
   const [items, setItems] = useState([])
   useEffect(() => {
-    getWorks()
+    getWorks({ accessString })
       .then(data => {
         Array.isArray(data) && setItems(data)
       })
@@ -21,7 +23,7 @@ const ShowWorksPage = () => {
   const deleteItem = (id) => {
     const a = window.confirm('Точно удалить')
     if (a) {
-      deleteWork(id)
+      deleteWork({ id, accessString })
         .then(() => {
           const _items = Array.isArray(items) ? items.filter(item => item.id !== id) : []
           setItems(_items)

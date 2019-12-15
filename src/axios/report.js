@@ -8,8 +8,7 @@ axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 const CURRENT_METHOD = METHOD_REPORT
 
-export const submitReport = async (data, id) => {
-  const accessString = localStorage.getItem(JWT)
+export const submitReport = async ({ data, id , accessString}) => {
   const addr = id ? `${CURRENT_METHOD}update/${id}`: `${CURRENT_METHOD}add`
   return await axios.post(addr, data, {
     headers: { Authorization: `JWT ${accessString}` }
@@ -27,8 +26,7 @@ export const getReports = async ({ parentId }) => {
     })
 }
 
-export const deleteReport = async (id) => {
-  const accessString = localStorage.getItem(JWT)
+export const deleteReport = async ({ id, accessString }) => {
   return await axios.delete(CURRENT_METHOD + id, { data: { id } }, {
     headers: { Authorization: `JWT ${accessString}` }
   })

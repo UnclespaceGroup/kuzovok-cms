@@ -1,20 +1,15 @@
-import React, { useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { ADD_SERVICE_PAGE, ADD_WORK_PAGE, HOME_PAGE, SERVICES_PAGE, WORKS_PAGE } from '../../constants/ROUTES'
 import { NavLink, Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import useUserStore from '../../hooks/useUserStore'
 import LoginForm from '../LoginForm/LoginForm'
-import { actionLogin } from '../../actions/actionLogin'
-// import { JWT, USER_NAME } from '../../constants/OTHER'
-import { bindActionCreators } from 'redux'
 import LogoutForm from '../LogoutForm/LogoutForm'
 
-const Header = ({ user, actionLogin }) => {
-  const userName = user
-  useMemo(() => {
-    // const token = localStorage.getItem(JWT)
-    // const name = localStorage.getItem(USER_NAME)
-    // if (token || name) actionLogin({ name, token })
+const Header = () => {
+  const { initialization, user } = useUserStore()
+  useEffect(() => {
+    initialization()
   }, [])
 
   return (
@@ -39,21 +34,13 @@ const Header = ({ user, actionLogin }) => {
         </Nav>
         <Nav>
           {
-            userName
-              ? <LogoutForm {...{ userName, actionLogin }} />
-              : <LoginForm actionLogin={actionLogin} />
+            user
+              ? <LogoutForm />
+              : <LoginForm />
           }
         </Nav>
       </Navbar.Collapse>
     </Navbar>
   )
 }
-export default connect(
-  state => {
-    return { user: state.userStore }
-  },
-  dispatch => {
-    return {
-      actionLogin: bindActionCreators(actionLogin, dispatch)
-    }
-  })(Header)
+export default Header
