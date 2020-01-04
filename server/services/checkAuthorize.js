@@ -1,5 +1,3 @@
-const { User } = require('../sequelize')
-
 const CheckAuthorize = (req, res, next, passport) => {
   passport.authenticate('jwt', { session: false }, (err, user, info) => {
     if (err) {

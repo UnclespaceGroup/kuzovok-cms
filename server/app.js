@@ -52,6 +52,8 @@ ModelCRUD(app, '/work/', Work, passport)
 ModelCRUD(app, '/report/', Report, passport)
 ModelCRUD(app, '/paper/', Paper, passport)
 
+require('./routes/getWorksList')(app)
+
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
