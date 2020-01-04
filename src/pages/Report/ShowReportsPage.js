@@ -3,7 +3,7 @@ import { Table, Button, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ADD_REPORT_PAGE } from '../../constants/ROUTES'
 import moment from 'moment'
-import { deleteReport, getReports } from '../../axios/report'
+import { deleteReport, getReports } from '../../axiosFetch/report'
 import { withRouter } from 'react-router'
 
 const ShowReportsPage = ({ location }) => {

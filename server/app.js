@@ -5,7 +5,7 @@ var cors = require('cors')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const ModelCRUD = require('./routes/ModelCRUD')
-const { Work, Report } = require('./sequelize')
+const { Work, Report, Paper } = require('./sequelize')
 const helmet = require('helmet')
 
 var app = express()
@@ -50,6 +50,7 @@ require('./routes/auth/updateUser')(app);
 
 ModelCRUD(app, '/work/', Work, passport)
 ModelCRUD(app, '/report/', Report, passport)
+ModelCRUD(app, '/paper/', Paper, passport)
 
 // error handler
 app.use(function(err, req, res, next) {

@@ -5,7 +5,7 @@ import moment from 'moment'
 import CardLink from '../../components/CardLink/CardLink'
 import AddCard from '../../components/AddCard/AddCard'
 import Padding from '../../components/Padding/Padding'
-import { deleteServices, getServices } from '../../axios/service'
+import { deleteServices, getServices } from '../../axiosFetch/service'
 import useUserStore from '../../hooks/useUserStore'
 
 const ShowServicesPage = () => {

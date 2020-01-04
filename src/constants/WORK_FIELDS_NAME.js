@@ -9,8 +9,10 @@ export const FIELD_DATA = 'data'
 export const FIELD_IMAGES = 'images'
 export const FIELD_DATE = 'date'
 export const FIELD_PARENT_ID = 'parentId'
+export const FIELD_ACTOR = 'actor'
 
 export const FORM_ADD_WORK = 'FORM_ADD_WORK'
+export const FORM_ADD_PAPER = 'FORM_ADD_PAPER'
 export const FORM_ADD_REPORT = 'FORM_ADD_REPORT'
 export const FORM_LOGIN = 'FORM_LOGIN'
 
@@ -43,15 +45,15 @@ export const WORKS_TYPES = [
 
 export const STATUSES = [
   {
-    id: '1',
+    id: '0',
     title: 'В работе'
   },
   {
-    id: '2',
+    id: '1',
     title: 'Выполнено'
   },
   {
-    id: '3',
+    id: '2',
     title: 'Архив'
   }
 ]

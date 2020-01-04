@@ -1,9 +1,10 @@
 import {
   FIELD_ANNOTATION,
-  FIELD_IMAGES,
+  FIELD_BANNER,
   FIELD_TEXT,
   FIELD_TITLE,
-} from 'constants/WORK_FIELDS_NAME'
+  FIELD_ACTOR
+} from '../../constants/WORK_FIELDS_NAME'
 
 export const fields = [
   {
@@ -13,9 +14,9 @@ export const fields = [
     name: FIELD_TITLE
   },
   {
-    type: 'imagesList',
+    type: 'image',
     label: 'Изображение баннера',
-    name: FIELD_IMAGES
+    name: FIELD_BANNER
   },
   {
     type: 'textarea',
@@ -27,5 +28,11 @@ export const fields = [
     type: 'editor',
     label: 'Описание',
     name: FIELD_TEXT
+  },
+  {
+    type: 'text',
+    label: 'Автор',
+    placeholder: 'Иванов И.В.',
+    name: FIELD_ACTOR
   }
 ]

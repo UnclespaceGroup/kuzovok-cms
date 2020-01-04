@@ -10,7 +10,7 @@ import {
   ADD_REPORT_PAGE,
   REPORTS_PAGE,
   ADD_SERVICE_PAGE,
-  SERVICES_PAGE, PAGE_LOGIN
+  SERVICES_PAGE, PAGE_LOGIN, ADD_PAPER_PAGE, PAPERS_PAGE
 } from './constants/ROUTES'
 import Header from './components/Header/Header'
 import AddWorkPage from './pages/Work/AddWorkPage'
@@ -21,6 +21,8 @@ import ShowServicesPage from './pages/Services/ShowServicesPage'
 import Login from './pages/auth/Login'
 import configureStore from './store/configureStore'
 import { Provider } from 'react-redux'
+import AddPaperPage from './pages/Paper/AddPaperPage'
+import ShowPaperPage from './pages/Paper/ShowPaperPage'
 
 const store = configureStore()
 
@@ -32,11 +34,13 @@ function App () {
         <Switch>
           <Route component={MainPage} exact path={HOME_PAGE} />
           <Route component={AddWorkPage} exact path={ADD_WORK_PAGE} />
+          <Route component={AddPaperPage} exact path={ADD_PAPER_PAGE} />
           <Route component={AddReportPage} exact path={ADD_REPORT_PAGE} />
           <Route component={AddServicePage} exact path={ADD_SERVICE_PAGE} />
           <Route component={ShowWorksPage} exact path={WORKS_PAGE} />
           <Route component={ShowReportsPage} exact path={REPORTS_PAGE} />
           <Route component={ShowServicesPage} exact path={SERVICES_PAGE} />
+          <Route component={ShowPaperPage} exact path={PAPERS_PAGE} />
           <Route component={Login} exact path={PAGE_LOGIN} />
           <Route component={MainPage} exact path={'*'} />
         </Switch>

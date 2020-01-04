@@ -8,7 +8,7 @@ import { withRouter } from 'react-router'
 import arrayMutators from 'final-form-arrays'
 import InputEditor from '../../components/InputEditor/InputEditor'
 import InputImage from '../../components/InputImage/InputImage'
-import { submitService } from '../../axios/service'
+import { submitService } from '../../axiosFetch/service'
 import { FIELD_TAGS } from '../../constants/WORK_FIELDS_NAME'
 
 import { FIELD_ANNOTATION, FIELD_TEXT, FIELD_TITLE, FIELD_BANNER, FORM_ADD_REPORT } from '../../constants/WORK_FIELDS_NAME'

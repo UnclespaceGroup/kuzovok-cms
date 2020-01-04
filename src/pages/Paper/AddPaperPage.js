@@ -7,22 +7,23 @@ import Padding from '../../components/Padding/Padding'
 import { FAIL } from '../../constants/STATUSES'
 import { withRouter } from 'react-router'
 import arrayMutators from 'final-form-arrays'
-import { submitReport } from '../../axiosFetch/report'
 import useUserStore from '../../hooks/useUserStore'
 import { fields } from './fields'
+import {
+  FORM_ADD_PAPER,
+} from '../../constants/WORK_FIELDS_NAME'
+import { submitPaper } from '../../axiosFetch/paper'
 
-import { FIELD_PARENT_ID, FIELD_IMAGES, FORM_ADD_REPORT } from '../../constants/WORK_FIELDS_NAME'
-
-const AddReportPage = ({ location, history }) => {
+const AddPaperPage = ({ location, history }) => {
   const { accessString } = useUserStore()
-
   const prevData = location.state || {}
   const [status, setStatus] = useState(null)
   const [pending, setPending] = useState(false)
+
   const submit = data => {
     setPending(true)
     setStatus(null)
-    submitReport({ data: correctData(data), id: prevData.id, accessString})
+    submitPaper({ data, id: prevData.id, accessString })
       .then(res => {
         setStatus(res)
         setTimeout(() => {
@@ -36,24 +37,16 @@ const AddReportPage = ({ location, history }) => {
         setPending(false)
       })
   }
-  const correctData = (data) => ({
-    ...data,
-    [FIELD_IMAGES]: JSON.stringify(data[FIELD_IMAGES]),
-    [FIELD_PARENT_ID]: prevData.parentId
-  })
   return (
     <Container style={{ marginTop: '5vh', minHeight: '120vh' }}>
       <FinalForm
-        form={FORM_ADD_REPORT}
+        form={FORM_ADD_PAPER}
         mutators={arrayMutators}
         onSubmit={submit}
-        initialValues={{
-          ...prevData,
-          images: prevData.images && JSON.parse(prevData.images)
-        }}
+        initialValues={prevData}
         render={({ handleSubmit }) => (
           <Form onSubmit={handleSubmit}>
-            <h2>Форма добавления отчета за день</h2>
+            <h2>Форма добавления статьи</h2>
             <FormConstructor scheme={fields} />
             <Button disabled={pending} type="submit">Submit</Button>
           </Form>
@@ -64,4 +57,4 @@ const AddReportPage = ({ location, history }) => {
     </Container>
   )
 }
-export default withRouter(AddReportPage)
+export default withRouter(AddPaperPage)

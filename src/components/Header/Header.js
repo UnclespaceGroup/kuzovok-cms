@@ -1,6 +1,13 @@
 import React, { useEffect } from 'react'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
-import { ADD_SERVICE_PAGE, ADD_WORK_PAGE, HOME_PAGE, SERVICES_PAGE, WORKS_PAGE } from '../../constants/ROUTES'
+import {
+  ADD_SERVICE_PAGE,
+  ADD_WORK_PAGE,
+  HOME_PAGE,
+  SERVICES_PAGE,
+  WORKS_PAGE,
+  ADD_PAPER_PAGE, PAPERS_PAGE
+} from '../../constants/ROUTES'
 import { NavLink, Link } from 'react-router-dom'
 import useUserStore from '../../hooks/useUserStore'
 import LoginForm from '../LoginForm/LoginForm'
@@ -28,6 +35,12 @@ const Header = () => {
           <NavDropdown title="Услуги" id="basic-nav-dropdown">
             <NavDropdown.Item as={NavLink} to={ADD_SERVICE_PAGE}>Добавить</NavDropdown.Item>
             <NavDropdown.Item as={NavLink} to={SERVICES_PAGE}>Просмотреть</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+          </NavDropdown>
+          <NavDropdown title="Статьи" id="basic-nav-dropdown">
+            <NavDropdown.Item as={NavLink} to={ADD_PAPER_PAGE}>Добавить</NavDropdown.Item>
+            <NavDropdown.Item as={NavLink} to={PAPERS_PAGE}>Просмотреть</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
           </NavDropdown>
