@@ -1,25 +1,25 @@
 import React from 'react'
-import ReactSummernote from 'react-summernote';
-import 'react-summernote/dist/react-summernote.css';
-import 'react-summernote/lang/summernote-ru-RU';
-import 'bootstrap/js/src/modal';
-import 'bootstrap/js/src/dropdown';
-import 'bootstrap/js/src/tooltip';
-import Compressor from 'compressorjs';
+import ReactSummernote from 'react-summernote'
+import 'react-summernote/dist/react-summernote.css'
+import 'react-summernote/lang/summernote-ru-RU'
+import 'bootstrap/js/src/modal'
+import 'bootstrap/js/src/dropdown'
+import 'bootstrap/js/src/tooltip'
+import Compressor from 'compressorjs'
 import _ from 'lodash'
 
 const InputEditor = ({ input = {} }) => {
 
   const onImageUpload = (fileList) => {
-    _.forEach(fileList, file => {
-      new Compressor(file, {
+    _.forEach(fileList, item => {
+      new Compressor(item, {
         maxWidth: 480,
-        success(result) {
-          const reader = new FileReader();
+        success (result) {
+          const reader = new FileReader()
           reader.onloadend = () => {
-            ReactSummernote.insertImage(reader.result);
+            ReactSummernote.insertImage(reader.result)
           }
-          reader.readAsDataURL(result);
+          reader.readAsDataURL(result)
         }
       })
     })
