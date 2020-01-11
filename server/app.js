@@ -7,6 +7,7 @@ const passport = require('passport')
 const ModelCRUD = require('./routes/ModelCRUD')
 const { Work, Report, Paper } = require('./sequelize')
 const helmet = require('helmet')
+const multer  = require("multer");
 
 var app = express()
 
@@ -37,7 +38,6 @@ app.use(cookieParser());
 app.use(helmet());
 app.use(passport.initialize());
 
-
 require('./routes/auth/loginUser')(app);
 require('./routes/auth/registerUser')(app);
 require('./routes/auth/forgotPassword')(app);
@@ -47,6 +47,8 @@ require('./routes/auth/updatePasswordViaEmail')(app);
 require('./routes/auth/findUsers')(app);
 require('./routes/auth/deleteUser')(app);
 require('./routes/auth/updateUser')(app);
+
+require('./routes/fileUpload')(app, passport, __dirname);
 
 ModelCRUD(app, '/work/', Work, passport)
 ModelCRUD(app, '/report/', Report, passport)

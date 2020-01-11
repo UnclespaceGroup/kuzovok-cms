@@ -8,9 +8,7 @@ const {
 } = require('../../src/constants/WORK_FIELDS_NAME')
 
 const workPath = '/report/'
-const bodyParser = require('body-parser')
 
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const ARRAY = [
   FIELD_DATE, FIELD_TITLE, FIELD_ANNOTATION, FIELD_TEXT, FIELD_IMAGES, FIELD_PARENT_ID

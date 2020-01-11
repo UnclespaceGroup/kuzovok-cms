@@ -43,7 +43,7 @@ const FormConstructor = ({ scheme }) =>
         return <Form.Group key={key}>
           <label>{label}</label>
           <Field name={name}>
-            {({ input }) => console.log(input.value) || <Form.Control {...input} as="select">
+            {({ input }) => <Form.Control {...input} as="select">
               {
                 options.map(({ id, title }, key) => (
                   <option key={key} value={id}>{title}</option>
@@ -82,4 +82,4 @@ const FormConstructor = ({ scheme }) =>
       }
     })
 
-export default FormConstructor
+export default React.memo(FormConstructor)

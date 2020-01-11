@@ -1,15 +1,28 @@
 import React from 'react'
+import { axiosApi } from 'axiosFetch'
 
-const InputFile = ({ input }) => {
-  const onChange = (e) => {
-    const file = e.target.files[0]
-    input.onChange(file)
+const InputFile = ({ input, accessString }) => {
+  const send = () => {
+    const axiosInstanse = axiosApi({accessString })
+
+    var bodyFormData = new FormData();
+    bodyFormData.append('file', input.value);
+    axiosInstanse({
+      enctype: 'multipart/form-data',
+      method: 'post',
+      url: '/upload',
+      data: bodyFormData
+    })
   }
+
   return (
-    <input
-      type={'file'}
-      onChange={onChange}
-    />
+    <div>
+      <input
+        {...input}
+        type={'file'}
+      />
+      <button type={'button'} onClick={() => send()}>Отправить</button>
+    </div>
   )
 }
-export default InputFile
+export default React.memo(InputFile)
