@@ -7,7 +7,7 @@ const passport = require('passport')
 const ModelCRUD = require('./routes/ModelCRUD')
 const { Work, Report, Paper } = require('./sequelize')
 const helmet = require('helmet')
-const multer  = require("multer");
+const path  = require("path");
 
 var app = express()
 
@@ -37,6 +37,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(helmet());
 app.use(passport.initialize());
+app.use(express.static(path.join(__dirname, 'public')))
 
 require('./routes/auth/loginUser')(app);
 require('./routes/auth/registerUser')(app);
