@@ -6,16 +6,18 @@ const fs = require('fs-extra')
 
 const fileUpload = function (app, passport, rootDirectory) {
   const imagesFolderName = 'images'
-  const imagesAbsoluteDirectory = `${rootDirectory}/public/${imagesFolderName}/`
+  const imagesAbsoluteDirectory = `${rootDirectory}/public/${imagesFolderName}`
 
   const storageConfig = multer.diskStorage({
     destination: (req, file, cb) => {
       const { folder: currentFolder, clearOld } = req.body
 
       if (clearOld && currentFolder) {
-        console.log('clear')
-        fs.remove(`${imagesAbsoluteDirectory}/${currentFolder}`, err => {
-          console.log('fail removing', err)
+        const deletingPath = `${imagesAbsoluteDirectory}/${currentFolder}`
+        fs.readdir(deletingPath, function(err, items) {
+          items.forEach(item => {
+            fs.unlink(`${deletingPath}/${item}`)
+          })
         })
       }
 
