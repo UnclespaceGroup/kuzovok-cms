@@ -51,9 +51,9 @@ require('./routes/auth/updateUser')(app);
 
 require('./routes/fileUpload')(app, passport, __dirname);
 
-ModelCRUD(app, '/work/', Work, passport)
-ModelCRUD(app, '/report/', Report, passport)
-ModelCRUD(app, '/paper/', Paper, passport)
+ModelCRUD(app, '/work/', Work, passport, __dirname)
+ModelCRUD(app, '/report/', Report, passport, __dirname)
+ModelCRUD(app, '/paper/', Paper, passport, __dirname)
 
 require('./routes/getWorksList')(app)
 

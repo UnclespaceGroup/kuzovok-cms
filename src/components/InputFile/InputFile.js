@@ -1,9 +1,10 @@
 import React, { useRef } from 'react'
 import { axiosApi } from 'axiosFetch'
 import css from './InputFile.module.scss'
-import { BASE_URL } from 'constants/ADDRESS'
+import { BASE_URL } from 'constants/url'
 
-const InputFile = ({ input, accessString }) => {
+const InputFile = ({ input, accessString, folderName, isSingleImage }) => {
+  if (!folderName) console.warn('where is fucking FOLDER NAME')
   const inputRef = useRef(null)
   const send = () => {
     const axiosInstanse = axiosApi({accessString })
@@ -11,8 +12,13 @@ const InputFile = ({ input, accessString }) => {
     var bodyFormData = new FormData()
     const files = inputRef.current && inputRef.current.files
 
-    bodyFormData.append('folder', 'defaultName')
-    bodyFormData.append('clearOld', 'true')
+    if (folderName) {
+      bodyFormData.append('folder', folderName)
+    } else {
+      bodyFormData.append('folder', 'default')
+    }
+    isSingleImage && bodyFormData.append('clearOld', 'true')
+
     bodyFormData.append('filedata', files[0])
     axiosInstanse({
       headers: {'Content-Type': 'multipart/form-data' },
@@ -20,7 +26,6 @@ const InputFile = ({ input, accessString }) => {
       url: '/upload',
       data: bodyFormData
     }).then(res => {
-      console.log(res)
       if (res.status === 200) {
         input.onChange(res.data.filePath)
       }

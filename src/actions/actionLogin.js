@@ -1,4 +1,4 @@
-import { JWT, USER_NAME } from '../constants/OTHER'
+import { JWT, USER_NAME } from 'constants/userConstants'
 
 export const actionLogin = payload => {
   if (payload) {

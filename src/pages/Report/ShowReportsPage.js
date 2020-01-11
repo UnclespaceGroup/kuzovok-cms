@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Table, Button, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { ADD_REPORT_PAGE } from '../../constants/ROUTES'
+import { ADD_REPORT_PAGE } from 'constants/routes'
 import moment from 'moment'
 import { deleteReport, getReports } from '../../axiosFetch/report'
 import { withRouter } from 'react-router'

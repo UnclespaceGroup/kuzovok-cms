@@ -4,7 +4,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import MainPage from './pages/MainPage'
 import {
   HOME_PAGE,
-} from './constants/ROUTES'
+} from 'constants/routes'
 import Header from './components/Header/Header'
 import configureStore from './store/configureStore'
 import { Provider } from 'react-redux'

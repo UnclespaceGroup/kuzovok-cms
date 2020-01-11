@@ -1,8 +1,7 @@
 module.exports = (sequelize, type) => sequelize.define('workTest', {
   id: {
-    type: type.INTEGER,
+    type: type.STRING,
     primaryKey: true,
-    autoIncrement: true,
   },
   title: type.STRING,
   annotation: type.STRING,

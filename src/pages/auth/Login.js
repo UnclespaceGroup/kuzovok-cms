@@ -6,7 +6,7 @@ import Padding from '../../components/Padding/Padding'
 import SectionStatus from '../../components/SectionStatus/SectionStatus'
 import { login } from '../../axiosFetch/login'
 import { connect } from 'react-redux'
-import { JWT, USER_NAME } from '../../constants/OTHER'
+import { JWT, USER_NAME } from 'constants/userConstants'
 import { actionLogin } from '../../actions/actionLogin'
 
 const { FORM_LOGIN, FIELD_PASSWORD, FIELD_LOGIN } = require('../../constants/WORK_FIELDS_NAME')

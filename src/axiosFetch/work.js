@@ -1,12 +1,12 @@
 import axios from 'axios'
-import { BASE_URL, METHOD_WORK } from '../constants/ADDRESS'
+import { BASE_URL, METHOD_WORK } from 'constants/url'
 
 axios.defaults.baseURL = BASE_URL
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
-export const submitWork = async ({ data, id, accessString }) => {
-  const addr = id ? `${METHOD_WORK}update/${id}` : METHOD_WORK + 'add'
+export const submitWork = async ({ data, id, accessString, update }) => {
+  const addr = update ? `${METHOD_WORK}update/${id}` : METHOD_WORK + 'add'
   return await axios.post(addr, data,
     {
       headers: { Authorization: `JWT ${accessString}` }

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { BASE_URL } from '../constants/ADDRESS'
-import { JWT, USER_NAME } from '../constants/OTHER'
+import { BASE_URL } from 'constants/url'
+import { JWT, USER_NAME } from 'constants/userConstants'
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.post['Content-Type'] ='application/json';

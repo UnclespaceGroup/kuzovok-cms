@@ -7,7 +7,7 @@ import {
   SERVICES_PAGE,
   WORKS_PAGE,
   ADD_PAPER_PAGE, PAPERS_PAGE
-} from '../../constants/ROUTES'
+} from 'constants/routes'
 import { NavLink, Link } from 'react-router-dom'
 import useUserStore from '../../hooks/useUserStore'
 import LoginForm from '../LoginForm/LoginForm'

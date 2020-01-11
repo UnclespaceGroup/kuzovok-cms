@@ -1,4 +1,4 @@
-import { SERVICES_PAGE, ADD_SERVICE_PAGE, ADD_WORK_PAGE, WORKS_PAGE } from 'constants/ROUTES'
+import { SERVICES_PAGE, ADD_SERVICE_PAGE, ADD_WORK_PAGE, WORKS_PAGE } from 'constants/routes'
 
 export const blocks = [
   {

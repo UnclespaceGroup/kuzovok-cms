@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { deleteWork, getWorks } from '../../axiosFetch/work'
 import { Button, Container, Card, Row, Col } from 'react-bootstrap'
-import { ADD_REPORT_PAGE, ADD_WORK_PAGE, REPORTS_PAGE } from '../../constants/ROUTES'
+import { ADD_REPORT_PAGE, ADD_WORK_PAGE, REPORTS_PAGE } from 'constants/routes'
 import moment from 'moment'
 import CardLink from '../../components/CardLink/CardLink'
 import AddCard from '../../components/AddCard/AddCard'
 import Padding from '../../components/Padding/Padding'
 import useUserStore from '../../hooks/useUserStore'
+import { getImageStorageUrl } from 'services/getImageStorageUrl'
 
 const ShowWorksPage = () => {
   const { accessString } = useUserStore()
@@ -45,7 +46,7 @@ const ShowWorksPage = () => {
           items.map((item, key) => (
             <Col xs={4} key={key}>
               <Card style={{ width: '22rem', marginBottom: '2rem' }} >
-                <Card.Img variant="top" src={item.banner} />
+                <Card.Img variant="top" src={getImageStorageUrl(item.banner)} />
                 <Card.Body>
                   <Card.Title>{item.title}</Card.Title>
                   <Card.Text>

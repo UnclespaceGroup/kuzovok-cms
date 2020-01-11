@@ -10,7 +10,7 @@ import {
   ADD_SERVICE_PAGE,
   WORKS_PAGE,
   REPORTS_PAGE, SERVICES_PAGE, PAPERS_PAGE, PAGE_LOGIN
-} from 'constants/ROUTES'
+} from 'constants/routes'
 import AddPaperPage from 'pages/Paper/AddPaperPage'
 import AddReportPage from 'pages/Report/AddReportPage'
 import AddServicePage from 'pages/Services/AddServicePage'

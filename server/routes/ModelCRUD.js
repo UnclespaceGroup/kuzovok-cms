@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize')
 const CheckAuthorize = require('../services/checkAuthorize')
 const Op = Sequelize.Op
+const deleteImageFolder = require('../services/deleteImageFolder')
 
-module.exports = function (app, workPath, Model, passport) {
+module.exports = function (app, workPath, Model, passport, rootDirectory) {
   // GET ALL DATA
   // app.get(workPath, (req, res, next) => {
   //   Model.findAll({ raw: true }).then(users => {
@@ -82,6 +83,7 @@ module.exports = function (app, workPath, Model, passport) {
         id
       }
     }).then((result) => {
+      deleteImageFolder(id, rootDirectory)
       res.sendStatus(200)
       console.log(result)
     }).catch(err => console.log(err))

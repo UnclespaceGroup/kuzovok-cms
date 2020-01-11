@@ -1,12 +1,11 @@
 import React from 'react'
 import _ from 'lodash'
-import { Button, Form } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { Field } from 'react-final-form'
-import { FieldArray } from 'react-final-form-arrays'
 import InputEditor from '../InputEditor/InputEditor'
-import InputImage from '../InputImage/InputImage'
+import InputFile from 'components/InputFile/InputFile'
 
-const FormConstructor = ({ scheme }) =>
+const FormConstructor = ({ scheme, ...props }) =>
   _.map(scheme,
     ({
        type,
@@ -56,28 +55,7 @@ const FormConstructor = ({ scheme }) =>
       if (type === 'image') {
         return <Form.Group key={key}>
           <label>{label}</label>
-          <Field name={name} component={InputImage} />
-        </Form.Group>
-      }
-      if (type === 'imagesList') {
-        return <Form.Group key={key}>
-          <label>{label}</label>
-          <FieldArray name={name}>
-            {({ fields }) =>
-              <div>
-                {
-                  fields.map((item, key) => (
-                    <Field key={key}
-                           name={`${item}`}
-                           component={InputImage}
-                           remove={() => { fields.pop(key) }}
-                    />
-                  ))
-                }
-                <Button onClick={() => { fields.push(undefined) }}>Добавить</Button>
-              </div>
-            }
-          </FieldArray>
+          <Field name={name} component={InputFile} {...props} />
         </Form.Group>
       }
     })

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { USER_STORAGE } from '../constants/OTHER'
+import { USER_STORAGE } from 'constants/userConstants'
 
 const useUserStore = () => {
   const dispatch = useDispatch()

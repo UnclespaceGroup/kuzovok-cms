@@ -1,5 +1,5 @@
 import React from 'react'
-import { FAIL, OK } from '../../constants/STATUSES'
+import { FAIL, OK } from 'constants/statuses'
 import { Alert } from 'react-bootstrap'
 
 const statusText = {

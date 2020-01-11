@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BASE_URL, METHOD_REPORT } from '../constants/ADDRESS'
+import { BASE_URL, METHOD_REPORT } from 'constants/url'
 
 axios.defaults.baseURL = BASE_URL;
 axios.defaults.headers.post['Content-Type'] ='application/json';

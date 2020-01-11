@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Container, Card, Row, Col } from 'react-bootstrap'
-import { ADD_SERVICE_PAGE } from '../../constants/ROUTES'
+import { ADD_SERVICE_PAGE } from 'constants/routes'
 import moment from 'moment'
 import CardLink from '../../components/CardLink/CardLink'
 import AddCard from '../../components/AddCard/AddCard'

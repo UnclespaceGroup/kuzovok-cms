@@ -6,7 +6,7 @@ import {
   FIELD_TYPE,
   STATUSES,
   WORKS_TYPES
-} from '../../constants/WORK_FIELDS_NAME'
+} from 'constants/WORK_FIELDS_NAME'
 
 export const fields = [
   {
