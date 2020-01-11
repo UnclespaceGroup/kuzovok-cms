@@ -15,11 +15,11 @@ export const blocks = [
       },
       {
         title: 'Автомобили в ремонте',
-        to: ''
+        to: '/'
       },
       {
         title: 'О нас',
-        to: ''
+        to: '/'
       }
     ]
   },

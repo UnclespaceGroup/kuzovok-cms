@@ -8,10 +8,10 @@ const SectionSideMenu = ({ blocks }) => (
     {
       _.map(blocks, (block, blockKey) => (
         <div key={blockKey} className={css.block}>
-          <Link to={block.to} className={css.title}>{block.title}</Link>
+          <Link to={block.to || '#'} className={css.title}>{block.title}</Link>
           {
             _.map(block.items, (item, key) => (
-              <Link className={css.item} to={item.to} key={key}>
+              <Link className={css.item} to={item.to || '#'} key={key}>
                 {item.title}
               </Link>
             ))
