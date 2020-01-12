@@ -2,16 +2,17 @@ import React, { useRef } from 'react'
 import { axiosApi } from 'axiosFetch'
 import css from './InputFile.module.scss'
 import { BASE_URL } from 'constants/url'
+import cn from 'classnames'
+import { MdEdit } from 'react-icons/md'
 
 const InputFile = ({ input, accessString, isSingleImage, id, categoryName, typeName }) => {
-  console.log(id, categoryName, typeName)
   if (!id || !categoryName || !typeName) {
     console.error('where is fucking PARAMS')
   }
   const inputRef = useRef(null)
   const send = () => {
     if (!id || !categoryName || !typeName) return
-    const axiosInstanse = axiosApi({accessString })
+    const axiosInstanse = axiosApi({ accessString })
 
     var bodyFormData = new FormData()
     const files = inputRef.current && inputRef.current.files
@@ -24,7 +25,7 @@ const InputFile = ({ input, accessString, isSingleImage, id, categoryName, typeN
 
     bodyFormData.append('filedata', files[0])
     axiosInstanse({
-      headers: {'Content-Type': 'multipart/form-data' },
+      headers: { 'Content-Type': 'multipart/form-data' },
       method: 'post',
       url: '/upload',
       data: bodyFormData
@@ -36,14 +37,24 @@ const InputFile = ({ input, accessString, isSingleImage, id, categoryName, typeN
     }).catch(e => console.log(e))
   }
   const imgPath = input.value && `${BASE_URL}${input.value}`
-  return (
-    <label className={css.container}>
-      {imgPath ?
-        <div className={css.img} style={{ backgroundImage: `url("${imgPath}")` }} />
-        : <div>
+  return imgPath ?
+    <div className={css.container}>
+      <div className={css.img} style={{ backgroundImage: `url("${imgPath}")` }} />
+      <label className={css.btnChange}>
+        <MdEdit />
+        <input
+          ref={inputRef}
+          type={'file'}
+          onChange={() => {
+            send()
+          }}
+        />
+      </label>
+    </div>
+    : <label className={cn(css.container, css.empty)}>
+        <div>
           Добавить фото
-      </div>
-      }
+        </div>
       <input
         ref={inputRef}
         type={'file'}
@@ -52,6 +63,6 @@ const InputFile = ({ input, accessString, isSingleImage, id, categoryName, typeN
         }}
       />
     </label>
-  )
+
 }
 export default React.memo(InputFile)
