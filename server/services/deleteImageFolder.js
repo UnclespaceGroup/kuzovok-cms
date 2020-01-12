@@ -1,10 +1,10 @@
 const fs = require('fs-extra')
 
-const deleteImageFolder = function (folder, rootDirectory) {
+const deleteImageFolder = async function (path, rootDirectory) {
   const imagesAbsoluteDirectory = `${rootDirectory}/public/images/`
 
-  fs.remove(imagesAbsoluteDirectory + folder, err => {
-    console.error(err ? err : 'Папка успешно удалена')
+  await fs.remove(imagesAbsoluteDirectory + path, err => {
+    console.error(err ? err : `Папка ${path} успешно удалена`)
   })
 }
 module.exports = deleteImageFolder

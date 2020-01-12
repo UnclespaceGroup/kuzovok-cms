@@ -3,6 +3,7 @@ const multer  = require("multer")
 const mkdirp = require('mkdirp')
 const fs = require('fs-extra')
 const _ = require('lodash')
+const mkdirpAsync = require('async-mkdirp')
 
 /**
  * Файловая структура картинок
@@ -39,17 +40,19 @@ const fileUpload = function (app, passport, rootDirectory) {
       const currentAbsoluteImagePath = createImageFolderPath({ categoryName, id, typeName })
       console.log(currentAbsoluteImagePath)
 
-      if (clearOld) {
+      if (clearOld && fs.exists(currentAbsoluteImagePath)) {
         fs.readdir(currentAbsoluteImagePath, function(err, items) {
-          _.size(items) && _.forEach(items, item => {
+          console.log(items)
+          items && _.size(items) && _.forEach(items, item => {
             console.log(item)
             fs.unlink(`${currentAbsoluteImagePath}/${item}`)
           })
         })
       }
-      mkdirp(currentAbsoluteImagePath)
-
-      cb(null, currentAbsoluteImagePath)
+      mkdirpAsync(currentAbsoluteImagePath)
+        .then(() => {
+          cb(null, currentAbsoluteImagePath)
+        })
     },
     filename: (req, file, cb) =>{
       cb(null, file.originalname)
