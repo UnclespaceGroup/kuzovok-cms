@@ -54,7 +54,8 @@ require('./routes/fileUpload')(app, passport, __dirname);
 ModelCRUD(app, '/report/', Report, passport, __dirname)
 ModelCRUD(app, '/paper/', Paper, passport, __dirname)
 
-require('./routes/works')(app, Work, passport, __dirname)
+require('./routes/works')(app, passport, __dirname)
+require('./routes/services')(app, passport, __dirname)
 
 // error handler
 app.use(function(err, req, res, next) {

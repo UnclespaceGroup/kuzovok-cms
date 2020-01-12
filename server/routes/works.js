@@ -7,7 +7,7 @@ const deleteImageFolder = require('../services/deleteImageFolder')
 
 const WORK_PATH = '/work/'
 
-const works = function (app, Model, passport, rootDirectory) {
+const works = function (app, passport, rootDirectory) {
   app.get(WORK_PATH + 'list', (req, res) => {
     const params = req.query
 
@@ -27,7 +27,7 @@ const works = function (app, Model, passport, rootDirectory) {
   app.get(WORK_PATH, (req, res) => {
     const params = req.query
 
-    Model.findAll({ where: { ...params }, raw: true }).then(users => {
+    Work.findAll({ where: { ...params }, raw: true }).then(users => {
       res.send(users)
     }).catch(err => console.log(err))
   })
@@ -42,7 +42,7 @@ const works = function (app, Model, passport, rootDirectory) {
       }
     } : {}
 
-    Model.findAll({ where: { ...where, ...params.where }, ...params }).then(users => {
+    Work.findAll({ where: { ...where, ...params.where }, ...params }).then(users => {
       res.send(users)
     }).catch(err => console.log(err))
   })
@@ -50,7 +50,7 @@ const works = function (app, Model, passport, rootDirectory) {
   // GET SINGLE DATA
   app.get(WORK_PATH + ':id', (req, res) => {
     const id = req.params.id
-    Model.findByPk(id)
+    Work.findByPk(id)
       .then(result => {
         if (!result) return
         res.send(result)
@@ -61,7 +61,7 @@ const works = function (app, Model, passport, rootDirectory) {
   app.post(WORK_PATH + 'add', (req, res, next) => {
     CheckAuthorize(req, res, next, passport)
     const data = req.body
-    Model.create({
+    Work.create({
       date: new Date().toString(),
       ...data
     }).then(result => {
@@ -77,7 +77,7 @@ const works = function (app, Model, passport, rootDirectory) {
     CheckAuthorize(req, res, next, passport)
     const data = req.body
     const id = req.params.id
-    Model.update(data, {
+    Work.update(data, {
       where: {
         id
       }
@@ -90,7 +90,7 @@ const works = function (app, Model, passport, rootDirectory) {
   app.delete(WORK_PATH + ':id', (req, res, next) => {
     CheckAuthorize(req, res, next, passport)
     const id = req.params.id
-    Model.destroy({
+    Work.destroy({
       where: {
         id
       }

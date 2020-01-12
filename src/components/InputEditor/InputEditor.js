@@ -7,6 +7,7 @@ import 'bootstrap/js/src/dropdown'
 import 'bootstrap/js/src/tooltip'
 import Compressor from 'compressorjs'
 import _ from 'lodash'
+import css from './InputEditor.module.scss'
 
 const InputEditor = ({ input = {} }) => {
 
@@ -29,7 +30,7 @@ const InputEditor = ({ input = {} }) => {
     input.onChange(content)
   }
   return (
-    <div>
+    <div className={css.container}>
       <ReactSummernote
         value={input.value}
         options={{

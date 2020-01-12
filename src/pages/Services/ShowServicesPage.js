@@ -7,6 +7,7 @@ import AddCard from '../../components/AddCard/AddCard'
 import Padding from '../../components/Padding/Padding'
 import { deleteServices, getServices } from '../../axiosFetch/service'
 import useUserStore from '../../hooks/useUserStore'
+import { getImageStorageUrl } from 'services/getImageStorageUrl'
 
 const ShowServicesPage = () => {
   const { accessString } = useUserStore()
@@ -47,7 +48,7 @@ const ShowServicesPage = () => {
           mainItems.map((item, key) => (
             <Col xs={4} key={key}>
               <Card style={{ width: '22rem', marginBottom: '2rem' }} >
-                <Card.Img variant="top" src={item.banner} />
+                <Card.Img variant="top" src={getImageStorageUrl(item.banner)} />
                 <Card.Body>
                   <Card.Title>{item.title}</Card.Title>
                   <Card.Text>

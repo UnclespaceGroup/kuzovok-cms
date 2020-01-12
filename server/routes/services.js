@@ -1,113 +1,106 @@
-const {
-  FIELD_ANNOTATION,
-  FIELD_BANNER,
-  FIELD_TEXT,
-  FIELD_TITLE,
-  FIELD_TAGS,
-  FIELD_DATE,
-  FIELD_PARENT_ID
-} = require('../../src/constants/WORK_FIELDS_NAME')
+const Sequelize = require('sequelize')
+const { Service } = require('../sequelize')
+const Op = Sequelize.Op
+const CheckAuthorize = require('../services/checkAuthorize')
+const deleteImageFolder = require('../services/deleteImageFolder')
 
-const workPath = '/service/'
-const bodyParser = require('body-parser')
 
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const WORK_PATH = '/service/'
 
-const ARRAY = [
-  FIELD_DATE, FIELD_TITLE, FIELD_ANNOTATION, FIELD_TEXT, FIELD_BANNER, FIELD_PARENT_ID, FIELD_TAGS
-]
+const works = function (app, passport, rootDirectory) {
+  app.get(WORK_PATH + 'list', (req, res) => {
+    const params = req.query
 
-const createWorkArray = (data = {}) => {
-  const arr = ARRAY.map(item => data[item] || '')
-  arr[0] = new Date().toString()
-  return arr
-}
-const createWorkString = (data) => {
-  const keys = Object.keys(data)
-  let str = ''
-  keys.forEach((key) => {
-    if (data[key] && key !== 'id') {
-      str += `${key}='${data[key]}', `
-    }
+    Service.findAll({ limit: +params.limit, raw: true }).then(items => {
+      const list = items.map(item => ({
+        title: item.title,
+        annotation: item.annotation,
+        status: item.status,
+        id: item.id,
+        date: item.date
+      }))
+      res.send(list)
+    }).catch(err => console.log(err))
   })
-  return str.substring(0, str.length - 2)
-}
 
-const createFilterParams = (data) => {
-  const keys = Object.keys(data)
-  let str = ''
-  keys.forEach(key => {
-    str += `${key}='${data[key]}', `
+  // GET DATA WITH PARAMS
+  app.get(WORK_PATH, (req, res) => {
+    const params = req.query
+
+    Service.findAll({ where: { ...params }, raw: true }).then(users => {
+      res.send(users)
+    }).catch(err => console.log(err))
   })
-  return str.substring(0, str.length - 2)
-}
 
-module.exports = function (app, pool, authenticate) {
-  // GET ALL
-  app.get(workPath, (req, res) => {
-    console.log(req.query)
-    const params = Object.keys(req.query).length ? `WHERE ${createFilterParams(req.query)}` : ''
-    console.log(params)
-    pool.query(`SELECT * FROM services ${params}`, function (err, data) {
-      if (err) {
-        res.status(500).send(err)
-        return
+  // GET DATA WITH POST PARAMS
+  app.post(WORK_PATH, (req, res) => {
+    const params = req.body.params || {}
+
+    const where = Array.isArray(params.rangeDate) ? {
+      createdAt: {
+        [Op.between]: params.rangeDate
       }
-      res.send(data)
-    })
+    } : {}
+
+    Service.findAll({ where: { ...where, ...params.where }, ...params }).then(users => {
+      res.send(users)
+    }).catch(err => console.log(err))
+  })
+
+  // GET SINGLE DATA
+  app.get(WORK_PATH + ':id', (req, res) => {
+    const id = req.params.id
+    Service.findByPk(id)
+      .then(result => {
+        if (!result) return
+        res.send(result)
+      }).catch(err => console.log(err))
   })
 
   // ADD NEW
-  app.post(workPath, authenticate, (req, res) => {
+  app.post(WORK_PATH + 'add', (req, res, next) => {
+    CheckAuthorize(req, res, next, passport)
     const data = req.body
-    const resData = createWorkArray(data)
-    const listResData = ARRAY.join(', ')
-    const sql = `INSERT INTO services (${listResData}) VALUES(?,?,?,?,?,?,?)`
-    pool.query(sql, resData, function (err, data) {
-      if (err) {
-        res.status(500).send(err)
-        return
-      }
-      res.send(data)
+    Service.create({
+      date: new Date().toString(),
+      ...data
+    }).then(result => {
+      res.send(result)
+    }).catch(err => {
+      res.status(500).send()
+      console.log(err)
     })
   })
 
-  // UPDATE
-  app.post(workPath + ':id', authenticate, (req, res) => {
+  // update
+  app.post(WORK_PATH + 'update/:id', (req, res, next) => {
+    CheckAuthorize(req, res, next, passport)
     const data = req.body
-    const sql = `UPDATE services SET ${createWorkString(data)} WHERE id LIKE ${req.params.id}`
-    console.log(sql)
-    pool.query(sql, function (err, data) {
-      if (err) {
-        res.status(500).send(err)
-        return
+    const id = req.params.id
+    Service.update(data, {
+      where: {
+        id
       }
-      res.send(data)
-    })
-  })
-
-  // GET SINGLE
-  app.get(workPath + ':id', (req, res) => {
-    const sql = `SELECT * FROM services WHERE id = ${req.params.id} LIMIT 1`
-    pool.query(sql, function (err, data) {
-      if (err) {
-        res.status(500).send(err)
-        return
-      }
-      data.content && console.log(JSON.parse(data.content))
-      res.send(data)
-    })
+    }).then((result) => {
+      res.send(result)
+    }).catch(err => console.log(err))
   })
 
   // DELETE
-  app.delete(workPath + ':id', authenticate, (req, res) => {
-    const sql = `DELETE FROM services WHERE id=${req.params.id}`
-    pool.query(sql, function (err, data) {
-      if (err) {
-        res.status(500).send(err)
-        return
+  app.delete(WORK_PATH + ':id', (req, res, next) => {
+    CheckAuthorize(req, res, next, passport)
+    const id = req.params.id
+    Service.destroy({
+      where: {
+        id
       }
-      res.send(data)
-    })
+    }).then((result) => {
+      deleteImageFolder(`services/${id}`, rootDirectory)
+        .then(() => {
+          res.sendStatus(200)
+          console.log(result)
+        })
+    }).catch(err => console.log(err))
   })
 }
+module.exports = works

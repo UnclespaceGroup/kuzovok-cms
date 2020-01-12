@@ -1,6 +1,6 @@
 // const CheckAuthorize = require('../services/checkAuthorize')
 const multer  = require("multer")
-const mkdirp = require('mkdirp')
+const deleteImageFolder = require("../services/deleteImageFolder")
 const fs = require('fs-extra')
 const _ = require('lodash')
 const mkdirpAsync = require('async-mkdirp')
@@ -74,6 +74,17 @@ const fileUpload = function (app, passport, rootDirectory) {
         filePath
       })
     }
+  })
+  app.post("/delete-image-folder", function (req, res) {
+    const { categoryName, id } = req.body
+    const folder = `${categoryName}/${id}`
+    deleteImageFolder(folder, rootDirectory)
+      .then(() => {
+        res.send(`Успешно удалено ${folder}`)
+      })
+      .catch(e => {
+        res.status(500).send(e)
+      })
   })
 }
 

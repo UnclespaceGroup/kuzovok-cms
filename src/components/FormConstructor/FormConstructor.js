@@ -13,6 +13,7 @@ const FormConstructor = ({ scheme, ...props }) =>
        placeholder,
        name,
        options = [],
+       text,
       ...others
      },
      key) => {
@@ -23,12 +24,18 @@ const FormConstructor = ({ scheme, ...props }) =>
             {({ input }) => <Form.Control
               placeholder={placeholder} {...input} />}
           </Field>
+          <Form.Text className="text-muted">
+            {text}
+          </Form.Text>
         </Form.Group>
       }
       if (type === 'editor') {
         return <Form.Group key={key}>
           <label>{label}</label>
           <Field component={InputEditor} name={name} />
+          <Form.Text className="text-muted">
+            {text}
+          </Form.Text>
         </Form.Group>
       }
       if (type === 'textarea') {
@@ -37,6 +44,9 @@ const FormConstructor = ({ scheme, ...props }) =>
           <Field name={name}>
             {({ input }) => <Form.Control as="textarea" rows="3" placeholder={placeholder} {...input} />}
           </Field>
+          <Form.Text className="text-muted">
+            {text}
+          </Form.Text>
         </Form.Group>
       }
       if (type === 'select') {
@@ -51,13 +61,18 @@ const FormConstructor = ({ scheme, ...props }) =>
               }
             </Form.Control>}
           </Field>
+          <Form.Text className="text-muted">
+            {text}
+          </Form.Text>
         </Form.Group>
       }
       if (type === 'image') {
-        console.log(others)
         return <Form.Group key={key}>
           <label>{label}</label>
           <Field name={name} component={InputFile} {...props} {...others} />
+          <Form.Text className="text-muted">
+            {text}
+          </Form.Text>
         </Form.Group>
       }
     })
