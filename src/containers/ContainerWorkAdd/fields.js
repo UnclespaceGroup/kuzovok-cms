@@ -10,6 +10,12 @@ import {
 
 export const fields = [
   {
+    type: 'image',
+    label: 'Изображение баннера',
+    name: FIELD_BANNER,
+    typeName: 'mainBanner'
+  },
+  {
     type: 'text',
     label: 'Заголовок',
     placeholder: 'Заголовок',
@@ -28,11 +34,6 @@ export const fields = [
     options: STATUSES
   },
   {
-    type: 'image',
-    label: 'Изображение баннера',
-    name: FIELD_BANNER
-  },
-  {
     type: 'textarea',
     label: 'Аннотация',
     name: FIELD_ANNOTATION,
@@ -48,5 +49,11 @@ export const fields = [
     type: 'editor',
     label: 'Описание',
     name: FIELD_TEXT
+  },
+  {
+    type: 'image',
+    label: 'Изображение баннера',
+    name: 'simpleImage',
+    typeName: 'simpleImage'
   }
 ]

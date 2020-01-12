@@ -1,46 +1,71 @@
-
 // const CheckAuthorize = require('../services/checkAuthorize')
 const multer  = require("multer")
 const mkdirp = require('mkdirp')
 const fs = require('fs-extra')
+const _ = require('lodash')
+
+/**
+ * Файловая структура картинок
+ * - public/images
+ *      - {categoryName}
+ *          - {id}
+ *              {typeName}
+ *
+ * Папки, в которых должно быть гарантировано 1 картинка, заливаются с флагом clearOld */
 
 const fileUpload = function (app, passport, rootDirectory) {
-  const imagesFolderName = 'images'
-  const imagesAbsoluteDirectory = `${rootDirectory}/public/${imagesFolderName}`
+  const imagesAbsoluteDirectory = `${rootDirectory}/public/images`
+
+  const createImageFolderPath = function ({ categoryName, id, typeName }) {
+    return `${imagesAbsoluteDirectory}/${categoryName}/${id}/${typeName}`
+  }
+
+  const fileFilter = (req, file, cb) => {
+    const { categoryName, id, typeName } = req.body
+    if(!categoryName || !id || !typeName){
+      console.log(`Нет полей categoryName, id, typeName`)
+      cb(null, false);
+    }
+    else{
+      console.log('Фильтр успешно')
+      cb(null, true);
+    }
+  }
 
   const storageConfig = multer.diskStorage({
     destination: (req, file, cb) => {
-      const { folder: currentFolder, clearOld } = req.body
+      const { categoryName = 'tmp', id = 'id', typeName = 'type', clearOld } = req.body
 
-      if (clearOld && currentFolder) {
-        const deletingPath = `${imagesAbsoluteDirectory}/${currentFolder}`
-        fs.readdir(deletingPath, function(err, items) {
-          items.forEach(item => {
-            fs.unlink(`${deletingPath}/${item}`)
+      const currentAbsoluteImagePath = createImageFolderPath({ categoryName, id, typeName })
+      console.log(currentAbsoluteImagePath)
+
+      if (clearOld) {
+        fs.readdir(currentAbsoluteImagePath, function(err, items) {
+          _.size(items) && _.forEach(items, item => {
+            console.log(item)
+            fs.unlink(`${currentAbsoluteImagePath}/${item}`)
           })
         })
       }
+      mkdirp(currentAbsoluteImagePath)
 
-      // Если есть поле folder, значит нужно пихать в подпапку
-      if (currentFolder) mkdirp(`${imagesAbsoluteDirectory}/${currentFolder}`)
-      console.log(imagesAbsoluteDirectory)
-      const currentPath = currentFolder ? `${imagesAbsoluteDirectory}/${currentFolder}` : imagesAbsoluteDirectory
-      cb(null, currentPath)
+      cb(null, currentAbsoluteImagePath)
     },
     filename: (req, file, cb) =>{
       cb(null, file.originalname)
     }
   })
-  app.use(multer({storage:storageConfig}).single("filedata"))
+
+  app.use(multer({storage:storageConfig, fileFilter}).single("filedata"))
+
   app.post("/upload", function (req, res, next) {
     let fileData = req.file
-    // Если есть поле folder, то нужно брать из подпапки
-    const folder = req.body.folder
+    const { categoryName, id, typeName } = req.body
 
-    if(!fileData)
-      res.send({ message: 'Ошибка при загрузке файла' })
+    if(!fileData || !categoryName || !id || !typeName)
+      res.status(500).send({ message: 'Ошибка при загрузке файла, или нет полей categoryName, id, typeName' })
     else {
-      const filePath = folder ? `${imagesFolderName}/${folder}/${fileData.originalname}` : `${imagesFolderName}/${fileData.originalname}`
+      const filePath = `images/${categoryName}/${id}/${typeName}/${fileData.originalname}`
       res.send({
         message: 'Успешно загружено',
         filePath

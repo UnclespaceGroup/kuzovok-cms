@@ -42,6 +42,11 @@ const ContainerWorkAdd = () => {
       })
   }
 
+  const imageParams = {
+    id,
+    categoryName: 'works'
+  }
+
   return (
     <FinalForm
       form={FORM_ADD_WORK}
@@ -51,7 +56,7 @@ const ContainerWorkAdd = () => {
       render={({ handleSubmit }) => (
         <Form onSubmit={handleSubmit}>
           <h2>Форма добавления работы</h2>
-          <FormConstructor isSingleImage folderName={id} scheme={fields} />
+          <FormConstructor isSingleImage {...imageParams} scheme={fields} />
           <Button disabled={pending} type="submit">Отправить</Button>
           <Padding value={20} />
           <SectionStatus status={status} />

@@ -3,20 +3,23 @@ import { axiosApi } from 'axiosFetch'
 import css from './InputFile.module.scss'
 import { BASE_URL } from 'constants/url'
 
-const InputFile = ({ input, accessString, folderName, isSingleImage }) => {
-  if (!folderName) console.warn('where is fucking FOLDER NAME')
+const InputFile = ({ input, accessString, isSingleImage, id, categoryName, typeName }) => {
+  console.log(id, categoryName, typeName)
+  if (!id || !categoryName || !typeName) {
+    console.error('where is fucking PARAMS')
+  }
   const inputRef = useRef(null)
   const send = () => {
+    if (!id || !categoryName || !typeName) return
     const axiosInstanse = axiosApi({accessString })
 
     var bodyFormData = new FormData()
     const files = inputRef.current && inputRef.current.files
 
-    if (folderName) {
-      bodyFormData.append('folder', folderName)
-    } else {
-      bodyFormData.append('folder', 'default')
-    }
+    bodyFormData.append('categoryName', categoryName)
+    bodyFormData.append('id', id)
+    bodyFormData.append('typeName', input.name)
+
     isSingleImage && bodyFormData.append('clearOld', 'true')
 
     bodyFormData.append('filedata', files[0])
@@ -26,6 +29,7 @@ const InputFile = ({ input, accessString, folderName, isSingleImage }) => {
       url: '/upload',
       data: bodyFormData
     }).then(res => {
+      console.log(res)
       if (res.status === 200) {
         input.onChange(res.data.filePath)
       }

@@ -12,7 +12,8 @@ const FormConstructor = ({ scheme, ...props }) =>
        label,
        placeholder,
        name,
-       options = []
+       options = [],
+      ...others
      },
      key) => {
       if (type === 'text') {
@@ -53,9 +54,10 @@ const FormConstructor = ({ scheme, ...props }) =>
         </Form.Group>
       }
       if (type === 'image') {
+        console.log(others)
         return <Form.Group key={key}>
           <label>{label}</label>
-          <Field name={name} component={InputFile} {...props} />
+          <Field name={name} component={InputFile} {...props} {...others} />
         </Form.Group>
       }
     })
