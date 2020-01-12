@@ -12,7 +12,6 @@ const ShowReportsPage = ({ location }) => {
   useEffect(() => {
     getReports({ parentId })
       .then(data => {
-        console.log(data)
         Array.isArray(data) && setItems(data)
       })
   }, [parentId])

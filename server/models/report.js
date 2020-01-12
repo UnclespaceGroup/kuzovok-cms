@@ -1,17 +1,15 @@
 module.exports = (sequelize, type) => sequelize.define('reportTest', {
   id: {
-    type: type.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+    type: type.STRING,
+    primaryKey: true
   },
   parentId: {
-    type: type.INTEGER,
+    type: type.STRING,
     allowNull: false
   },
+  parentTitle: type.STRING,
   title: type.STRING,
   annotation: type.STRING,
   text: type.STRING,
   date: type.DATE,
-  images: type.STRING,
-  data: type.STRING,
 })
