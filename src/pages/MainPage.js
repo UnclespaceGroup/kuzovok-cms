@@ -9,7 +9,7 @@ import {
   ADD_REPORT_PAGE,
   ADD_SERVICE_PAGE,
   WORKS_PAGE,
-  REPORTS_PAGE, SERVICES_PAGE, PAPERS_PAGE, PAGE_LOGIN
+  REPORTS_PAGE, SERVICES_PAGE, PAPERS_PAGE, PAGE_LOGIN, EDIT_PAGE
 } from 'constants/routes'
 import AddPaperPage from 'pages/Paper/AddPaperPage'
 import AddReportPage from 'pages/Report/AddReportPage'
@@ -19,6 +19,7 @@ import ShowReportsPage from 'pages/Report/ShowReportsPage'
 import ShowServicesPage from 'pages/Services/ShowServicesPage'
 import ShowPaperPage from 'pages/Paper/ShowPaperPage'
 import Login from 'pages/auth/Login'
+import EditPage from 'pages/EditPage/EditPage'
 
 const MainPage = () => {
   return (
@@ -36,6 +37,7 @@ const MainPage = () => {
           <Route component={ShowReportsPage} exact path={REPORTS_PAGE} />
           <Route component={ShowServicesPage} exact path={SERVICES_PAGE} />
           <Route component={ShowPaperPage} exact path={PAPERS_PAGE} />
+          <Route component={EditPage} exact path={EDIT_PAGE + ':page'} />
           <Route component={Login} exact path={PAGE_LOGIN} />
         </Switch>
       </Col>

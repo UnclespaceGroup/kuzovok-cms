@@ -56,6 +56,7 @@ ModelCRUD(app, '/paper/', Paper, passport, __dirname)
 require('./routes/works')(app, passport, __dirname)
 require('./routes/services')(app, passport, __dirname)
 require('./routes/report')(app, passport, __dirname)
+require('./routes/pages')(app, passport, __dirname)
 
 // error handler
 app.use(function(err, req, res, next) {

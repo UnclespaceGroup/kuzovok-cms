@@ -1,25 +1,24 @@
-import { SERVICES_PAGE, ADD_SERVICE_PAGE, ADD_WORK_PAGE, WORKS_PAGE } from 'constants/routes'
+import { SERVICES_PAGE, ADD_SERVICE_PAGE, ADD_WORK_PAGE, WORKS_PAGE, EDIT_PAGE } from 'constants/routes'
 
 export const blocks = [
   {
     title: 'Страницы',
-    to: '/',
     items: [
       {
         title: 'Главная',
-        to: '/'
+        to: EDIT_PAGE + 'main'
       },
       {
-        title: 'Услуги станции',
-        to: '/'
+        title: 'Последние работы',
+        to: EDIT_PAGE + 'last-works'
       },
       {
         title: 'Автомобили в ремонте',
-        to: '/'
+        to: EDIT_PAGE + 'works'
       },
       {
         title: 'О нас',
-        to: '/'
+        to: EDIT_PAGE + 'about'
       }
     ]
   },
