@@ -49,11 +49,5 @@ export const fields = [
     type: 'editor',
     label: 'Описание',
     name: FIELD_TEXT
-  },
-  {
-    type: 'image',
-    label: 'Изображение баннера',
-    name: 'simpleImage',
-    typeName: 'simpleImage'
   }
 ]
