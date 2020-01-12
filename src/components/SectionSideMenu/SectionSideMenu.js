@@ -1,7 +1,7 @@
 import React from 'react'
 import css from './SectionSideMenu.module.scss'
 import _ from 'lodash'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const SectionSideMenu = ({ blocks }) => (
   <div className={css.container}>
@@ -11,9 +11,9 @@ const SectionSideMenu = ({ blocks }) => (
           <Link to={block.to || '#'} className={css.title}>{block.title}</Link>
           {
             _.map(block.items, (item, key) => (
-              <Link className={css.item} to={item.to || '#'} key={key}>
+              <NavLink activeClassName={css.active} className={css.item} to={item.to || '#'} key={key}>
                 {item.title}
-              </Link>
+              </NavLink>
             ))
           }
         </div>

@@ -27,12 +27,12 @@ export const blocks = [
     to: SERVICES_PAGE,
     items: [
       {
-        title: 'Добавить',
+        title: 'Добавить ',
         to: ADD_SERVICE_PAGE
       },
       {
         title: 'Посмотреть',
-        ti: SERVICES_PAGE
+        to: SERVICES_PAGE
       }
     ]
   },
@@ -46,7 +46,7 @@ export const blocks = [
       },
       {
         title: 'Посмотреть',
-        ti: WORKS_PAGE
+        to: WORKS_PAGE
       }
     ]
   }

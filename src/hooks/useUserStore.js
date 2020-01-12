@@ -1,16 +1,27 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { USER_STORAGE } from 'constants/userConstants'
+import Cookies from 'js-cookie'
+import { useEffect } from 'react'
+
+const userKey = 'user-data'
 
 const useUserStore = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.userStore)
 
+  useEffect(() => {
+    const data = Cookies.getJSON(userKey)
+    dispatch({
+      type: 'loginUser',
+      payload: data || null
+    })
+  }, [dispatch])
+
   const initialization = () => {
-    const data = localStorage.getItem(USER_STORAGE)
+    const data = Cookies.getJSON(userKey)
     if (data) {
       dispatch({
         type: 'loginUser',
-        payload: safeParsing(data)
+        payload: data
       })
     }
   }
@@ -20,7 +31,7 @@ const useUserStore = () => {
       type: 'loginUser',
       payload: data
     })
-    localStorage.setItem(USER_STORAGE, JSON.stringify(data))
+    Cookies.set(userKey, data)
   }
 
   const logOut = () => {
@@ -28,7 +39,7 @@ const useUserStore = () => {
       type: 'loginUser',
       payload: null
     })
-    localStorage.setItem(USER_STORAGE, null)
+    Cookies.set(userKey, null)
   }
 
   return {
@@ -37,15 +48,6 @@ const useUserStore = () => {
     user,
     initialization,
     accessString: user && user.token
-  }
-}
-
-const safeParsing = (data) => {
-  try {
-    return JSON.parse(data)
-  }
-  catch (e) {
-    console.log(e)
   }
 }
 
