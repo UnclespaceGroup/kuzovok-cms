@@ -53,8 +53,6 @@ const ContainerEditPage = () => {
     categoryName: 'pages'
   }
 
-  console.log(prevData)
-
   return (
     <FinalForm
       form={FORM_ADD_WORK}
