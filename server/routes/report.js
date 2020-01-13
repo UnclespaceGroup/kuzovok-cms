@@ -20,7 +20,10 @@ const works = function (app, passport, rootDirectory) {
         date: item.date
       }))
       res.send(list)
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 
   // GET DATA WITH PARAMS
@@ -29,7 +32,10 @@ const works = function (app, passport, rootDirectory) {
 
     Report.findAll({ where: { ...params }, raw: true }).then(users => {
       res.send(users)
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 
   // GET DATA WITH POST PARAMS
@@ -44,7 +50,10 @@ const works = function (app, passport, rootDirectory) {
 
     Report.findAll({ where: { ...where, ...params.where }, ...params }).then(users => {
       res.send(users)
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 
   // GET SINGLE DATA
@@ -54,7 +63,10 @@ const works = function (app, passport, rootDirectory) {
       .then(result => {
         if (!result) return
         res.send(result)
-      }).catch(err => console.log(err))
+      }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 
   // ADD NEW
@@ -83,7 +95,10 @@ const works = function (app, passport, rootDirectory) {
       }
     }).then((result) => {
       res.send(result)
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 
   // DELETE
@@ -100,7 +115,10 @@ const works = function (app, passport, rootDirectory) {
           res.sendStatus(200)
           console.log(result)
         })
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 }
 module.exports = works

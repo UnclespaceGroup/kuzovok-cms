@@ -15,7 +15,10 @@ const works = function (app, passport, rootDirectory) {
 
     Page.findAll({ where: { ...params }, raw: true }).then(users => {
       res.send(users)
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 
   // GET DATA WITH POST PARAMS
@@ -30,7 +33,10 @@ const works = function (app, passport, rootDirectory) {
 
     Page.findAll({ where: { ...where, ...params.where }, ...params }).then(users => {
       res.send(users)
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 
   // GET SINGLE DATA
@@ -56,7 +62,7 @@ const works = function (app, passport, rootDirectory) {
     }).then(result => {
       res.send(result)
     }).catch(err => {
-      res.status(500).send()
+      res.status(500).send(err)
       console.log(err)
     })
   })
@@ -89,7 +95,10 @@ const works = function (app, passport, rootDirectory) {
           res.sendStatus(200)
           console.log(result)
         })
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 }
 module.exports = works

@@ -5,11 +5,6 @@ const deleteImageFolder = require('../services/deleteImageFolder')
 
 module.exports = function (app, workPath, Model, passport, rootDirectory) {
   // GET ALL DATA
-  // app.get(workPath, (req, res, next) => {
-  //   Model.findAll({ raw: true }).then(users => {
-  //     res.send(users)
-  //   }).catch(err => console.log(err))
-  // })
 
   // GET DATA WITH PARAMS
   app.get(workPath, (req, res) => {
@@ -17,7 +12,10 @@ module.exports = function (app, workPath, Model, passport, rootDirectory) {
 
     Model.findAll({ where: { ...params }, raw: true }).then(users => {
       res.send(users)
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 
   // GET DATA WITH POST PARAMS
@@ -32,7 +30,10 @@ module.exports = function (app, workPath, Model, passport, rootDirectory) {
 
     Model.findAll({ where: { ...where, ...params.where }, ...params }).then(users => {
       res.send(users)
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 
   // GET SINGLE DATA
@@ -42,7 +43,10 @@ module.exports = function (app, workPath, Model, passport, rootDirectory) {
       .then(result => {
         if (!result) return
         res.send(result)
-      }).catch(err => console.log(err))
+      }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 
   // ADD NEW
@@ -71,7 +75,10 @@ module.exports = function (app, workPath, Model, passport, rootDirectory) {
       }
     }).then((result) => {
       res.send(result)
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 
   // DELETE
@@ -86,6 +93,9 @@ module.exports = function (app, workPath, Model, passport, rootDirectory) {
       deleteImageFolder(id, rootDirectory)
       res.sendStatus(200)
       console.log(result)
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      res.status(404).send(err)
+      console.log(err)
+    })
   })
 }
