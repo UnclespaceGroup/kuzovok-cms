@@ -75,6 +75,19 @@ const FormConstructor = ({ scheme, ...props }) =>
           </Form.Text>
         </Form.Group>
       }
+      if (type === 'checkbox') {
+        return <Form.Group key={key}>
+          <Field name={name} type="checkbox">
+          {({ input }) => <Form.Check
+            {...input}
+            label={label}
+          />}
+          </Field>
+          <Form.Text className="text-muted">
+            {text}
+          </Form.Text>
+        </Form.Group>
+      }
     })
 
 export default React.memo(FormConstructor)

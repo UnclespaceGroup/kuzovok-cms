@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import ContainerSideMenu from 'containers/ContainerSideMenu/ContainerSideMenu'
 import { Route, Switch } from 'react-router'
@@ -20,8 +20,16 @@ import ShowServicesPage from 'pages/Services/ShowServicesPage'
 import ShowPaperPage from 'pages/Paper/ShowPaperPage'
 import Login from 'pages/auth/Login'
 import EditPage from 'pages/EditPage/EditPage'
+import useUserStore from 'hooks/useUserStore'
+import PageLogin from 'pages/PageLogin/PageLogin'
 
 const MainPage = () => {
+  const { initialization, user } = useUserStore()
+  useEffect(() => {
+    initialization()
+  }, [])
+
+  if (!user) return <PageLogin />
   return (
     <Row>
       <Col xs={2}>

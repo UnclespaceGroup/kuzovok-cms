@@ -8,19 +8,23 @@ import {
 import Header from './components/Header/Header'
 import configureStore from './store/configureStore'
 import { Provider } from 'react-redux'
+import { Container } from 'react-bootstrap'
+import PageLogin from 'pages/PageLogin/PageLogin'
 
 const store = configureStore()
 
 function App () {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route component={MainPage} path={HOME_PAGE} />
-          <Route component={MainPage} path={'*'} />
-        </Switch>
-      </BrowserRouter>
+      <Container fluid>
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <Route component={MainPage} path={HOME_PAGE} />
+            <Route component={PageLogin} path={'*'} />
+          </Switch>
+        </BrowserRouter>
+      </Container>
     </Provider>
   )
 }

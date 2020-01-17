@@ -9,5 +9,7 @@ module.exports = (sequelize, type) => sequelize.define('serviceTest', {
   text: type.TEXT,
   date: type.DATE,
   banner: type.STRING,
-  slug: type.STRING
+  slug: type.STRING,
+  isMain: type.INTEGER,
+  isBanner: type.INTEGER
 })

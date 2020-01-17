@@ -40,16 +40,19 @@ const works = function (app, passport, rootDirectory) {
 
   // GET DATA WITH POST PARAMS
   app.post(WORK_PATH, (req, res) => {
-    const params = req.body.params || {}
+    const { where, single } = req.body || {}
 
-    const where = Array.isArray(params.rangeDate) ? {
-      createdAt: {
-        [Op.between]: params.rangeDate
-      }
-    } : {}
+    console.log(req.body)
 
-    Service.findAll({ where: { ...where, ...params.where }, ...params }).then(users => {
-      res.send(users)
+    // const where = Array.isArray(params.rangeDate) ? {
+    //   createdAt: {
+    //     [Op.between]: params.rangeDate
+    //   }
+    // } : {}
+
+    Service.findAll({ where }).then(users => {
+      if (single) res.send(users[0])
+      else res.send(users)
     }).catch(err => {
       res.status(404).send(err)
       console.log(err)
@@ -57,9 +60,9 @@ const works = function (app, passport, rootDirectory) {
   })
 
   // GET SINGLE DATA
-  app.get(WORK_PATH + ':id', (req, res) => {
-    const id = req.params.id
-    Service.findByPk(id)
+  app.get(WORK_PATH + ':slug', (req, res) => {
+    const slug = req.params.slug
+    Service.findByPk(slug)
       .then(result => {
         if (!result) return
         res.send(result)

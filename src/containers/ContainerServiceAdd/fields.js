@@ -12,6 +12,13 @@ export const fields = [
     name: 'title'
   },
   {
+    type: 'text',
+    label: 'Слаг',
+    placeholder: 'pokraska-avto',
+    name: 'slug',
+    text: 'Будет отображаться в поисковом запросе (английскими буквами, без пробелов)'
+  },
+  {
     type: 'textarea',
     label: 'Аннотация',
     name: 'annotation',
@@ -22,5 +29,15 @@ export const fields = [
     type: 'editor',
     label: 'Описание',
     name: 'text'
+  },
+  {
+    type: 'checkbox',
+    label: 'Основная',
+    name: 'isMain'
+  },
+  {
+    type: 'checkbox',
+    label: 'Баннер',
+    name: 'isBanner'
   }
 ]
