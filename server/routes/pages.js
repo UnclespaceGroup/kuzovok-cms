@@ -23,7 +23,7 @@ const pages = function (app, passport) {
   })
 
   // GET DATA WITH POST PARAMS
-  app.post(WORK_PATH, (req, res) => {
+  app.post(WORK_PATH, (req, res, next) => {
     const { where, single } = req.body
 
     Page.findAll({ where }).then(pages => {
@@ -37,7 +37,10 @@ const pages = function (app, passport) {
 
   // update
   app.post(WORK_PATH + 'update/:id', (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
+
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const data = req.body
     const { id } = req.params
     Page.update(data, {

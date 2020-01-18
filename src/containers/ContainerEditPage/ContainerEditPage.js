@@ -8,44 +8,17 @@ import { fields } from './fields'
 import Padding from 'components/Padding/Padding'
 import SectionStatus from 'components/SectionStatus/SectionStatus'
 import { FAIL, OK } from 'constants/statuses'
-import { getAxiosInstance } from 'axiosFetch'
-import useUserStore from 'hooks/useUserStore'
 import { useParams } from 'react-router'
 import { METHOD_PAGE_EDIT } from 'constants/url'
-import useGetAxiosInstance from 'hooks/useGetAxiosInstance'
+import useHandleAxios from 'hooks/useHandleAxios'
+import useAxiosInstance from 'hooks/useAxiosInstance'
 
 const ContainerEditPage = () => {
-  const { accessString } = useUserStore()
   const { id: page } = useParams()
 
-  const { handleSendData, isPending, isSuccess, isError } = useGetAxiosInstance({ url: METHOD_PAGE_EDIT + `update/${page}` })
-  const [ prevData, setPrevData ] = useState({})
+  const { handleSendData, isPending, isSuccess, isError } = useHandleAxios({ url: METHOD_PAGE_EDIT + `update/${page}` })
+  const { data: prevData } = useAxiosInstance({ url: METHOD_PAGE_EDIT, where: { id: page }, single: true }, [page])
 
-  const instanceAxios =  getAxiosInstance({ accessString })
-
-  useMemo(() => {
-    instanceAxios.get(METHOD_PAGE_EDIT + page )
-      .then(response => {
-        const { data } = response
-        setPrevData(data)
-      })
-  }, [page])
-
-  // const submit = data => {
-  //   instanceAxios.post(METHOD_PAGE_EDIT + `update/${page}`, data)
-  //     .then(() => {
-  //       setStatus(OK)
-  //       setPending(false)
-  //       setTimeout(() => {
-  //         setStatus()
-  //       }, 1000)
-  //     })
-  //     .catch(e => {
-  //       console.log(e)
-  //       setStatus(FAIL)
-  //       setPending(false)
-  //     })
-  // }
 
   const imageParams = {
     id: page,

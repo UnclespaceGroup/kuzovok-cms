@@ -5,9 +5,10 @@ var cors = require('cors')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const ModelCRUD = require('./routes/ModelCRUD')
-const { Work, Report, Paper } = require('./sequelize')
+const { Paper } = require('./sequelize')
 const helmet = require('helmet')
 const path  = require("path");
+var session = require('express-session')
 
 var app = express()
 
@@ -28,7 +29,6 @@ var app = express()
 //   optionsSuccessStatus: 200,
 // };
 
-
 require('./config/passport');
 app.use(cors())
 app.use(logger('dev'));
@@ -36,7 +36,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(helmet());
+
 app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 require('./routes/auth/loginUser')(app);
