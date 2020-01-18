@@ -60,13 +60,17 @@ const fileUpload = function (app, passport, rootDirectory) {
   })
 
   app.use((req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const handler = multer({storage:storageConfig, fileFilter}).single("filedata")
     handler(req, res, next)
   })
 
   app.post("/upload", function (req, res, next) {
-    CheckAuthorize(req, res, next, passport)
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     let fileData = req.file
     const { categoryName, id, typeName } = req.body
 
@@ -80,7 +84,10 @@ const fileUpload = function (app, passport, rootDirectory) {
       })
     }
   })
-  app.post("/delete-image-folder", function (req, res) {
+  app.post("/delete-image-folder", function (req, res, next) {
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const { categoryName, id } = req.body
     const folder = `${categoryName}/${id}`
     deleteImageFolder(folder, rootDirectory)

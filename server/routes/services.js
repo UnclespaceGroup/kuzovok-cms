@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize')
 const { Service } = require('../sequelize')
 const Op = Sequelize.Op
-const CheckAuthorize = require('../services/checkAuthorize')
 const deleteImageFolder = require('../services/deleteImageFolder')
 
 
@@ -74,7 +73,9 @@ const works = function (app, passport, rootDirectory) {
 
   // ADD NEW
   app.post(WORK_PATH + 'add', (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const data = req.body
     Service.create({
       date: new Date().toString(),
@@ -89,7 +90,9 @@ const works = function (app, passport, rootDirectory) {
 
   // update
   app.post(WORK_PATH + 'update/:id', (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const data = req.body
     const id = req.params.id
     Service.update(data, {
@@ -106,7 +109,9 @@ const works = function (app, passport, rootDirectory) {
 
   // DELETE
   app.delete(WORK_PATH + ':id', (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const id = req.params.id
     Service.destroy({
       where: {

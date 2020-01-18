@@ -1,5 +1,4 @@
 const Sequelize = require('sequelize')
-const CheckAuthorize = require('../services/checkAuthorize')
 const Op = Sequelize.Op
 const deleteImageFolder = require('../services/deleteImageFolder')
 
@@ -51,7 +50,9 @@ module.exports = function (app, workPath, Model, passport, rootDirectory) {
 
   // ADD NEW
   app.post(workPath + 'add', (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const data = req.body
     Model.create({
       date: new Date().toString(),
@@ -66,7 +67,9 @@ module.exports = function (app, workPath, Model, passport, rootDirectory) {
 
   // update
   app.post(workPath + 'update/:id', (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const data = req.body
     const id = req.params.id
     Model.update(data, {
@@ -83,7 +86,9 @@ module.exports = function (app, workPath, Model, passport, rootDirectory) {
 
   // DELETE
   app.delete(workPath + ':id', (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const id = req.params.id
     Model.destroy({
       where: {

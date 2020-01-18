@@ -1,6 +1,5 @@
 const { Work } = require('../sequelize')
 const { Report } = require('../sequelize')
-const CheckAuthorize = require('../services/checkAuthorize')
 const deleteImageFolder = require('../services/deleteImageFolder')
 
 const WORK_PATH = '/work/'
@@ -70,7 +69,9 @@ const works = function (app, passport, rootDirectory) {
 
   // ADD NEW
   app.post(WORK_PATH + 'add', (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const data = req.body
     Work.create({
       date: new Date().toString(),
@@ -85,7 +86,9 @@ const works = function (app, passport, rootDirectory) {
 
   // update
   app.post(WORK_PATH + 'update/:id', (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const data = req.body
     const id = req.params.id
     Work.update(data, {
@@ -102,7 +105,9 @@ const works = function (app, passport, rootDirectory) {
 
   // DELETE
   app.delete(WORK_PATH + ':id', async (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
+    const pass = passport.authenticate('jwt', { session: false })
+    pass(req, res, next)
+
     const id = req.params.id
     try {
       // Удаляем работу
