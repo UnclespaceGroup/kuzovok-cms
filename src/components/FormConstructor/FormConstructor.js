@@ -32,7 +32,7 @@ const FormConstructor = ({ scheme, ...props }) =>
       if (type === 'editor') {
         return <Form.Group key={key}>
           <label>{label}</label>
-          <Field component={InputEditor} name={name} />
+          <Field component={InputEditor} {...props} {...others}  name={name} />
           <Form.Text className="text-muted">
             {text}
           </Form.Text>

@@ -6,15 +6,9 @@ export const fields = [
     name: 'title'
   },
   {
-    type: 'textarea',
-    label: 'Аннотация',
-    name: 'annotation',
-    placeholder: 'Аннотация',
-    text: 'Отображается в баннере и на карточке'
-  },
-  {
     type: 'editor',
     label: 'Описание',
-    name: 'text'
+    name: 'text',
+    typeName: 'contentImages'
   }
 ]

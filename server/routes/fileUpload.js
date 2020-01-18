@@ -28,7 +28,6 @@ const fileUpload = function (app, passport, rootDirectory) {
       cb(null, false);
     }
     else{
-      console.log('Фильтр успешно')
       cb(null, true);
     }
   }
@@ -60,8 +59,8 @@ const fileUpload = function (app, passport, rootDirectory) {
   })
 
   app.use((req, res, next) => {
-    const pass = passport.authenticate('jwt', { session: false })
-    pass(req, res, next)
+    // const pass = passport.authenticate('jwt', { session: false })
+    // pass(req, res, next)
 
     const handler = multer({storage:storageConfig, fileFilter}).single("filedata")
     handler(req, res, next)

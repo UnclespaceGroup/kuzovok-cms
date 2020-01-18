@@ -1,28 +1,33 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import ReactSummernote from 'react-summernote'
 import 'react-summernote/dist/react-summernote.css'
 import 'react-summernote/lang/summernote-ru-RU'
 import 'bootstrap/js/src/modal'
 import 'bootstrap/js/src/dropdown'
 import 'bootstrap/js/src/tooltip'
-import Compressor from 'compressorjs'
-import _ from 'lodash'
 import css from './InputEditor.module.scss'
+import { sendFile } from 'services/sendFile'
+import useUserStore from 'hooks/useUserStore'
+import { BASE_URL_DEV } from 'constants/url'
+import _ from 'lodash'
 
-const InputEditor = ({ input = {} }) => {
+const InputEditor = ({ input = {}, id, categoryName, typeName }) => {
+  let editorRef = useRef(null)
+  const { accessString } = useUserStore()
+
+  console.log(editorRef.current)
 
   const onImageUpload = (fileList) => {
-    _.forEach(fileList, item => {
-      new Compressor(item, {
-        maxWidth: 480,
-        success (result) {
-          const reader = new FileReader()
-          reader.onloadend = () => {
-            ReactSummernote.insertImage(reader.result)
+    _.forEach(fileList, file => {
+      sendFile({file, id, categoryName, typeName, accessString, name: input.name})
+        .then(res => {
+          if (editorRef.current) {
+            editorRef.current.insertImage(BASE_URL_DEV + res.filePath, res.filePath)
           }
-          reader.readAsDataURL(result)
-        }
-      })
+        })
+        .catch(e => {
+          console.log(e)
+        })
     })
   }
 
@@ -32,17 +37,18 @@ const InputEditor = ({ input = {} }) => {
   return (
     <div className={css.container}>
       <ReactSummernote
+        ref={editorRef}
         value={input.value}
         options={{
           lang: 'ru-RU',
-          height: 350,
+          height: 800,
           toolbar: [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['style', ['style']],
             ['font', ['strikethrough', 'superscript', 'subscript']],
             ['fontsize', ['fontsize']],
             ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['para', ['ul', 'ol', 'paragraph']],
+            ['insert', ['link', 'picture']],
+            ['para', ['ul', 'ol', 'paragraph', 'h1', 'h2']],
             ['height', ['height']],
           ]
         }}

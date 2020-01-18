@@ -1,3 +1,22 @@
 .container {
   padding: 1px;
+
+  :global {
+
+    .note-editable * {
+      max-width: 100%;
+    }
+
+    .note-toolbar {
+    }
+
+    .dropdown-menu {
+      min-width: 30rem!important;
+      padding: 1rem;
+
+      li {
+        margin-bottom: 1rem;
+      }
+    }
+  }
 }

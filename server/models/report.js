@@ -10,6 +10,6 @@ module.exports = (sequelize, type) => sequelize.define('reportTest', {
   parentTitle: type.STRING,
   title: type.STRING,
   annotation: type.STRING,
-  text: type.STRING,
+  text: type.TEXT('long'),
   date: type.DATE,
 })

@@ -4,11 +4,8 @@ var logger = require('morgan');
 var cors = require('cors')
 const bodyParser = require('body-parser')
 const passport = require('passport')
-const ModelCRUD = require('./routes/ModelCRUD')
-const { Paper } = require('./sequelize')
 const helmet = require('helmet')
 const path  = require("path");
-var session = require('express-session')
 
 var app = express()
 
@@ -38,7 +35,6 @@ app.use(cookieParser());
 app.use(helmet());
 
 app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(express.static(path.join(__dirname, 'public')))
 
@@ -54,7 +50,7 @@ require('./routes/auth/updateUser')(app);
 
 require('./routes/fileUpload')(app, passport, __dirname);
 
-ModelCRUD(app, '/paper/', Paper, passport, __dirname)
+// ModelCRUD(app, '/paper/', Paper, passport, __dirname)
 
 require('./routes/works')(app, passport, __dirname)
 require('./routes/services')(app, passport, __dirname)
