@@ -1,9 +1,7 @@
-const Sequelize = require('sequelize')
 const { Work } = require('../sequelize')
-const Op = Sequelize.Op
+const { Report } = require('../sequelize')
 const CheckAuthorize = require('../services/checkAuthorize')
 const deleteImageFolder = require('../services/deleteImageFolder')
-
 
 const WORK_PATH = '/work/'
 
@@ -40,16 +38,17 @@ const works = function (app, passport, rootDirectory) {
 
   // GET DATA WITH POST PARAMS
   app.post(WORK_PATH, (req, res) => {
-    const params = req.body.params || {}
+    const { where, single } = req.body || {}
 
-    const where = Array.isArray(params.rangeDate) ? {
-      createdAt: {
-        [Op.between]: params.rangeDate
-      }
-    } : {}
+    // const where = Array.isArray(params.rangeDate) ? {
+    //   createdAt: {
+    //     [Op.between]: params.rangeDate
+    //   }
+    // } : {}
 
-    Work.findAll({ where: { ...where, ...params.where }, ...params }).then(users => {
-      res.send(users)
+    Work.findAll({ where }).then(users => {
+      if (single) res.send(users[0])
+      else res.send(users)
     }).catch(err => {
       res.status(404).send(err)
       console.log(err)
@@ -102,23 +101,22 @@ const works = function (app, passport, rootDirectory) {
   })
 
   // DELETE
-  app.delete(WORK_PATH + ':id', (req, res, next) => {
+  app.delete(WORK_PATH + ':id', async (req, res, next) => {
     CheckAuthorize(req, res, next, passport)
     const id = req.params.id
-    Work.destroy({
-      where: {
-        id
-      }
-    }).then((result) => {
-      deleteImageFolder(`works/${id}`, rootDirectory)
-        .then(() => {
-          res.sendStatus(200)
-          console.log(result)
-        })
-    }).catch(err => {
-      res.status(404).send(err)
+    try {
+      // Удаляем работу
+      await Work.destroy({ where: { id } })
+      // Удаляем прикреплённые к ней отчеты
+      await Report.destroy({ where: { parentId: id } })
+      // Удаляем папку с картинками
+      await deleteImageFolder(`works/${id}`, rootDirectory)
+
+      res.status(200).send({ text: 'Успешно удалено' })
+    } catch (err) {
+      res.status(500).send({ text: 'Что то пошло не так', err })
       console.log(err)
-    })
+    }
   })
 }
 module.exports = works

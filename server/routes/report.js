@@ -7,11 +7,13 @@ const deleteImageFolder = require('../services/deleteImageFolder')
 
 const WORK_PATH = '/report/'
 
-const works = function (app, passport, rootDirectory) {
-  app.get(WORK_PATH + 'list', (req, res) => {
-    const params = req.query
+const report = function (app, passport, rootDirectory) {
 
-    Report.findAll({ limit: +params.limit, raw: true }).then(items => {
+  // get simple list
+  app.post(WORK_PATH + 'list', (req, res) => {
+    const { where, limit } = req.body || {}
+
+    Report.findAll({ where, limit }).then(items => {
       const list = items.map(item => ({
         title: item.title,
         annotation: item.annotation,
@@ -26,46 +28,19 @@ const works = function (app, passport, rootDirectory) {
     })
   })
 
-  // GET DATA WITH PARAMS
-  app.get(WORK_PATH, (req, res) => {
-    const params = req.query
-
-    Report.findAll({ where: { ...params }, raw: true }).then(users => {
-      res.send(users)
-    }).catch(err => {
-      res.status(404).send(err)
-      console.log(err)
-    })
-  })
-
   // GET DATA WITH POST PARAMS
   app.post(WORK_PATH, (req, res) => {
-    const params = req.body.params || {}
+    const { where = {}, rangeData } = req.body || {}
 
-    const where = Array.isArray(params.rangeDate) ? {
-      createdAt: {
-        [Op.between]: params.rangeDate
-      }
-    } : {}
+    if (rangeData) where.createdAt = {
+      [Op.between]: rangeData
+    }
 
-    Report.findAll({ where: { ...where, ...params.where }, ...params }).then(users => {
+    Report.findAll({ where }).then(users => {
       res.send(users)
     }).catch(err => {
       res.status(404).send(err)
-      console.log(err)
-    })
-  })
-
-  // GET SINGLE DATA
-  app.get(WORK_PATH + ':id', (req, res) => {
-    const id = req.params.id
-    Report.findByPk(id)
-      .then(result => {
-        if (!result) return
-        res.send(result)
-      }).catch(err => {
-      res.status(404).send(err)
-      console.log(err)
+      console.log('GET DATA WITH POST PARAMS' + err)
     })
   })
 
@@ -106,9 +81,7 @@ const works = function (app, passport, rootDirectory) {
     CheckAuthorize(req, res, next, passport)
     const id = req.params.id
     Report.destroy({
-      where: {
-        id
-      }
+      where: { id }
     }).then((result) => {
       deleteImageFolder(`works/${id}`, rootDirectory)
         .then(() => {
@@ -121,4 +94,4 @@ const works = function (app, passport, rootDirectory) {
     })
   })
 }
-module.exports = works
+module.exports = report
