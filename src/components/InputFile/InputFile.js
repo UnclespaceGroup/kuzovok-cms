@@ -4,8 +4,10 @@ import css from './InputFile.module.scss'
 import { BASE_URL } from 'constants/url'
 import cn from 'classnames'
 import { MdEdit } from 'react-icons/md'
+import useUserStore from 'hooks/useUserStore'
 
-const InputFile = ({ input, accessString, isSingleImage, id, categoryName, typeName }) => {
+const InputFile = ({ input, isSingleImage, id, categoryName, typeName }) => {
+  const { accessString } = useUserStore()
   if (!id || !categoryName || !typeName) {
     console.error('where is fucking PARAMS')
   }
@@ -25,7 +27,10 @@ const InputFile = ({ input, accessString, isSingleImage, id, categoryName, typeN
 
     bodyFormData.append('filedata', files[0])
     axiosInstanse({
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `JWT ${accessString}`
+      },
       method: 'post',
       url: '/upload',
       data: bodyFormData

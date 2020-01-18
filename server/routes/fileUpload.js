@@ -1,4 +1,4 @@
-// const CheckAuthorize = require('../services/checkAuthorize')
+const CheckAuthorize = require('../services/checkAuthorize')
 const multer  = require("multer")
 const deleteImageFolder = require("../services/deleteImageFolder")
 const fs = require('fs-extra')
@@ -59,9 +59,14 @@ const fileUpload = function (app, passport, rootDirectory) {
     }
   })
 
-  app.use(multer({storage:storageConfig, fileFilter}).single("filedata"))
+  app.use((req, res, next) => {
+    CheckAuthorize(req, res, next, passport)
+    const handler = multer({storage:storageConfig, fileFilter}).single("filedata")
+    handler(req, res, next)
+  })
 
   app.post("/upload", function (req, res, next) {
+    CheckAuthorize(req, res, next, passport)
     let fileData = req.file
     const { categoryName, id, typeName } = req.body
 
