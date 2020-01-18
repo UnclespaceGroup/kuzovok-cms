@@ -19,7 +19,7 @@ export const submitReport = async ({ data, id , accessString}) => {
 }
 
 export const getReports = async ({ parentId }) => {
-  return await axios.get(CURRENT_METHOD.slice(0, -1) + `?parentId=${parentId}`)
+  return await axios.post(CURRENT_METHOD, { where: {parentId} })
     .then(res => {
       return res.data
     })
@@ -30,6 +30,6 @@ export const deleteReport = async ({ id, accessString }) => {
     headers: { Authorization: `JWT ${accessString}` }
   })
     .then(res => {
-      return 'OK'
+      return { res }
     })
 }
