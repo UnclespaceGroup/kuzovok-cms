@@ -5,6 +5,8 @@ axios.defaults.baseURL = BASE_URL
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
-export const axiosApi = ({ accessString }) => axios.create({
+export const getAxiosInstance = ({ accessString }) => axios.create({
   headers: { Authorization: `JWT ${accessString}` }
 })
+
+export const axiosInstance = axios.create()

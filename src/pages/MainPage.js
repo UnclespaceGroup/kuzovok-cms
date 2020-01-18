@@ -45,7 +45,7 @@ const MainPage = () => {
           <Route component={ShowReportsPage} exact path={REPORTS_PAGE} />
           <Route component={ShowServicesPage} exact path={SERVICES_PAGE} />
           <Route component={ShowPaperPage} exact path={PAPERS_PAGE} />
-          <Route component={EditPage} exact path={EDIT_PAGE + ':page'} />
+          <Route component={EditPage} exact path={EDIT_PAGE + ':id'} />
           <Route component={Login} exact path={PAGE_LOGIN} />
         </Switch>
       </Col>

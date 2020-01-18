@@ -10,7 +10,7 @@ export const blocks = [
       },
       {
         title: 'Последние работы',
-        to: EDIT_PAGE + 'last-works'
+        to: EDIT_PAGE + 'reports'
       },
       {
         title: 'Автомобили в ремонте',

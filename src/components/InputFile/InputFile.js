@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { axiosApi } from 'axiosFetch'
+import { getAxiosInstance } from 'axiosFetch'
 import css from './InputFile.module.scss'
 import { BASE_URL } from 'constants/url'
 import cn from 'classnames'
@@ -12,7 +12,7 @@ const InputFile = ({ input, accessString, isSingleImage, id, categoryName, typeN
   const inputRef = useRef(null)
   const send = () => {
     if (!id || !categoryName || !typeName) return
-    const axiosInstanse = axiosApi({ accessString })
+    const axiosInstanse = getAxiosInstance({ accessString })
 
     var bodyFormData = new FormData()
     const files = inputRef.current && inputRef.current.files

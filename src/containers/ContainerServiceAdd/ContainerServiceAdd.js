@@ -11,7 +11,7 @@ import useUserStore from 'hooks/useUserStore'
 import { useLocation, useHistory } from 'react-router'
 import { generateId } from 'services/generateId'
 import { FAIL } from 'constants/statuses'
-import { axiosApi } from 'axiosFetch'
+import { getAxiosInstance } from 'axiosFetch'
 import { METHOD_SERVICE, DELETE_IMAGE_FOLDER_URL } from 'constants/url'
 
 const ContainerServiceAdd = () => {
@@ -25,7 +25,7 @@ const ContainerServiceAdd = () => {
 
   const id = prevData.id || generateId('service')
 
-  const instanceAxios =  axiosApi({ accessString })
+  const instanceAxios =  getAxiosInstance({ accessString })
 
   const submit = data => {
     setPending(true)

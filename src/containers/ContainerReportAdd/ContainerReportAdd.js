@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import useUserStore from 'hooks/useUserStore'
 import { useLocation, useHistory } from 'react-router'
 import { generateId } from 'services/generateId'
-import { axiosApi } from 'axiosFetch'
+import { getAxiosInstance } from 'axiosFetch'
 import { METHOD_REPORT, DELETE_IMAGE_FOLDER_URL } from 'constants/url'
 import { FAIL } from 'constants/statuses'
 import { Form as FinalForm } from 'react-final-form'
@@ -25,7 +25,7 @@ const ContainerReportAdd = () => {
 
   const id = prevData.id || generateId('report')
 
-  const instanceAxios =  axiosApi({ accessString })
+  const instanceAxios =  getAxiosInstance({ accessString })
 
   const submit = data => {
     setPending(true)

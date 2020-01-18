@@ -1,20 +1,21 @@
-const Sequelize = require('sequelize')
 const { Page } = require('../sequelize')
-const Op = Sequelize.Op
 const CheckAuthorize = require('../services/checkAuthorize')
-const deleteImageFolder = require('../services/deleteImageFolder')
 
 
 const WORK_PATH = '/page/'
 
-const works = function (app, passport, rootDirectory) {
+const pages = function (app, passport) {
 
   // GET DATA WITH PARAMS
-  app.get(WORK_PATH, (req, res) => {
-    const params = req.query
+  app.get(WORK_PATH + ':page', (req, res, next) => {
+    const { page: id } = req.params
 
-    Page.findAll({ where: { ...params }, raw: true }).then(users => {
-      res.send(users)
+    if (!id) {
+      res.status(404).send({ text: 'Нет id' })
+    }
+
+    Page.findAll({ where: { id }, raw: true }).then(users => {
+      res.send(users[0])
     }).catch(err => {
       res.status(404).send(err)
       console.log(err)
@@ -23,44 +24,11 @@ const works = function (app, passport, rootDirectory) {
 
   // GET DATA WITH POST PARAMS
   app.post(WORK_PATH, (req, res) => {
-    const params = req.body.params || {}
+    const { where, single } = req.body
 
-    const where = Array.isArray(params.rangeDate) ? {
-      createdAt: {
-        [Op.between]: params.rangeDate
-      }
-    } : {}
-
-    Page.findAll({ where: { ...where, ...params.where }, ...params }).then(users => {
-      res.send(users)
-    }).catch(err => {
-      res.status(404).send(err)
-      console.log(err)
-    })
-  })
-
-  // GET SINGLE DATA
-  app.get(WORK_PATH + ':id', (req, res) => {
-    const id = req.params.id
-    Page.findByPk(id)
-      .then(result => {
-        if (!result) return
-        res.send(result)
-      }).catch(err => {
-        res.status(404).send('Не найдено')
-        console.log(err)
-      })
-  })
-
-  // ADD NEW
-  app.post(WORK_PATH + 'add', (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
-    const data = req.body
-    Page.create({
-      date: new Date().toString(),
-      ...data
-    }).then(result => {
-      res.send(result)
+    Page.findAll({ where }).then(pages => {
+      if (single) res.send(pages[0])
+      else res.send(pages)
     }).catch(err => {
       res.status(500).send(err)
       console.log(err)
@@ -71,7 +39,7 @@ const works = function (app, passport, rootDirectory) {
   app.post(WORK_PATH + 'update/:id', (req, res, next) => {
     CheckAuthorize(req, res, next, passport)
     const data = req.body
-    const id = req.params.id
+    const { id } = req.params
     Page.update(data, {
       where: {
         id
@@ -80,25 +48,5 @@ const works = function (app, passport, rootDirectory) {
       res.send(result)
     }).catch(err => console.log(err))
   })
-
-  // DELETE
-  app.delete(WORK_PATH + ':id', (req, res, next) => {
-    CheckAuthorize(req, res, next, passport)
-    const id = req.params.id
-    Page.destroy({
-      where: {
-        id
-      }
-    }).then((result) => {
-      deleteImageFolder(`works/${id}`, rootDirectory)
-        .then(() => {
-          res.sendStatus(200)
-          console.log(result)
-        })
-    }).catch(err => {
-      res.status(404).send(err)
-      console.log(err)
-    })
-  })
 }
-module.exports = works
+module.exports = pages
