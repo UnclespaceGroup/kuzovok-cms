@@ -20,13 +20,11 @@ const ContainerAddReport = () => {
 
   const id = prevData.id || generateId('report')
 
-    const isUpdate = prevData.id
+  const isUpdate = prevData.id
 
-    const url = isUpdate ? `${METHOD_REPORT}update/${id}` : METHOD_REPORT + 'add'
+  const url = isUpdate ? `${METHOD_REPORT}update/${id}` : METHOD_REPORT + 'add'
 
-    const { data, isError, isSuccess, isPending, handleSendData } = useHandleAxios({ url })
-    console.log(data)
-
+  const { isError, isSuccess, isPending, handleSendData } = useHandleAxios({ url })
 
   const imageParams = {
     id,
@@ -38,7 +36,7 @@ const ContainerAddReport = () => {
       form={FORM_ADD_WORK}
       mutators={arrayMutators}
       onSubmit={handleSendData}
-      initialValues={{...prevData, id }}
+      initialValues={{ ...prevData, id }}
       render={({ handleSubmit }) => (
         <Form onSubmit={handleSubmit}>
           <h2>Форма добавления услуги</h2>

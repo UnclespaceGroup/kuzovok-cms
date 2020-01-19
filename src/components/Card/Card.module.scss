@@ -2,6 +2,12 @@
   width: 30%;
   border: solid 1px darkgrey;
   position: relative;
+
+  &:hover {
+    .link {
+      opacity: 1;
+    }
+  }
 }
 
 .img {
@@ -45,4 +51,30 @@
 .delete {
   composes: edit;
   top: 4rem;
+}
+
+.link {
+  position: absolute;
+  display: flex;
+  bottom: 1.6rem;
+  right: 2.4rem;
+  opacity: 0;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 50%;
+  background-color: #E88D06;
+  box-shadow: 0 .4rem 2rem rgba(0, 0, 0, 0.20);
+  justify-content: center;
+  align-items: center;
+  transition: all 100ms ease-in;
+
+  &:hover {
+    box-shadow: 0px .4rem 2rem rgba(0, 0, 0, 0.50);
+  }
+
+  svg {
+    color: white;
+    width: 3.2rem;
+    height: 3.2rem;
+  }
 }

@@ -3,19 +3,24 @@ import css from './Card.module.scss'
 import { BASE_URL } from 'constants/url'
 import { Link } from 'react-router-dom'
 import { MdEdit, MdDelete } from 'react-icons/md'
+import Wysiwyg from 'components/Wysiwyg/desktop/Wysiwyg'
+import { FaArrowRight } from 'react-icons/fa'
 
-const Card = ({ editLink, onDelete, ...props }) => {
+const Card = ({ editLink, onDelete, to, ...props }) => {
   const {banner, title, text} = props
   return (
-  <div className={css.container} >
+  <Link className={css.container} to={to}>
     <div className={css.img} style={{ backgroundImage: `url(${BASE_URL + banner})` }} />
     <div className={css.title}>{title}</div>
-    <div className={css.text}>{text}</div>
+    <Wysiwyg className={css.text}>{text}</Wysiwyg>
     { editLink && <Link className={css.edit}
       to={{ pathname: editLink, state: {...props}}}
     ><MdEdit /></Link>}
     <div className={css.delete} onClick={() => onDelete()}
     ><MdDelete /></div>
-  </div>
+    {
+      to && <div className={css.link} ><FaArrowRight /></div>
+    }
+  </Link>
 )}
 export default Card
