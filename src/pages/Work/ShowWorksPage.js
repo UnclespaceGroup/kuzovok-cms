@@ -61,7 +61,7 @@ const ShowWorksPage = () => {
                       parentId: item.id,
                       parentTitle: item.title
                     } }}>Добавить отчет</CardLink>
-                <CardLink to={{ pathname: REPORTS_PAGE, state: { parentId: item.id } }}>Просмотреть отчеты</CardLink>
+                <CardLink to={REPORTS_PAGE + item.id}>Просмотреть отчеты</CardLink>
                 <Card.Footer>
                   <Button variant={'danger'} onClick={() => deleteItem(item.id)}>Удалить</Button>
                 </Card.Footer>

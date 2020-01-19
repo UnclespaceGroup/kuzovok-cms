@@ -1,0 +1,43 @@
+.block {
+  position: relative;
+  padding: 2rem 0;
+  border-bottom: solid 1px #dedede;
+  max-width: 60rem;
+}
+
+.title {
+  font-size: 2.4rem;
+}
+
+.openBtn {
+  font-size: 1.4rem;
+  padding: 1rem 0;
+  cursor: pointer;
+}
+
+.edit {
+  position: absolute;
+  top: 2rem;
+  right: 4rem;
+  border-radius: .4rem;
+  display: block;
+  border: solid 1px darkgray;
+  background-color: white;
+  padding: 0.4rem;
+  transition: all 100ms ease-in;
+
+  &:hover {
+    background-color: #dadada;
+  }
+
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.delete {
+  composes: edit;
+  right: 0rem;
+}

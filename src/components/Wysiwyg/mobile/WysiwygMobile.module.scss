@@ -1,0 +1,63 @@
+.container {
+  font-size: 1.6rem;
+  font-weight: 300;
+
+  h2, h1, span, p {
+    background-color: inherit!important;
+    color: inherit!important;
+  }
+
+  h2 {
+    margin: 1rem 0 2rem;
+  }
+
+  li {
+    position: relative;
+    padding-left: 2rem;
+    margin: 1rem 0;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      display: inline-block;
+      width: 0.8rem;
+      height: 0.8rem;
+      border-radius: 50%;
+      background-color: #c37306;
+    }
+  }
+
+  h2 {
+    font-weight: 400;
+    font-size: 2.4rem;
+  }
+
+  h3 {
+    font-weight: 400;
+    font-size: 2rem;
+  }
+
+  table {
+    margin: 2rem 0;
+    border-spacing: 0;
+    width: 100%;
+    font-size: 1.6rem;
+  }
+
+  td {
+    padding: 1.5rem 0 0.5rem;
+    border-bottom: solid 1px darkgrey;
+    &:first-child {
+      font-weight: 300;
+    }
+    &:last-child {
+      text-align: right;
+    }
+  }
+
+  ul {
+    margin: 1rem 0;
+  }
+}

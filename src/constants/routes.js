@@ -7,7 +7,7 @@ export const ADD_ADVANTAGES_MAIN = '/add-advantages-main'
 
 export const WORKS_PAGE = '/show-works'
 export const PAPERS_PAGE = '/show-papers'
-export const REPORTS_PAGE = '/show-reports'
+export const REPORTS_PAGE = '/show-reports/'
 export const SERVICES_PAGE = '/show-services'
 export const PAGE_BANNERS = '/page-banners/'
 
