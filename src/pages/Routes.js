@@ -27,6 +27,7 @@ import AddAdvantagesMain from 'pages/AdvantagesMain/AddAdvantagesMain'
 import PageBanners from 'pages/PageBanners/PageBanners'
 import Reports from 'pages/Report/Reports'
 import Works from 'pages/Work/Works'
+import Services from 'pages/Services/Services'
 
 const Routes = () => {
   const { initialization, user } = useUserStore()
@@ -53,7 +54,7 @@ const Routes = () => {
           <Route component={PageBanners} exact path={PAGE_BANNERS} />
           <Route component={Works} exact path={WORKS_PAGE} />
           <Route component={Reports} exact path={REPORTS_PAGE + ':parentId'} />
-          <Route component={ShowServicesPage} exact path={SERVICES_PAGE} />
+          <Route component={Services} exact path={SERVICES_PAGE} />
           <Route component={ShowPaperPage} exact path={PAPERS_PAGE} />
 
           <Route component={EditPage} exact path={EDIT_PAGE + ':id'} />
