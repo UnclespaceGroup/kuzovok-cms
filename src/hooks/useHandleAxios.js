@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { getAxiosInstance } from 'axiosFetch/index'
 import useUserStore from 'hooks/useUserStore'
+import { useHistory } from 'react-router'
 
 const STATUS_ERROR = 'STATUS_ERROR'
 const STATUS_SUCCESS = 'STATUS_SUCCESS'
@@ -12,6 +13,7 @@ const useHandleAxios = ({
   const { accessString, logOut } = useUserStore()
   const [ status, setStatus ] = useState()
   const [ data, setData ] = useState()
+  const history = useHistory()
 
   const axiosInstance = getAxiosInstance({ accessString })
 
@@ -22,9 +24,11 @@ const useHandleAxios = ({
         if (res.status === 401) {
           logOut()
         }
-        setData(res.data)
-        setStatus(STATUS_SUCCESS)
-
+        else {
+          history.goBack()
+          setData(res.data)
+          setStatus(STATUS_SUCCESS)
+        }
         setTimeout(() => {
           setStatus()
         }, 3000)
@@ -35,6 +39,7 @@ const useHandleAxios = ({
         setStatus(STATUS_ERROR)
       })
   }
+
 
   return {
     handleSendData,

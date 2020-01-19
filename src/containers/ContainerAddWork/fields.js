@@ -19,7 +19,8 @@ export const fields = [
     type: 'text',
     label: 'Заголовок',
     placeholder: 'Заголовок',
-    name: FIELD_TITLE
+    name: FIELD_TITLE,
+    text: 'Отображается в верхнем баннере, и на карточке в странице деталки'
   },
   {
     type: 'select',
@@ -37,13 +38,8 @@ export const fields = [
     type: 'textarea',
     label: 'Аннотация',
     name: FIELD_ANNOTATION,
-    placeholder: 'Аннотация'
-  },
-  {
-    type: 'textarea',
-    label: 'Теги',
-    name: FIELD_TAGS,
-    placeholder: '#тег'
+    placeholder: 'Аннотация',
+    text: 'Отображается как текст на карточке, на деталке в верхнем баннере'
   },
   {
     type: 'editor',

@@ -1,7 +1,7 @@
 import React from 'react'
-import './App.css'
+import 'App.scss'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
-import MainPage from './pages/MainPage'
+import Routes from 'pages/Routes'
 import {
   HOME_PAGE,
 } from 'constants/routes'
@@ -20,7 +20,7 @@ function App () {
         <BrowserRouter>
           <Header />
           <Switch>
-            <Route component={MainPage} path={HOME_PAGE} />
+            <Route component={Routes} path={HOME_PAGE} />
             <Route component={PageLogin} path={'*'} />
           </Switch>
         </BrowserRouter>

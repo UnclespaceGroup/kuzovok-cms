@@ -33,11 +33,13 @@ export const fields = [
   {
     type: 'checkbox',
     label: 'Основная',
-    name: 'isMain'
+    name: 'isMain',
+    text: 'Будет ли страница в разделе с основными'
   },
   {
     type: 'checkbox',
     label: 'Баннер',
-    name: 'isBanner'
+    name: 'isBanner',
+    text: 'Будет ли услуга появляться в слайдере на услугах'
   }
 ]

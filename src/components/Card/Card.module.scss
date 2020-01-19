@@ -1,0 +1,48 @@
+.container {
+  width: 30%;
+  border: solid 1px darkgrey;
+  position: relative;
+}
+
+.img {
+  height: 15rem;
+  background: no-repeat center;
+  background-size: cover;
+}
+
+.title {
+  padding: 1rem 1rem 0;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.text {
+  padding: 1rem;
+  font-size: 1.4rem;
+}
+
+.edit {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  border-radius: .4rem;
+  display: block;
+  background-color: white;
+  padding: 0.4rem;
+  transition: all 100ms ease-in;
+
+  &:hover {
+    background-color: #dadada;
+  }
+
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.delete {
+  composes: edit;
+  top: 4rem;
+}

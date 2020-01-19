@@ -1,8 +1,8 @@
 import React from 'react'
 import { useLocation } from 'react-router'
 import { generateId } from 'services/generateId'
-import { METHOD_REPORT } from 'constants/url'
-import { FAIL, OK } from 'constants/statuses'
+import { METHOD_ADVANTAGES_MAIN } from 'constants/url'
+import useHandleAxios from 'hooks/useHandleAxios'
 import { Form as FinalForm } from 'react-final-form'
 import { FORM_ADD_WORK } from 'constants/WORK_FIELDS_NAME'
 import arrayMutators from 'final-form-arrays'
@@ -11,26 +11,21 @@ import FormConstructor from 'components/FormConstructor/FormConstructor'
 import { fields } from './fields'
 import Padding from 'components/Padding/Padding'
 import SectionStatus from 'components/SectionStatus/SectionStatus'
-import useHandleAxios from 'hooks/useHandleAxios'
+import { FAIL, OK } from 'constants/statuses'
 
-const ContainerReportAdd = () => {
+const ContainerAddAdvantagesMain = () => {
   const location = useLocation()
-
   const prevData = location.state || {}
 
-  const id = prevData.id || generateId('report')
+  const id = prevData.id || generateId('advantages')
+  const isUpdate = prevData.id
+  const url = isUpdate ? `${METHOD_ADVANTAGES_MAIN}update/${id}` : METHOD_ADVANTAGES_MAIN + 'add'
 
-    const isUpdate = prevData.id
-
-    const url = isUpdate ? `${METHOD_REPORT}update/${id}` : METHOD_REPORT + 'add'
-
-    const { data, isError, isSuccess, isPending, handleSendData } = useHandleAxios({ url })
-    console.log(data)
-
+  const { handleSendData, isSuccess, isError, isPending } = useHandleAxios({ url })
 
   const imageParams = {
     id,
-    categoryName: 'report'
+    categoryName: 'advantages'
   }
 
   return (
@@ -38,17 +33,17 @@ const ContainerReportAdd = () => {
       form={FORM_ADD_WORK}
       mutators={arrayMutators}
       onSubmit={handleSendData}
-      initialValues={{...prevData, id }}
+      initialValues={{...prevData, id}}
       render={({ handleSubmit }) => (
         <Form onSubmit={handleSubmit}>
-          <h2>Форма добавления услуги</h2>
+          <h2>Форма добавления преимущества главной</h2>
           <FormConstructor isSingleImage {...imageParams} scheme={fields} />
           <Button disabled={isPending} type="submit">Отправить</Button>
           <Padding value={20} />
-          <SectionStatus status={isSuccess ? OK : isError ? FAIL : null} />
+          <SectionStatus status={isError ? FAIL : isSuccess ? OK : null} />
         </Form>
       )}
     />
   )
 }
-export default ContainerReportAdd
+export default ContainerAddAdvantagesMain

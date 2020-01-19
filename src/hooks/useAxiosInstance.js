@@ -22,6 +22,10 @@ const useAxiosInstance = ({
   const axiosInstance = getAxiosInstance({ accessString })
 
   useEffect(() => {
+    loadData()
+  }, [location].concat(deps))
+
+  const loadData = () => {
     setStatus(STATUS_PENDING)
     axiosInstance.post(url, { where, single, limit, rangeData })
       .then(res => {
@@ -32,16 +36,41 @@ const useAxiosInstance = ({
         setStatus(STATUS_SUCCESS)
       })
       .catch(err => {
+        if ((typeof err === 'string') && err.findIndex('401') !== -1) {
+          logOut()
+        }
+        console.log(`error in ${url} response`, err)
+        setStatus(STATUS_ERROR)
+      })
+  }
+
+
+  const handleDeleteData = id => {
+    const a = window.confirm('Точно удалить')
+    console.log(a)
+    if (!a) return
+    setStatus(STATUS_PENDING)
+    axiosInstance.delete(url + id)
+      .then(res => {
+        if (res.status === 401) {
+          logOut()
+        }
+        setData(res.data)
+        loadData()
+        setStatus()
+      })
+      .catch(err => {
         logOut()
         console.log(`error in ${url} response`, err)
         setStatus(STATUS_ERROR)
       })
-  }, [location].concat(deps))
+  }
 
 
   return {
     data,
     status,
+    handleDeleteData,
     isPending: status === STATUS_PENDING,
     isError: status === STATUS_ERROR,
     isSuccess: status === STATUS_SUCCESS

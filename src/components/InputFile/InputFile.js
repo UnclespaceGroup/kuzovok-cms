@@ -7,7 +7,7 @@ import { MdEdit } from 'react-icons/md'
 import useUserStore from 'hooks/useUserStore'
 
 const InputFile = ({ input, isSingleImage, id, categoryName, typeName }) => {
-  const { accessString } = useUserStore()
+  const { accessString, logOut } = useUserStore()
   if (!id || !categoryName || !typeName) {
     console.error('where is fucking PARAMS')
   }
@@ -39,7 +39,10 @@ const InputFile = ({ input, isSingleImage, id, categoryName, typeName }) => {
       if (res.status === 200) {
         input.onChange(res.data.filePath)
       }
-    }).catch(e => console.log(e))
+    }).catch(e => {
+      logOut()
+      console.log(e)
+    })
   }
   const imgPath = input.value && `${BASE_URL}${input.value}`
   return imgPath ?
@@ -57,9 +60,9 @@ const InputFile = ({ input, isSingleImage, id, categoryName, typeName }) => {
       </label>
     </div>
     : <label className={cn(css.container, css.empty)}>
-        <div>
-          Добавить фото
-        </div>
+      <div>
+        Добавить фото
+      </div>
       <input
         ref={inputRef}
         type={'file'}

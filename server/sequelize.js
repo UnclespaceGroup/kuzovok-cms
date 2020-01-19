@@ -5,6 +5,7 @@ const ReportModel = require('./models/report')
 const PaperModel = require('./models/paper')
 const ServiceModel = require('./models/service')
 const PageModel = require('./models/page')
+const AdvantagesMainModel = require('./models/advantagesMain')
 const connectionConfig = require('./constants/index')
 
 const sequelize = new Sequelize(connectionConfig.database, connectionConfig.user, connectionConfig.password, {
@@ -18,6 +19,7 @@ const Report = ReportModel(sequelize, Sequelize);
 const Paper = PaperModel(sequelize, Sequelize);
 const Service = ServiceModel(sequelize, Sequelize);
 const Page = PageModel(sequelize, Sequelize);
+const AdvantagesMain = AdvantagesMainModel(sequelize, Sequelize)
 
 sequelize.sync().then(() => {
   console.log('Users db and user table have been created');
@@ -29,5 +31,6 @@ module.exports = {
   Report,
   Paper,
   Service,
-  Page
+  Page,
+  AdvantagesMain
 };

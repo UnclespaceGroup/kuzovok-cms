@@ -1,11 +1,11 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import ContainerWorkAdd from 'containers/ContainerWorkAdd/ContainerWorkAdd'
+import ContainerAddWork from 'containers/ContainerAddWork/ContainerAddWork'
 
 const AddWorkPage = () => {
   return (
     <Container style={{ marginTop: '5vh', minHeight: '120vh' }}>
-      <ContainerWorkAdd />
+      <ContainerAddWork />
     </Container>
   )
 }
