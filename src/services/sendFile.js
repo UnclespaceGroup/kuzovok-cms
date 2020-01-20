@@ -1,6 +1,7 @@
 import { getAxiosInstance } from 'axiosFetch'
 
 export const sendFile = async ({ id, categoryName, typeName, accessString, file, isSingleImage, name }) => {
+  console.log(id, categoryName, typeName)
   if (!id || !categoryName || !typeName) {
     console.log('params?????')
     return

@@ -15,8 +15,6 @@ const InputEditor = ({ input = {}, id, categoryName, typeName }) => {
   let editorRef = useRef(null)
   const { accessString } = useUserStore()
 
-  console.log(editorRef.current)
-
   const onImageUpload = (fileList) => {
     _.forEach(fileList, file => {
       sendFile({file, id, categoryName, typeName, accessString, name: input.name})

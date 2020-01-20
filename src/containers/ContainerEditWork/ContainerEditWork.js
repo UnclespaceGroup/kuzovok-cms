@@ -18,9 +18,10 @@ const ContainerEditWork = () => {
       <Padding value={10} />
       <div className={'row-wrap-3'}>
         {
-          _.map(data, (item, key) => (
+          _.map(data, ({text, ...item}, key) => (
             <Card editLink={ADD_WORK_PAGE}
                   key={key} {...item}
+                  text={item.annotation}
                   onDelete={() => item.id && handleDeleteData(item.id)}
                   to={REPORTS_PAGE + item.id}
             />

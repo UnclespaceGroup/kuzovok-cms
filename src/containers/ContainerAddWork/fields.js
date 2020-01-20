@@ -1,7 +1,7 @@
 import {
   FIELD_ANNOTATION,
   FIELD_BANNER,
-  FIELD_STATUS, FIELD_TAGS, FIELD_TEXT,
+  FIELD_STATUS, FIELD_TEXT,
   FIELD_TITLE,
   FIELD_TYPE,
   STATUSES,
@@ -44,6 +44,7 @@ export const fields = [
   {
     type: 'editor',
     label: 'Описание',
-    name: FIELD_TEXT
+    name: FIELD_TEXT,
+    typeName: 'textImages'
   }
 ]
