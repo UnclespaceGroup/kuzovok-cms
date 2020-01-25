@@ -9,7 +9,15 @@ import {
   ADD_REPORT_PAGE,
   ADD_SERVICE_PAGE,
   WORKS_PAGE,
-  REPORTS_PAGE, SERVICES_PAGE, PAPERS_PAGE, PAGE_LOGIN, EDIT_PAGE, EDIT_MAIN_PAGE, ADD_ADVANTAGES_MAIN, PAGE_BANNERS
+  REPORTS_PAGE,
+  SERVICES_PAGE,
+  PAPERS_PAGE,
+  PAGE_LOGIN,
+  EDIT_PAGE,
+  EDIT_MAIN_PAGE,
+  ADD_ADVANTAGES_MAIN,
+  PAGE_BANNERS,
+  ADD_MAIN_PAGE_CARD
 } from 'constants/routes'
 import AddPaperPage from 'pages/Paper/AddPaperPage'
 import AddReportPage from 'pages/Report/AddReportPage'
@@ -28,6 +36,7 @@ import PageBanners from 'pages/PageBanners/PageBanners'
 import Reports from 'pages/Report/Reports'
 import Works from 'pages/Work/Works'
 import Services from 'pages/Services/Services'
+import AddMainPageCards from 'pages/MainPageCards/AddMainPageCards'
 
 const Routes = () => {
   const { initialization, user } = useUserStore()
@@ -46,6 +55,7 @@ const Routes = () => {
           <Route component={EditMainPage} exact path={EDIT_MAIN_PAGE} />
 
           <Route component={AddAdvantagesMain} exact path={ADD_ADVANTAGES_MAIN} />
+          <Route component={AddMainPageCards} exact path={ADD_MAIN_PAGE_CARD} />
           <Route component={AddWorkPage} exact path={ADD_WORK_PAGE} />
           <Route component={AddPaperPage} exact path={ADD_PAPER_PAGE} />
           <Route component={AddReportPage} exact path={ADD_REPORT_PAGE} />

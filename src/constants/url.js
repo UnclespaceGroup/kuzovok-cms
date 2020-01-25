@@ -8,5 +8,6 @@ export const METHOD_REPORT = '/report/'
 export const METHOD_SERVICE = '/service/'
 export const METHOD_PAGE_EDIT = '/page/'
 export const METHOD_ADVANTAGES_MAIN = '/advantages-main/'
+export const METHOD_MAIN_PAGE_CARDS = '/main-page-cards/'
 
 export const DELETE_IMAGE_FOLDER_URL = '/delete-image-folder'

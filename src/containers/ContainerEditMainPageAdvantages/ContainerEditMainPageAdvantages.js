@@ -7,7 +7,7 @@ import { ADD_ADVANTAGES_MAIN } from 'constants/routes'
 import Link from 'components/Link/Link'
 import Padding from 'components/Padding/Padding'
 
-const ContainerEditMainPage = () => {
+const ContainerEditMainPageAdvantages = () => {
   const { data: cards, handleDeleteData } = useAxiosInstance({ url: METHOD_ADVANTAGES_MAIN })
 
   return (
@@ -28,4 +28,4 @@ const ContainerEditMainPage = () => {
     </div>
   )
 }
-export default ContainerEditMainPage
+export default ContainerEditMainPageAdvantages
