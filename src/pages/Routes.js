@@ -22,9 +22,6 @@ import {
 import AddPaperPage from 'pages/Paper/AddPaperPage'
 import AddReportPage from 'pages/Report/AddReportPage'
 import AddServicePage from 'pages/Services/AddServicePage'
-import ShowWorksPage from 'pages/Work/ShowWorksPage'
-import ShowReportsPage from 'pages/Report/ShowReportsPage'
-import ShowServicesPage from 'pages/Services/ShowServicesPage'
 import ShowPaperPage from 'pages/Paper/ShowPaperPage'
 import Login from 'pages/auth/Login'
 import EditPage from 'pages/EditPage/EditPage'
@@ -40,6 +37,7 @@ import AddMainPageCards from 'pages/MainPageCards/AddMainPageCards'
 import Slides from 'pages/Slides/Slides'
 import AddSlidePage from 'pages/Slides/AddSlidePage'
 import Padding from 'components/Padding/Padding'
+import css from './routes.module.scss'
 
 const Routes = () => {
   const { initialization, user } = useUserStore()
@@ -51,30 +49,34 @@ const Routes = () => {
   return (
     <Row>
       <Col xs={2}>
+        <Padding value={24} />
         <ContainerSideMenu />
       </Col>
-      <Col>
-        <Switch>
-          <Route component={EditMainPage} exact path={EDIT_MAIN_PAGE} />
+      <Col xs={9}>
+        <Padding value={24} />
+        <div className={css.content}>
+          <Switch>
+            <Route component={EditMainPage} exact path={EDIT_MAIN_PAGE} />
 
-          <Route component={AddAdvantagesMain} exact path={ADD_ADVANTAGES_MAIN} />
-          <Route component={AddMainPageCards} exact path={ADD_MAIN_PAGE_CARD} />
-          <Route component={AddWorkPage} exact path={ADD_WORK_PAGE} />
-          <Route component={AddPaperPage} exact path={ADD_PAPER_PAGE} />
-          <Route component={AddReportPage} exact path={ADD_REPORT_PAGE} />
-          <Route component={AddServicePage} exact path={ADD_SERVICE_PAGE} />
+            <Route component={AddAdvantagesMain} exact path={ADD_ADVANTAGES_MAIN} />
+            <Route component={AddMainPageCards} exact path={ADD_MAIN_PAGE_CARD} />
+            <Route component={AddWorkPage} exact path={ADD_WORK_PAGE} />
+            <Route component={AddPaperPage} exact path={ADD_PAPER_PAGE} />
+            <Route component={AddReportPage} exact path={ADD_REPORT_PAGE} />
+            <Route component={AddServicePage} exact path={ADD_SERVICE_PAGE} />
 
-          <Route component={PageBanners} exact path={PAGE_BANNERS} />
-          <Route component={Works} exact path={WORKS_PAGE} />
-          <Route component={Reports} exact path={REPORTS_PAGE + ':parentId'} />
-          <Route component={Services} exact path={SERVICES_PAGE} />
-          <Route component={Slides} exact path={PAGE_SLIDES} />
-          <Route component={ShowPaperPage} exact path={PAPERS_PAGE} />
+            <Route component={PageBanners} exact path={PAGE_BANNERS} />
+            <Route component={Works} exact path={WORKS_PAGE} />
+            <Route component={Reports} exact path={REPORTS_PAGE + ':parentId'} />
+            <Route component={Services} exact path={SERVICES_PAGE} />
+            <Route component={Slides} exact path={PAGE_SLIDES} />
+            <Route component={ShowPaperPage} exact path={PAPERS_PAGE} />
 
-          <Route component={EditPage} exact path={EDIT_PAGE + ':id'} />
-          <Route component={AddSlidePage} exact path={ADD_SLIDE} />
-          <Route component={Login} exact path={PAGE_LOGIN} />
-        </Switch>
+            <Route component={EditPage} exact path={EDIT_PAGE + ':id'} />
+            <Route component={AddSlidePage} exact path={ADD_SLIDE} />
+            <Route component={Login} exact path={PAGE_LOGIN} />
+          </Switch>
+        </div>
         <Padding value={120} />
       </Col>
     </Row>

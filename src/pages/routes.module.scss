@@ -1,8 +1,4 @@
-.item {
-  transition: all 200ms ease-in;
-
-  &__deleted {
-    composes: item;
-    opacity: 0;
-  }
+.content {
+  background-color: white;
+  padding: 2.4rem;
 }
