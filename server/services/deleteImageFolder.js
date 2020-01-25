@@ -7,4 +7,5 @@ const deleteImageFolder = async function (path, rootDirectory) {
     console.error(err ? err : `Папка ${path} успешно удалена`)
   })
 }
+
 module.exports = deleteImageFolder
