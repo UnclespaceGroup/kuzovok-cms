@@ -11,6 +11,8 @@ export const PAPERS_PAGE = '/show-papers'
 export const REPORTS_PAGE = '/show-reports/'
 export const SERVICES_PAGE = '/show-services'
 export const PAGE_BANNERS = '/page-banners/'
+export const PAGE_SLIDES = '/slides/'
+export const ADD_SLIDE = '/add-slide/'
 
 export const PAGE_LOGIN = '/login'
 export const EDIT_PAGE = '/edit-page/'

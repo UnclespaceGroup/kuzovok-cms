@@ -7,6 +7,8 @@ const ServiceModel = require('./models/service')
 const PageModel = require('./models/page')
 const AdvantagesMainModel = require('./models/advantagesMain')
 const mainPageCardsModel = require('./models/mainPageCards')
+const SlideModel = require('./models/slide')
+
 const connectionConfig = require('./constants/index')
 
 const sequelize = new Sequelize(connectionConfig.database, connectionConfig.user, connectionConfig.password, {
@@ -22,6 +24,7 @@ const Service = ServiceModel(sequelize, Sequelize);
 const Page = PageModel(sequelize, Sequelize);
 const AdvantagesMain = AdvantagesMainModel(sequelize, Sequelize)
 const MainPageCards = mainPageCardsModel(sequelize, Sequelize)
+const Slide = SlideModel(sequelize, Sequelize)
 
 sequelize.sync().then(() => {
   console.log('Users db and user table have been created');
@@ -35,5 +38,6 @@ module.exports = {
   Service,
   Page,
   AdvantagesMain,
-  MainPageCards
+  MainPageCards,
+  Slide
 };

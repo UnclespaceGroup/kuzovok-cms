@@ -3,9 +3,8 @@ import {
   ADD_SERVICE_PAGE,
   ADD_WORK_PAGE,
   WORKS_PAGE,
-  EDIT_PAGE,
   EDIT_MAIN_PAGE,
-  PAGE_BANNERS
+  PAGE_BANNERS, PAGE_SLIDES
 } from 'constants/routes'
 
 export const blocks = [
@@ -15,6 +14,10 @@ export const blocks = [
       {
         title: 'Главная',
         to: EDIT_MAIN_PAGE
+      },
+      {
+        title: 'Слайдер на главной',
+        to: PAGE_SLIDES
       },
       {
         title: 'Баннеры страниц',

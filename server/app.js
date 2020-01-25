@@ -58,6 +58,7 @@ require('./routes/report')(app, passport, __dirname)
 require('./routes/pages')(app, passport, __dirname)
 require('./routes/advantagesMain')(app, passport, __dirname)
 require('./routes/mainPageCards')(app, passport, __dirname)
+require('./routes/slide')(app, passport, __dirname)
 
 // error handler
 app.use(function(err, req, res, next) {

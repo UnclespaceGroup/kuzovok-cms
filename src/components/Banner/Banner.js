@@ -7,13 +7,14 @@ import BgImage from 'components/BgImage/BgImage'
 import { MdEdit } from 'react-icons/md'
 
 const Banner = (props) => {
+  const editPath = props.path || EDIT_PAGE
   return (
   <BgImage className={'mb-24'} url={BASE_URL + props.banner}>
     <div className={css.banner}>
       <div className={css.title}>{props.title}</div>
       <div className={css.text}>{props.text}</div>
       <Link className={css.edit}
-            to={{ pathname: EDIT_PAGE + props.id, state: {...props}}}
+            to={{ pathname: editPath + props.id, state: {...props}}}
       ><MdEdit /></Link>
     </div>
   </BgImage>
