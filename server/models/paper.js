@@ -1,4 +1,4 @@
-const { PAPER_DB } = require('server/constants/db')
+const { PAPER_DB } = require('../constants/db')
 
 module.exports = (sequelize, type) => sequelize.define(PAPER_DB, {
   id: {

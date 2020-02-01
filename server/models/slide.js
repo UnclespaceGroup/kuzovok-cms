@@ -1,4 +1,4 @@
-const { SLIDE_DB } = require('server/constants/db')
+const { SLIDE_DB } = require('../constants/db')
 
 const Slide = (sequelize, type) => sequelize.define(SLIDE_DB, {
   id: {

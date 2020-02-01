@@ -1,4 +1,6 @@
-const Page = (sequelize, type) => sequelize.define('testAdvantagesMain', {
+const { ADVANTAGES_CARDS_DB } = require('../constants/db')
+
+const Page = (sequelize, type) => sequelize.define(ADVANTAGES_CARDS_DB, {
   id: {
     type: type.STRING,
     primaryKey: true

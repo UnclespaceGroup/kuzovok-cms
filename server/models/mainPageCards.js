@@ -1,4 +1,4 @@
-const { MAIN_PAGE_CARDS_DB } = require('server/constants/db')
+const { MAIN_PAGE_CARDS_DB } = require('../constants/db')
 
 const Page = (sequelize, type) => sequelize.define(MAIN_PAGE_CARDS_DB, {
   id: {

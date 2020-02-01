@@ -1,4 +1,4 @@
-const { WORK_DB } = require('server/constants/db')
+const { WORK_DB } = require('../constants/db')
 
 module.exports = (sequelize, type) => sequelize.define(WORK_DB, {
   id: {

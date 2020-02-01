@@ -1,4 +1,4 @@
-const { PAGE_DB } = require('server/constants/db')
+const { PAGE_DB } = require('../constants/db')
 
 const Page = (sequelize, type) => sequelize.define(PAGE_DB, {
   id: {
