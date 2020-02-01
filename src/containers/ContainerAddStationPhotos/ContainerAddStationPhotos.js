@@ -1,46 +1,44 @@
 import React from 'react'
-import { Form as FinalForm } from 'react-final-form'
 import { FORM_ADD_WORK } from 'constants/WORK_FIELDS_NAME'
 import arrayMutators from 'final-form-arrays'
 import { Form, Button } from 'react-bootstrap'
 import FormConstructor from 'components/FormConstructor/FormConstructor'
 import { fields } from './fields'
+import { Form as FinalForm } from 'react-final-form'
+import { FAIL, OK } from 'constants/statuses'
 import Padding from 'components/Padding/Padding'
 import SectionStatus from 'components/SectionStatus/SectionStatus'
-import { FAIL, OK } from 'constants/statuses'
-import { useParams } from 'react-router'
-import { METHOD_PAGE_EDIT } from 'constants/url'
 import useHandleAxios from 'hooks/useHandleAxios'
+import { METHOD_OTHER_DATA } from 'constants/url'
 import useAxiosInstance from 'hooks/useAxiosInstance'
 
-const ContainerEditPage = () => {
-  const { id: page } = useParams()
+const ContainerAddStationPhotos = () => {
+  const id = 'stationPhotos'
 
-  const { handleSendData, isPending, isSuccess, isError } = useHandleAxios({ url: METHOD_PAGE_EDIT + `update/${page}` })
-  const { data: prevData } = useAxiosInstance({ url: METHOD_PAGE_EDIT, where: { id: page }, single: true }, [page])
-  console.log(prevData)
+  const url = `${METHOD_OTHER_DATA}update/${id}`
 
+  const { handleSendData, isError, isSuccess, isPending } = useHandleAxios({ url, backUrl: '/' })
+  const { data } = useAxiosInstance({ url: METHOD_OTHER_DATA, where: { id }, single: true })
   const imageParams = {
-    id: page,
-    categoryName: 'pages'
+    id,
+    categoryName: 'data'
   }
-
   return (
     <FinalForm
       form={FORM_ADD_WORK}
       mutators={arrayMutators}
       onSubmit={handleSendData}
-      initialValues={{ ...prevData }}
+      initialValues={{...data, id, type: 'stationPhotos'}}
       render={({ handleSubmit }) => (
         <Form onSubmit={handleSubmit}>
-          <h2>Форма редакирования страницы</h2>
+          <h2>Форма добавления фотографий станции</h2>
           <FormConstructor isSingleImage {...imageParams} scheme={fields} />
           <Button disabled={isPending} type="submit">Отправить</Button>
           <Padding value={20} />
-          <SectionStatus status={isSuccess ? OK : isError ? FAIL : null} />
+          <SectionStatus status={isError ? FAIL : isSuccess ? OK : null} />
         </Form>
       )}
     />
   )
 }
-export default ContainerEditPage
+export default ContainerAddStationPhotos

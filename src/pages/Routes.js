@@ -17,7 +17,7 @@ import {
   EDIT_MAIN_PAGE,
   ADD_ADVANTAGES_MAIN,
   PAGE_BANNERS,
-  ADD_MAIN_PAGE_CARD, PAGE_SLIDES, ADD_SLIDE, PAGE_CONTACTS
+  ADD_MAIN_PAGE_CARD, PAGE_SLIDES, ADD_SLIDE, PAGE_CONTACTS, ADD_STATION_PHOTOS
 } from 'constants/routes'
 import AddPaperPage from 'pages/Paper/AddPaperPage'
 import AddReportPage from 'pages/Report/AddReportPage'
@@ -40,6 +40,7 @@ import Padding from 'components/Padding/Padding'
 import css from './routes.module.scss'
 import MainPage from 'pages/MainPage/MainPage'
 import Contacts from 'pages/Contacts/Contacts'
+import AddStationPhotos from 'pages/StationPhotos/AddStationPhotos'
 
 const Routes = () => {
   const { initialization, user } = useUserStore()
@@ -66,6 +67,7 @@ const Routes = () => {
             <Route component={AddPaperPage} exact path={ADD_PAPER_PAGE} />
             <Route component={AddReportPage} exact path={ADD_REPORT_PAGE} />
             <Route component={AddServicePage} exact path={ADD_SERVICE_PAGE} />
+            <Route component={AddStationPhotos} path={ADD_STATION_PHOTOS} />
 
             <Route component={PageBanners} exact path={PAGE_BANNERS} />
             <Route component={Works} exact path={WORKS_PAGE} />
@@ -75,7 +77,7 @@ const Routes = () => {
             <Route component={ShowPaperPage} exact path={PAPERS_PAGE} />
 
             <Route component={EditPage} exact path={EDIT_PAGE + ':id'} />
-            <Route component={AddSlidePage} exact path={ADD_SLIDE} />
+            <Route component={AddSlidePage} exact path={ADD_SLIDE + ':id'} />
             <Route component={Login} exact path={PAGE_LOGIN} />
 
             <Route component={Contacts} path={PAGE_CONTACTS} />

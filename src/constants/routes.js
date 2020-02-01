@@ -5,6 +5,7 @@ export const ADD_REPORT_PAGE = '/add-report'
 export const ADD_SERVICE_PAGE = '/add-service'
 export const ADD_ADVANTAGES_MAIN = '/add-advantages-main'
 export const ADD_MAIN_PAGE_CARD = '/add-main-page-card'
+export const ADD_STATION_PHOTOS = '/add-station-photos'
 
 export const WORKS_PAGE = '/show-works'
 export const PAPERS_PAGE = '/show-papers'

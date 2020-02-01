@@ -14,7 +14,7 @@ const ContainerEditSlides = () => {
       <h2>Список слайдов</h2>
       {
         _.map(data, (item, key) => (
-          <Banner editPath={ADD_SLIDE} key={key} {...item} />
+          <Banner path={ADD_SLIDE} key={key} {...item} />
         ))
       }
       <Link to={ADD_SLIDE}>Добавить слайд</Link>

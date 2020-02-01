@@ -1,5 +1,5 @@
 .container {
-  font-size: 1.8rem;
+  font-size: 1rem;
   font-weight: 300;
 
   h2, h1, span, p {
@@ -12,7 +12,7 @@
   }
 
   h2 {
-    margin: 1rem 0 2rem;
+    margin: .5rem 0 1rem;
   }
 
   img {
@@ -44,11 +44,11 @@
   table {
     border-spacing: 0;
     width: 100%;
-    font-size: 1.6rem;
+    font-size: 1rem;
   }
 
   td {
-    padding: 1.5rem 0 0.5rem;
+    padding: 1rem 0 0.2rem;
     border-bottom: dotted 1px darkgrey;
     &:first-child {
       font-weight: 300;
