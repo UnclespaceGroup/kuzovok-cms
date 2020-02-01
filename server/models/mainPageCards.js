@@ -1,4 +1,6 @@
-const Page = (sequelize, type) => sequelize.define('mainPageCards', {
+const { MAIN_PAGE_CARDS_DB } = require('server/constants/db')
+
+const Page = (sequelize, type) => sequelize.define(MAIN_PAGE_CARDS_DB, {
   id: {
     type: type.STRING,
     primaryKey: true

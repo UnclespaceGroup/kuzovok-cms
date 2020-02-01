@@ -1,4 +1,6 @@
-const Page = (sequelize, type) => sequelize.define('pageTest', {
+const { PAGE_DB } = require('server/constants/db')
+
+const Page = (sequelize, type) => sequelize.define(PAGE_DB, {
   id: {
     type: type.STRING,
     primaryKey: true

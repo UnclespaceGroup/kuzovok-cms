@@ -1,4 +1,6 @@
-module.exports = (sequelize, type) => sequelize.define('serviceTest', {
+const { SERVICE_DB } = require('server/constants/db')
+
+module.exports = (sequelize, type) => sequelize.define(SERVICE_DB, {
   id: {
     type: type.STRING,
     primaryKey: true

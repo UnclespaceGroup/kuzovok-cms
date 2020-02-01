@@ -1,4 +1,6 @@
-const Slide = (sequelize, type) => sequelize.define('slide', {
+const { SLIDE_DB } = require('server/constants/db')
+
+const Slide = (sequelize, type) => sequelize.define(SLIDE_DB, {
   id: {
     type: type.STRING,
     primaryKey: true

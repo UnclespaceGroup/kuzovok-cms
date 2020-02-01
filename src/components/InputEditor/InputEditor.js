@@ -19,6 +19,7 @@ const InputEditor = ({ input = {}, id, categoryName, typeName }) => {
     _.forEach(fileList, file => {
       sendFile({file, id, categoryName, typeName, accessString, name: input.name})
         .then(res => {
+          console.log(res)
           if (editorRef.current) {
             editorRef.current.insertImage(BASE_URL_DEV + res.filePath, res.filePath)
           }
@@ -29,14 +30,19 @@ const InputEditor = ({ input = {}, id, categoryName, typeName }) => {
     })
   }
 
+  const pathTemplate = '__path__'
+
   const onChange = function (content) {
-    input.onChange(content)
+    const _value = content.replace(new RegExp(BASE_URL_DEV, 'g'), pathTemplate)
+    input.onChange(_value)
   }
+  const formattedValue = input.value.replace(new RegExp(pathTemplate, 'g'), BASE_URL_DEV)
+
   return (
     <div className={css.container}>
       <ReactSummernote
         ref={editorRef}
-        value={input.value}
+        value={formattedValue}
         options={{
           lang: 'ru-RU',
           height: 800,
