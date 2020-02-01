@@ -35,7 +35,7 @@ const useHandleAxios = ({
         }, 3000)
       })
       .catch(err => {
-        if ((typeof err === 'string') && err.findIndex('401') !== -1) {
+        if (err.response.status === 401) {
           logOut()
         }
         console.log(`error in ${url} response`, err)
