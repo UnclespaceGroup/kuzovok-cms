@@ -18,7 +18,9 @@ const report = function (app, passport, rootDirectory) {
         annotation: item.annotation,
         status: item.status,
         id: item.id,
-        date: item.date
+        date: item.date,
+        parentTitle: item.parentTitle,
+        parentId: item.parentId
       }))
       res.send(list)
     }).catch(err => {

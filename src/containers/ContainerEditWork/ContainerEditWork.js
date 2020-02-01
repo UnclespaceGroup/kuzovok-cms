@@ -9,7 +9,6 @@ import Link from 'components/Link/Link'
 
 const ContainerEditWork = () => {
   const { data, handleDeleteData } = useAxiosInstance({ url: METHOD_WORK })
-  console.log(data)
 
   return (
     <div>

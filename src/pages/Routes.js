@@ -17,7 +17,7 @@ import {
   EDIT_MAIN_PAGE,
   ADD_ADVANTAGES_MAIN,
   PAGE_BANNERS,
-  ADD_MAIN_PAGE_CARD, PAGE_SLIDES, ADD_SLIDE
+  ADD_MAIN_PAGE_CARD, PAGE_SLIDES, ADD_SLIDE, PAGE_CONTACTS
 } from 'constants/routes'
 import AddPaperPage from 'pages/Paper/AddPaperPage'
 import AddReportPage from 'pages/Report/AddReportPage'
@@ -38,6 +38,8 @@ import Slides from 'pages/Slides/Slides'
 import AddSlidePage from 'pages/Slides/AddSlidePage'
 import Padding from 'components/Padding/Padding'
 import css from './routes.module.scss'
+import MainPage from 'pages/MainPage/MainPage'
+import Contacts from 'pages/Contacts/Contacts'
 
 const Routes = () => {
   const { initialization, user } = useUserStore()
@@ -75,6 +77,10 @@ const Routes = () => {
             <Route component={EditPage} exact path={EDIT_PAGE + ':id'} />
             <Route component={AddSlidePage} exact path={ADD_SLIDE} />
             <Route component={Login} exact path={PAGE_LOGIN} />
+
+            <Route component={Contacts} path={PAGE_CONTACTS} />
+
+            <Route component={MainPage} path={'*'} />
           </Switch>
         </div>
         <Padding value={120} />

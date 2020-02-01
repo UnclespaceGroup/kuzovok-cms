@@ -25,7 +25,7 @@ const ContainerEditReports = () => {
           <SectionReport
             toEditLink={{
               pathname: ADD_REPORT_PAGE,
-              state: {...item}
+              state: {...item, parentTitle: parent.title, parentId}
             }}
             key={key} {...item}
             onDelete={() => handleDeleteData(item.id)}

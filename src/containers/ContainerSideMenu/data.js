@@ -4,7 +4,7 @@ import {
   ADD_WORK_PAGE,
   WORKS_PAGE,
   EDIT_MAIN_PAGE,
-  PAGE_BANNERS, PAGE_SLIDES
+  PAGE_BANNERS, PAGE_SLIDES, PAGE_CONTACTS
 } from 'constants/routes'
 
 export const blocks = [
@@ -22,6 +22,10 @@ export const blocks = [
       {
         title: 'Баннеры страниц',
         to: PAGE_BANNERS
+      },
+      {
+        title: 'Контакты',
+        to: PAGE_CONTACTS
       }
     ]
   },

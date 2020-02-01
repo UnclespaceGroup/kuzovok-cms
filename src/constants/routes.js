@@ -15,5 +15,6 @@ export const PAGE_SLIDES = '/slides/'
 export const ADD_SLIDE = '/add-slide/'
 
 export const PAGE_LOGIN = '/login'
+export const PAGE_CONTACTS = '/contacts'
 export const EDIT_PAGE = '/edit-page/'
 export const EDIT_MAIN_PAGE = '/edit-main-page/'

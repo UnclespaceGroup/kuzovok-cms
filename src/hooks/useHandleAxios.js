@@ -9,6 +9,7 @@ const STATUS_PENDING = 'STATUS_PENDING'
 
 const useHandleAxios = ({
   url,
+  backUrl
 }) => {
   const { accessString, logOut } = useUserStore()
   const [ status, setStatus ] = useState()
@@ -25,16 +26,18 @@ const useHandleAxios = ({
           logOut()
         }
         else {
-          history.goBack()
           setData(res.data)
           setStatus(STATUS_SUCCESS)
         }
         setTimeout(() => {
+          backUrl ? history.push(backUrl) : history.goBack()
           setStatus()
         }, 3000)
       })
       .catch(err => {
-        logOut()
+        if ((typeof err === 'string') && err.findIndex('401') !== -1) {
+          logOut()
+        }
         console.log(`error in ${url} response`, err)
         setStatus(STATUS_ERROR)
       })
