@@ -2,7 +2,7 @@ import React from 'react'
 import useAxiosInstance from 'hooks/useAxiosInstance'
 import { METHOD_WORK } from 'constants/url'
 import _ from 'lodash'
-import { ADD_WORK_PAGE, ADD_ADVANTAGES_MAIN, REPORTS_PAGE } from 'constants/routes'
+import { ADD_WORK_PAGE, REPORTS_PAGE } from 'constants/routes'
 import Card from 'components/Card/Card'
 import Padding from 'components/Padding/Padding'
 import CardAdd from 'components/CardAdd/Card'
@@ -15,7 +15,7 @@ const ContainerEditWork = () => {
       <h1>Машины в ремонте</h1>
       <Padding value={10} />
       <div className={'row-wrap-3'}>
-        <CardAdd to={ADD_ADVANTAGES_MAIN} />
+        <CardAdd to={ADD_WORK_PAGE} />
         {
           _.map(data, ({text, ...item}, key) => (
             <Card editLink={ADD_WORK_PAGE}

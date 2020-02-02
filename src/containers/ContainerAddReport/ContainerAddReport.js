@@ -39,7 +39,7 @@ const ContainerAddReport = () => {
       initialValues={{ ...prevData, id }}
       render={({ handleSubmit }) => (
         <Form onSubmit={handleSubmit}>
-          <h2>Форма добавления услуги</h2>
+          <h2>Форма добавления отчета</h2>
           <FormConstructor isSingleImage {...imageParams} scheme={fields} />
           <Button disabled={isPending} type="submit">Отправить</Button>
           <Padding value={20} />
