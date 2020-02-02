@@ -4,7 +4,8 @@ import { METHOD_SLIDES } from 'constants/url'
 import _ from 'lodash'
 import Banner from 'components/Banner/Banner'
 import { ADD_SLIDE } from 'constants/routes'
-import Link from 'components/Link/Link'
+import CardAdd from 'components/CardAdd/Card'
+import Padding from 'components/Padding/Padding'
 
 const ContainerEditSlides = () => {
   const { data } = useAxiosInstance({ url: METHOD_SLIDES })
@@ -12,12 +13,13 @@ const ContainerEditSlides = () => {
   return (
     <div>
       <h2>Список слайдов</h2>
+      <CardAdd to={ADD_SLIDE} big />
+      <Padding value={40} />
       {
         _.map(data, (item, key) => (
           <Banner path={ADD_SLIDE} key={key} {...item} />
         ))
       }
-      <Link to={ADD_SLIDE}>Добавить слайд</Link>
     </div>
   )
 }

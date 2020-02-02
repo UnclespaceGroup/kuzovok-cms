@@ -4,8 +4,8 @@ import { METHOD_MAIN_PAGE_CARDS } from 'constants/url'
 import _ from 'lodash'
 import Card from 'components/Card/Card'
 import { ADD_MAIN_PAGE_CARD } from 'constants/routes'
-import Link from 'components/Link/Link'
 import Padding from 'components/Padding/Padding'
+import CardAdd from 'components/CardAdd/Card'
 
 const ContainerEditMainPageCards = () => {
   const { data: cards, handleDeleteData } = useAxiosInstance({ url: METHOD_MAIN_PAGE_CARDS })
@@ -14,6 +14,7 @@ const ContainerEditMainPageCards = () => {
     <div>
       <h2>Карточки главной</h2>
       <div className={'row-wrap-3'}>
+        <CardAdd to={ADD_MAIN_PAGE_CARD} />
         {
           _.map(cards, (card, key) => (
             <Card editLink={ADD_MAIN_PAGE_CARD}
@@ -24,7 +25,6 @@ const ContainerEditMainPageCards = () => {
         }
       </div>
       <Padding value={10} />
-      <Link to={ADD_MAIN_PAGE_CARD}>Добавить</Link>
     </div>
   )
 }

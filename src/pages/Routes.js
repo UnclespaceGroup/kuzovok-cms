@@ -17,13 +17,12 @@ import {
   EDIT_MAIN_PAGE,
   ADD_ADVANTAGES_MAIN,
   PAGE_BANNERS,
-  ADD_MAIN_PAGE_CARD, PAGE_SLIDES, ADD_SLIDE, PAGE_CONTACTS, ADD_STATION_PHOTOS
+  ADD_MAIN_PAGE_CARD, PAGE_SLIDES, ADD_SLIDE, PAGE_CONTACTS, ADD_STATION_PHOTOS, HOME_DOCUMENT
 } from 'constants/routes'
 import AddPaperPage from 'pages/Paper/AddPaperPage'
 import AddReportPage from 'pages/Report/AddReportPage'
 import AddServicePage from 'pages/Services/AddServicePage'
 import ShowPaperPage from 'pages/Paper/ShowPaperPage'
-import Login from 'pages/auth/Login'
 import EditPage from 'pages/EditPage/EditPage'
 import useUserStore from 'hooks/useUserStore'
 import PageLogin from 'pages/PageLogin/PageLogin'
@@ -41,6 +40,7 @@ import css from './routes.module.scss'
 import MainPage from 'pages/MainPage/MainPage'
 import Contacts from 'pages/Contacts/Contacts'
 import AddStationPhotos from 'pages/StationPhotos/AddStationPhotos'
+import PageDocument from 'pages/PageDocument/PageDocument'
 
 const Routes = () => {
   const { initialization, user } = useUserStore()
@@ -59,6 +59,8 @@ const Routes = () => {
         <Padding value={24} />
         <div className={css.content}>
           <Switch>
+            <Route component={PageDocument} path={HOME_DOCUMENT} exact />
+
             <Route component={EditMainPage} exact path={EDIT_MAIN_PAGE} />
 
             <Route component={AddAdvantagesMain} exact path={ADD_ADVANTAGES_MAIN} />
@@ -78,7 +80,7 @@ const Routes = () => {
             <Route component={ShowPaperPage} exact path={PAPERS_PAGE} />
 
             <Route component={EditPage} exact path={EDIT_PAGE + ':id'} />
-            <Route component={Login} exact path={PAGE_LOGIN} />
+            <Route component={PageLogin} exact path={PAGE_LOGIN} />
 
             <Route component={Contacts} path={PAGE_CONTACTS} />
 

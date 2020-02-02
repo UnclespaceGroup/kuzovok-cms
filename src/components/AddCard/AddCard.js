@@ -2,10 +2,10 @@ import React from 'react'
 import css from './AddCard.module.scss'
 import { Link } from 'react-router-dom'
 
-const AddCard = ({ path }) => (
-  <Link to={path} className={css.container}>
+const AddCard = ({ to, text }) => (
+  <Link to={to} className={css.container}>
     <div className={css.plus}>+</div>
-    <div>Добавить</div>
+    <div>{text || 'Добавить'}</div>
     <div />
   </Link>
 )

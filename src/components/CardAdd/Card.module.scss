@@ -9,10 +9,22 @@
   cursor: pointer;
   transition: all 200ms ease-in;
   padding: 2rem 0;
-  font-size: 1.4rem;
 
   &:hover {
     background-color: #dadada;
   }
 }
+.title {
+  padding: 1rem 1rem 0;
+  font-size: 1.4rem;
+}
 
+.icon {
+  color: #635e5a;
+  width: 3.6rem;
+  height: 3.6rem;
+}
+
+.big {
+  width: 100%!important;
+}

@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 
 const userKey = 'user-data'
 
+const cookieExpires = 1/48
+
 const useUserStore = () => {
   const dispatch = useDispatch()
   const user = useSelector(state => state.userStore)
@@ -31,7 +33,7 @@ const useUserStore = () => {
       type: 'loginUser',
       payload: data
     })
-    Cookies.set(userKey, data)
+    Cookies.set(userKey, data, { expires: cookieExpires })
   }
 
   const logOut = () => {

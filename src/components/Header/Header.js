@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
-import { HOME_PAGE, } from 'constants/routes'
+import { HOME_PAGE, HOME_DOCUMENT, } from 'constants/routes'
 import { Link } from 'react-router-dom'
 import useUserStore from '../../hooks/useUserStore'
 import LogoutForm from '../LogoutForm/LogoutForm'
@@ -15,6 +15,8 @@ const Header = () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link as={Link} to={HOME_PAGE} exact={'true'}>Главная</Nav.Link>
+          <Nav.Link as={Link} to={HOME_DOCUMENT} exact={'true'}>Документация</Nav.Link>
+
         </Nav>
         <Nav>
           {

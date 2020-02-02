@@ -6,7 +6,7 @@ import _ from 'lodash'
 import SectionReport from 'components/SectionReport/SectionReport'
 import { ADD_REPORT_PAGE, ADD_WORK_PAGE } from 'constants/routes'
 import Banner from 'components/Banner/Banner'
-import Link from 'components/Link/Link'
+import CardAdd from 'components/CardAdd/Card'
 
 const ContainerEditReports = () => {
 
@@ -22,10 +22,10 @@ const ContainerEditReports = () => {
               banner={parent.banner}
               path={ADD_WORK_PAGE}
       />
-      <Link to={{
+      <CardAdd big to={{
         pathname: ADD_REPORT_PAGE,
         state: {parentTitle: parent.title, parentId}
-      }}>Добавить</Link>
+      }} />
       {
         _.map(data, (item, key) => (
           <SectionReport

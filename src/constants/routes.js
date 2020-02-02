@@ -1,4 +1,5 @@
 export const HOME_PAGE = '/'
+export const HOME_DOCUMENT = '/doc'
 export const ADD_WORK_PAGE = '/add-work'
 export const ADD_PAPER_PAGE = '/add-paper'
 export const ADD_REPORT_PAGE = '/add-report'

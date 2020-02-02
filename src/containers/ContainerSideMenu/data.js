@@ -9,29 +9,8 @@ import {
 
 export const blocks = [
   {
-    title: 'Страницы',
-    items: [
-      {
-        title: 'Слайдер на главной',
-        to: PAGE_SLIDES
-      },
-      {
-        title: 'Главная',
-        to: EDIT_MAIN_PAGE
-      },
-      {
-        title: 'Баннеры страниц',
-        to: PAGE_BANNERS
-      },
-      {
-        title: 'Контакты',
-        to: PAGE_CONTACTS
-      },
-      {
-        title: 'Фото станции',
-        to: ADD_STATION_PHOTOS
-      }
-    ]
+    title: 'Главная',
+    to: '/'
   },
   {
     title: 'Услуги',
@@ -58,6 +37,36 @@ export const blocks = [
       {
         title: 'Посмотреть',
         to: WORKS_PAGE
+      }
+    ]
+  },
+  {
+    title: 'Редактировать главную',
+    items: [
+      {
+        title: 'Слайдер на главной',
+        to: PAGE_SLIDES
+      },
+      {
+        title: 'Блоки',
+        to: EDIT_MAIN_PAGE
+      },
+    ]
+  },
+  {
+    title: 'Прочее',
+    items: [
+      {
+        title: 'Баннеры страниц',
+        to: PAGE_BANNERS
+      },
+      {
+        title: 'Контакты',
+        to: PAGE_CONTACTS
+      },
+      {
+        title: 'Фото станции',
+        to: ADD_STATION_PHOTOS
       }
     ]
   }

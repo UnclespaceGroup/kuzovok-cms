@@ -3,7 +3,7 @@ import 'App.scss'
 import { Switch, Route, BrowserRouter } from 'react-router-dom'
 import Routes from 'pages/Routes'
 import {
-  HOME_PAGE,
+  HOME_PAGE
 } from 'constants/routes'
 import Header from './components/Header/Header'
 import configureStore from './store/configureStore'
