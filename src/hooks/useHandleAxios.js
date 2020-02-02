@@ -32,7 +32,7 @@ const useHandleAxios = ({
         setTimeout(() => {
           backUrl ? history.push(backUrl) : history.goBack()
           setStatus()
-        }, 3000)
+        }, 1000)
       })
       .catch(err => {
         if (err.response.status === 401) {

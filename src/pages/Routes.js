@@ -68,6 +68,7 @@ const Routes = () => {
             <Route component={AddReportPage} exact path={ADD_REPORT_PAGE} />
             <Route component={AddServicePage} exact path={ADD_SERVICE_PAGE} />
             <Route component={AddStationPhotos} path={ADD_STATION_PHOTOS} />
+            <Route component={AddSlidePage} exact path={ADD_SLIDE} />
 
             <Route component={PageBanners} exact path={PAGE_BANNERS} />
             <Route component={Works} exact path={WORKS_PAGE} />
@@ -77,7 +78,6 @@ const Routes = () => {
             <Route component={ShowPaperPage} exact path={PAPERS_PAGE} />
 
             <Route component={EditPage} exact path={EDIT_PAGE + ':id'} />
-            <Route component={AddSlidePage} exact path={ADD_SLIDE + ':id'} />
             <Route component={Login} exact path={PAGE_LOGIN} />
 
             <Route component={Contacts} path={PAGE_CONTACTS} />

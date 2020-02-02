@@ -13,14 +13,8 @@ export const fields = [
   },
   {
     type: 'textarea',
-    label: 'Тескс',
+    label: 'Текст',
     name: 'text',
     placeholder: 'Текст'
-  },
-  {
-    type: 'text',
-    label: 'Ссылка',
-    placeholder: '/custom-link',
-    name: 'slug'
   }
 ]

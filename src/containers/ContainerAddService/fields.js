@@ -28,7 +28,8 @@ export const fields = [
   {
     type: 'editor',
     label: 'Описание',
-    name: 'text'
+    name: 'text',
+    typeName: 'contentImages'
   },
   {
     type: 'checkbox',

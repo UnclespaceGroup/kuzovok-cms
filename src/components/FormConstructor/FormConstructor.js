@@ -14,6 +14,7 @@ const FormConstructor = ({ scheme, ...props }) =>
        name,
        options = [],
        text,
+       defaultValue,
       ...others
      },
      key) => {
@@ -53,7 +54,7 @@ const FormConstructor = ({ scheme, ...props }) =>
         return <Form.Group key={key}>
           <label>{label}</label>
           <Field name={name}>
-            {({ input }) => <Form.Control {...input} as="select">
+            {({ input }) => <Form.Control defaultValue={defaultValue} {...input} as="select">
               {
                 options.map(({ id, title }, key) => (
                   <option key={key} value={id}>{title}</option>

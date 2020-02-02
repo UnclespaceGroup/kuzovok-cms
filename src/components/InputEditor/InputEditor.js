@@ -13,18 +13,18 @@ import _ from 'lodash'
 
 const InputEditor = ({ input = {}, id, categoryName, typeName }) => {
   let editorRef = useRef(null)
-  const { accessString } = useUserStore()
+  const { accessString, logOut } = useUserStore()
 
   const onImageUpload = (fileList) => {
     _.forEach(fileList, file => {
       sendFile({file, id, categoryName, typeName, accessString, name: input.name})
         .then(res => {
-          console.log(res)
           if (editorRef.current) {
             editorRef.current.insertImage(BASE_URL_DEV + res.filePath, res.filePath)
           }
         })
         .catch(e => {
+          if (e.response.status === 401) logOut()
           console.log(e)
         })
     })

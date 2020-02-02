@@ -12,12 +12,12 @@ export const blocks = [
     title: 'Страницы',
     items: [
       {
-        title: 'Главная',
-        to: EDIT_MAIN_PAGE
-      },
-      {
         title: 'Слайдер на главной',
         to: PAGE_SLIDES
+      },
+      {
+        title: 'Главная',
+        to: EDIT_MAIN_PAGE
       },
       {
         title: 'Баннеры страниц',

@@ -4,8 +4,9 @@ import useAxiosInstance from 'hooks/useAxiosInstance'
 import { METHOD_REPORT, METHOD_WORK } from 'constants/url'
 import _ from 'lodash'
 import SectionReport from 'components/SectionReport/SectionReport'
-import { ADD_REPORT_PAGE } from 'constants/routes'
+import { ADD_REPORT_PAGE, ADD_WORK_PAGE } from 'constants/routes'
 import Banner from 'components/Banner/Banner'
+import Link from 'components/Link/Link'
 
 const ContainerEditReports = () => {
 
@@ -19,7 +20,12 @@ const ContainerEditReports = () => {
       <Banner title={parent.title}
               text={parent.annotation}
               banner={parent.banner}
+              path={ADD_WORK_PAGE}
       />
+      <Link to={{
+        pathname: ADD_REPORT_PAGE,
+        state: {parentTitle: parent.title, parentId}
+      }}>Добавить</Link>
       {
         _.map(data, (item, key) => (
           <SectionReport

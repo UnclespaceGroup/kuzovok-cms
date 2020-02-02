@@ -35,12 +35,11 @@ const InputFile = ({ input, isSingleImage, id, categoryName, typeName }) => {
       url: '/upload',
       data: bodyFormData
     }).then(res => {
-      console.log(res)
       if (res.status === 200) {
         input.onChange(res.data.filePath)
       }
     }).catch(e => {
-      logOut()
+      if (e.response.status === 401) logOut()
       console.log(e)
     })
   }

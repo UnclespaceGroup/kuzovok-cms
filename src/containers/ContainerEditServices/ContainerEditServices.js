@@ -11,10 +11,11 @@ const ContainerEditServices = () => {
     <div>
       <div className={'row-wrap-3'}>
         {
-          _.map(data, ({ title, banner, annotation, id }, key) => (
+          _.map(data, ({ title, banner, id, ...props }, key) => (
             <Card key={key}
+                  id={id}
+                  {...props}
                   title={title}
-                  text={annotation}
                   banner={banner}
                   onDelete={() => handleDeleteData(id)}
                   editLink={ADD_SERVICE_PAGE}
