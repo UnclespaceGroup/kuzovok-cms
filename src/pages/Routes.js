@@ -22,7 +22,7 @@ import {
 import AddPaperPage from 'pages/Paper/AddPaperPage'
 import AddReportPage from 'pages/Report/AddReportPage'
 import AddServicePage from 'pages/Services/AddServicePage'
-import ShowPaperPage from 'pages/Paper/ShowPaperPage'
+import Paper from 'pages/Paper/Paper'
 import EditPage from 'pages/EditPage/EditPage'
 import useUserStore from 'hooks/useUserStore'
 import PageLogin from 'pages/PageLogin/PageLogin'
@@ -46,6 +46,7 @@ const Routes = () => {
   const { initialization, user } = useUserStore()
   useEffect(() => {
     initialization()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (!user) return <PageLogin />
@@ -77,7 +78,7 @@ const Routes = () => {
             <Route component={Reports} exact path={REPORTS_PAGE + ':parentId'} />
             <Route component={Services} exact path={SERVICES_PAGE} />
             <Route component={Slides} exact path={PAGE_SLIDES} />
-            <Route component={ShowPaperPage} exact path={PAPERS_PAGE} />
+            <Route component={Paper} exact path={PAPERS_PAGE} />
 
             <Route component={EditPage} exact path={EDIT_PAGE + ':id'} />
             <Route component={PageLogin} exact path={PAGE_LOGIN} />

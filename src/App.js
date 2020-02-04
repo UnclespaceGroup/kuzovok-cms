@@ -9,7 +9,7 @@ import Header from './components/Header/Header'
 import configureStore from './store/configureStore'
 import { Provider } from 'react-redux'
 import { Container } from 'react-bootstrap'
-import PageLogin from 'pages/PageLogin/PageLogin'
+import MainPage from 'pages/MainPage/MainPage'
 
 const store = configureStore()
 
@@ -21,7 +21,8 @@ function App () {
           <Header />
           <Switch>
             <Route component={Routes} path={HOME_PAGE} />
-            <Route component={PageLogin} path={'*'} />
+
+            <Route exact component={MainPage} />
           </Switch>
         </BrowserRouter>
       </Container>

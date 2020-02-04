@@ -9,6 +9,8 @@ const LogoutForm = () => {
   return (
     <div className={css.container}>
       <div>{user.name}</div>
+      &nbsp;
+      <div>{user.lastName}</div>
       <FaUser />
       <Button variant="outline-success" onClick={() => { logOut() }}>Выход</Button>
     </div>

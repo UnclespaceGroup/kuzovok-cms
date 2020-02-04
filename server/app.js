@@ -23,14 +23,14 @@ app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, 'public')))
 
 require('./routes/auth/loginUser')(app);
-require('./routes/auth/registerUser')(app);
-require('./routes/auth/forgotPassword')(app);
-require('./routes/auth/resetPassword')(app);
-require('./routes/auth/updatePassword')(app);
-require('./routes/auth/updatePasswordViaEmail')(app);
+// require('./routes/auth/registerUser')(app);
+// require('./routes/auth/forgotPassword')(app);
+// require('./routes/auth/resetPassword')(app);
+// require('./routes/auth/updatePassword')(app);
+// require('./routes/auth/updatePasswordViaEmail')(app);
 require('./routes/auth/findUsers')(app);
-require('./routes/auth/deleteUser')(app);
-require('./routes/auth/updateUser')(app);
+// require('./routes/auth/deleteUser')(app);
+// require('./routes/auth/updateUser')(app);
 
 require('./routes/fileUpload')(app, passport, __dirname);
 
@@ -45,6 +45,7 @@ require('./routes/mainPageCards')(app, passport, __dirname)
 require('./routes/slide')(app, passport, __dirname)
 require('./routes/contact')(app, passport, __dirname)
 require('./routes/data')(app, passport, __dirname)
+require('./routes/paper')(app, passport, __dirname)
 
 // error handler
 app.use(function(err, req, res, next) {

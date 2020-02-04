@@ -4,7 +4,7 @@ import {
   ADD_WORK_PAGE,
   WORKS_PAGE,
   EDIT_MAIN_PAGE,
-  PAGE_BANNERS, PAGE_SLIDES, PAGE_CONTACTS, ADD_STATION_PHOTOS
+  PAGE_BANNERS, PAGE_SLIDES, PAGE_CONTACTS, ADD_STATION_PHOTOS, PAPERS_PAGE, ADD_PAPER_PAGE
 } from 'constants/routes'
 
 export const blocks = [
@@ -37,6 +37,20 @@ export const blocks = [
       {
         title: 'Посмотреть',
         to: WORKS_PAGE
+      }
+    ]
+  },
+  {
+    title: 'Статьи',
+    to: PAPERS_PAGE,
+    items: [
+      {
+        title: 'Добавить',
+        to: ADD_PAPER_PAGE
+      },
+      {
+        title: 'Посмотреть',
+        to: PAPERS_PAGE
       }
     ]
   },

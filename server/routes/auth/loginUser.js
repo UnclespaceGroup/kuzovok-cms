@@ -28,6 +28,8 @@ module.exports = app => {
             })
             res.status(200).send({
               auth: true,
+              email: user.email,
+              lastName: user.last_name,
               token,
               name: user.first_name,
               message: 'user found & logged in',

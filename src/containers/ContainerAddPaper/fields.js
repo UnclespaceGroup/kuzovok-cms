@@ -9,14 +9,24 @@ export const fields = [
     type: 'text',
     label: 'Заголовок',
     placeholder: 'Заголовок',
-    name: 'title',
-    text: 'Отображается в верхнем баннере, и на карточке в странице деталки'
+    name: 'title'
   },
   {
-    type: 'textarea',
+    type: 'text',
     label: 'Аннотация',
-    name: 'text',
     placeholder: 'Аннотация',
-    text: 'Отображается как текст на карточке, на деталке в верхнем баннере'
+    name: 'annotation'
+  },
+  {
+    type: 'text',
+    label: 'Автор',
+    placeholder: 'Автор',
+    name: 'actor'
+  },
+  {
+    type: 'editor',
+    label: 'Описание',
+    name: 'text',
+    typeName: 'contentImages'
   }
 ]

@@ -30,7 +30,7 @@ const useHandleAxios = ({
           setStatus(STATUS_SUCCESS)
         }
         setTimeout(() => {
-          backUrl ? history.push(backUrl) : history.goBack()
+          backUrl && history.push(backUrl)
           setStatus()
         }, 1000)
       })

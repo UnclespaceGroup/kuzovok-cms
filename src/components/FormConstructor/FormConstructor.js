@@ -4,6 +4,7 @@ import { Form } from 'react-bootstrap'
 import { Field } from 'react-final-form'
 import InputEditor from '../InputEditor/InputEditor'
 import InputFile from 'components/InputFile/InputFile'
+import Select from 'components/Select/Select'
 
 const FormConstructor = ({ scheme, ...props }) =>
   _.map(scheme,
@@ -53,15 +54,11 @@ const FormConstructor = ({ scheme, ...props }) =>
       if (type === 'select') {
         return <Form.Group key={key}>
           <label>{label}</label>
-          <Field name={name}>
-            {({ input }) => <Form.Control defaultValue={defaultValue} {...input} as="select">
-              {
-                options.map(({ id, title }, key) => (
-                  <option key={key} value={id}>{title}</option>
-                ))
-              }
-            </Form.Control>}
-          </Field>
+          <Field name={name}
+                 component={Select}
+                 placeholder={placeholder}
+                 options={options}
+          />
           <Form.Text className="text-muted">
             {text}
           </Form.Text>

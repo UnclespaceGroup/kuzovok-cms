@@ -26,15 +26,13 @@ export const fields = [
     type: 'select',
     label: 'Тип работы',
     name: FIELD_TYPE,
-    options: WORKS_TYPES,
-    defaultValue: WORKS_TYPES[0].id
+    options: WORKS_TYPES
   },
   {
     type: 'select',
     label: 'Статус',
     name: FIELD_STATUS,
-    options: STATUSES,
-    defaultValue: STATUSES[0]
+    options: STATUSES
   },
   {
     type: 'textarea',

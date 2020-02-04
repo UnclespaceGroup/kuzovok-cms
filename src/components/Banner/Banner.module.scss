@@ -22,7 +22,7 @@
 
 .edit {
   position: absolute;
-  top: 0.5rem;
+  top: 4rem;
   right: 0.5rem;
   border-radius: .4rem;
   display: block;
@@ -39,4 +39,9 @@
     width: 2rem;
     height: 2rem;
   }
+}
+
+.delete {
+  composes: edit;
+  top: 0.5rem;
 }

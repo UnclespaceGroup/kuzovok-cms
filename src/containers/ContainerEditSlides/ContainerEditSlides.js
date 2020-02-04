@@ -8,7 +8,7 @@ import CardAdd from 'components/CardAdd/Card'
 import Padding from 'components/Padding/Padding'
 
 const ContainerEditSlides = () => {
-  const { data } = useAxiosInstance({ url: METHOD_SLIDES })
+  const { data, handleDeleteData } = useAxiosInstance({ url: METHOD_SLIDES })
 
   return (
     <div>
@@ -16,8 +16,9 @@ const ContainerEditSlides = () => {
       <CardAdd to={ADD_SLIDE} big />
       <Padding value={40} />
       {
-        _.map(data, (item, key) => (
-          <Banner path={ADD_SLIDE} key={key} {...item} />
+        _.map(data, ({ ...item }, key) => (
+          <Banner onDelete={() => handleDeleteData(item.id)}
+            withoutId path={ADD_SLIDE} key={key} {...item} />
         ))
       }
     </div>
