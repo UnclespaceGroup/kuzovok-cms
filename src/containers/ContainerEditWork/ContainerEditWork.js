@@ -6,10 +6,11 @@ import { ADD_WORK_PAGE, REPORTS_PAGE } from 'constants/routes'
 import Card from 'components/Card/Card'
 import Padding from 'components/Padding/Padding'
 import CardAdd from 'components/CardAdd/Card'
+import moment from 'moment'
 
 const ContainerEditWork = () => {
   const { data, handleDeleteData } = useAxiosInstance({ url: METHOD_WORK })
-
+  const sortedData = _.sortBy(data, o => moment(o.date).format('YYYYMMDD')).reverse()
   return (
     <div>
       <h1>Машины в ремонте</h1>
@@ -17,7 +18,7 @@ const ContainerEditWork = () => {
       <div className={'row-wrap-3'}>
         <CardAdd to={ADD_WORK_PAGE} />
         {
-          _.map(data, ({text, ...item}, key) => (
+          _.map(sortedData, ({text, ...item}, key) => (
             <Card editLink={ADD_WORK_PAGE}
                   key={key} {...item}
                   text={item.annotation}

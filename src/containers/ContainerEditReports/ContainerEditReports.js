@@ -7,6 +7,7 @@ import SectionReport from 'components/SectionReport/SectionReport'
 import { ADD_REPORT_PAGE, ADD_WORK_PAGE } from 'constants/routes'
 import Banner from 'components/Banner/Banner'
 import CardAdd from 'components/CardAdd/Card'
+import moment from 'moment'
 
 const ContainerEditReports = () => {
 
@@ -14,6 +15,8 @@ const ContainerEditReports = () => {
 
   const { data = [], handleDeleteData } = useAxiosInstance({ url: METHOD_REPORT, where: { parentId } })
   const { data: parent = {} } = useAxiosInstance({ url: METHOD_WORK, where: { id: parentId }, single: true })
+
+  const sortedData = _.sortBy(data, o => moment(o.date).format('YYYYMMDD')).reverse()
 
   return (
     <div >
@@ -27,7 +30,7 @@ const ContainerEditReports = () => {
         state: {parentTitle: parent.title, parentId}
       }} />
       {
-        _.map(data, (item, key) => (
+        _.map(sortedData, (item, key) => (
           <SectionReport
             toEditLink={{
               pathname: ADD_REPORT_PAGE,
