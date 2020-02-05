@@ -8,7 +8,7 @@ import 'bootstrap/js/src/tooltip'
 import css from './InputEditor.module.scss'
 import { sendFile } from 'services/sendFile'
 import useUserStore from 'hooks/useUserStore'
-import { BASE_URL_DEV } from 'constants/url'
+import { BASE_URL } from 'constants/url'
 import _ from 'lodash'
 
 const InputEditor = ({ input = {}, id, categoryName, typeName }) => {
@@ -20,7 +20,7 @@ const InputEditor = ({ input = {}, id, categoryName, typeName }) => {
       sendFile({file, id, categoryName, typeName, accessString, name: input.name})
         .then(res => {
           if (editorRef.current) {
-            editorRef.current.insertImage(BASE_URL_DEV + res.filePath, res.filePath)
+            editorRef.current.insertImage(BASE_URL + res.filePath, res.filePath)
           }
         })
         .catch(e => {
@@ -33,10 +33,10 @@ const InputEditor = ({ input = {}, id, categoryName, typeName }) => {
   const pathTemplate = '__path__'
 
   const onChange = function (content) {
-    const _value = content.replace(new RegExp(BASE_URL_DEV, 'g'), pathTemplate)
+    const _value = content.replace(new RegExp(BASE_URL, 'g'), pathTemplate)
     input.onChange(_value)
   }
-  const formattedValue = input.value.replace(new RegExp(pathTemplate, 'g'), BASE_URL_DEV)
+  const formattedValue = input.value.replace(new RegExp(pathTemplate, 'g'), BASE_URL)
 
   return (
     <div className={css.container}>

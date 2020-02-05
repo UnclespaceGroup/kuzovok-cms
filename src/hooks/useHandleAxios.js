@@ -9,7 +9,8 @@ const STATUS_PENDING = 'STATUS_PENDING'
 
 const useHandleAxios = ({
   url,
-  backUrl
+  backUrl,
+  onBackClick
 }) => {
   const { accessString, logOut } = useUserStore()
   const [ status, setStatus ] = useState()
@@ -30,6 +31,7 @@ const useHandleAxios = ({
           setStatus(STATUS_SUCCESS)
         }
         setTimeout(() => {
+          onBackClick && onBackClick()
           backUrl && history.push(backUrl)
           setStatus()
         }, 1000)

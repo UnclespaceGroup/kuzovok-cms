@@ -12,13 +12,13 @@ import { useParams } from 'react-router'
 import { METHOD_PAGE_EDIT } from 'constants/url'
 import useHandleAxios from 'hooks/useHandleAxios'
 import useAxiosInstance from 'hooks/useAxiosInstance'
+import { PAGE_BANNERS } from 'constants/routes'
 
 const ContainerEditPage = () => {
   const { id: page } = useParams()
 
-  const { handleSendData, isPending, isSuccess, isError } = useHandleAxios({ url: METHOD_PAGE_EDIT + `update/${page}` })
-  const { data: prevData } = useAxiosInstance({ url: METHOD_PAGE_EDIT, where: { id: page }, single: true }, [page])
-  console.log(prevData)
+  const { handleSendData, isPending, isSuccess, isError } = useHandleAxios({ url: METHOD_PAGE_EDIT + `update/${page}`, backUrl: PAGE_BANNERS })
+  const { data: prevData } = useAxiosInstance({ url: METHOD_PAGE_EDIT, where: { id: page }, single: true })
 
   const imageParams = {
     id: page,

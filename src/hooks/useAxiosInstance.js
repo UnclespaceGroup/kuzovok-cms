@@ -13,7 +13,7 @@ const useAxiosInstance = ({
   single,
   limit,
   rangeData
-}, deps) => {
+}) => {
   const { accessString, logOut } = useUserStore()
   const [ status, setStatus ] = useState()
   const [ data, setData ] = useState()
@@ -24,7 +24,7 @@ const useAxiosInstance = ({
   useEffect(() => {
     loadData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location, deps])
+  }, [location])
 
   const loadData = () => {
     setStatus(STATUS_PENDING)
@@ -37,7 +37,7 @@ const useAxiosInstance = ({
         setStatus(STATUS_SUCCESS)
       })
       .catch(err => {
-        if (err.response.status === 401) {
+        if (err.response && (err.response.status === 401)) {
           logOut()
         }
         console.log(`error in ${url} response`, err)
