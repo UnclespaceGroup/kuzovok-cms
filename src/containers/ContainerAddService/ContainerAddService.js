@@ -12,6 +12,7 @@ import { generateId } from 'services/generateId'
 import { METHOD_SERVICE } from 'constants/url'
 import useHandleAxios from 'hooks/useHandleAxios'
 import { OK, FAIL } from 'constants/statuses'
+import { SERVICES_PAGE } from 'constants/routes'
 
 const ContainerAddService = () => {
   const location = useLocation()
@@ -21,7 +22,7 @@ const ContainerAddService = () => {
   const isUpdate = prevData.id
   const url = isUpdate ? `${METHOD_SERVICE}update/${id}` : METHOD_SERVICE + 'add'
 
-  const { handleSendData, isSuccess, isError, isPending } = useHandleAxios({ url })
+  const { handleSendData, isSuccess, isError, isPending } = useHandleAxios({ url, backUrl: SERVICES_PAGE })
 
   const imageParams = {
     id,

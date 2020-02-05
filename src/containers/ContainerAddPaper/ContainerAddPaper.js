@@ -12,6 +12,7 @@ import { fields } from './fields'
 import Padding from 'components/Padding/Padding'
 import SectionStatus from 'components/SectionStatus/SectionStatus'
 import useHandleAxios from 'hooks/useHandleAxios'
+import { PAPERS_PAGE } from 'constants/routes'
 
 const ContainerAddPaper = () => {
   const location = useLocation()
@@ -24,7 +25,7 @@ const ContainerAddPaper = () => {
 
   const url = isUpdate ? `${METHOD_PAPER}update/${id}` : METHOD_PAPER + 'add'
 
-  const { isError, isSuccess, isPending, handleSendData } = useHandleAxios({ url })
+  const { isError, isSuccess, isPending, handleSendData } = useHandleAxios({ url, backUrl: PAPERS_PAGE })
 
   const imageParams = {
     id,

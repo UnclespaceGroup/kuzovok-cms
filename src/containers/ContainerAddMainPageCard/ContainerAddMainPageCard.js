@@ -12,6 +12,7 @@ import { fields } from './fields'
 import Padding from 'components/Padding/Padding'
 import SectionStatus from 'components/SectionStatus/SectionStatus'
 import { FAIL, OK } from 'constants/statuses'
+import { EDIT_MAIN_PAGE } from 'constants/routes'
 
 const IMAGE_FOLDER = 'main-page-cards'
 
@@ -23,7 +24,7 @@ const ContainerAddMainPageCard = () => {
   const isUpdate = prevData.id
   const url = isUpdate ? `${METHOD_MAIN_PAGE_CARDS}update/${id}` : METHOD_MAIN_PAGE_CARDS + 'add'
 
-  const { handleSendData, isSuccess, isError, isPending } = useHandleAxios({ url })
+  const { handleSendData, isSuccess, isError, isPending } = useHandleAxios({ url, backUrl: EDIT_MAIN_PAGE })
 
   const imageParams = {
     id,

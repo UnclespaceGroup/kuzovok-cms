@@ -12,6 +12,7 @@ import SectionStatus from 'components/SectionStatus/SectionStatus'
 import { generateId } from 'services/generateId'
 import useHandleAxios from 'hooks/useHandleAxios'
 import { METHOD_SLIDES } from 'constants/url'
+import { PAGE_SLIDES } from 'constants/routes'
 
 const IMAGE_FOLDER = 'slides'
 
@@ -26,7 +27,7 @@ const ContainerAddSlide = () => {
 
   const url = isUpdate ? `${METHOD_SLIDES}update/${id}` : METHOD_SLIDES + 'add'
 
-  const { handleSendData, isError, isSuccess, isPending } = useHandleAxios({ url })
+  const { handleSendData, isError, isSuccess, isPending } = useHandleAxios({ url, backUrl: PAGE_SLIDES })
 
   const imageParams = {
     id,

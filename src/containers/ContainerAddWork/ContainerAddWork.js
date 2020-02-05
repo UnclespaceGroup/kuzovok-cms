@@ -12,6 +12,7 @@ import SectionStatus from 'components/SectionStatus/SectionStatus'
 import { generateId } from 'services/generateId'
 import useHandleAxios from 'hooks/useHandleAxios'
 import { METHOD_WORK } from 'constants/url'
+import { WORKS_PAGE } from 'constants/routes'
 
 const ContainerAddWork = () => {
   const location = useLocation()
@@ -24,7 +25,7 @@ const ContainerAddWork = () => {
 
   const url = isUpdate ? `${METHOD_WORK}update/${id}` : METHOD_WORK + 'add'
 
-  const { handleSendData, isError, isSuccess, isPending } = useHandleAxios({ url })
+  const { handleSendData, isError, isSuccess, isPending } = useHandleAxios({ url, backUrl: WORKS_PAGE })
 
   const imageParams = {
     id,

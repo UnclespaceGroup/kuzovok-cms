@@ -24,7 +24,7 @@ const useAxiosInstance = ({
   useEffect(() => {
     loadData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location].concat(deps))
+  }, [location, deps])
 
   const loadData = () => {
     setStatus(STATUS_PENDING)
