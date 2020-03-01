@@ -1,8 +1,5 @@
-const Sequelize = require('sequelize')
 const { Service } = require('../sequelize')
-const Op = Sequelize.Op
 const deleteImageFolder = require('../services/deleteImageFolder')
-
 
 const WORK_PATH = '/service/'
 
@@ -39,17 +36,9 @@ const works = function (app, passport, rootDirectory) {
 
   // GET DATA WITH POST PARAMS
   app.post(WORK_PATH, (req, res) => {
-    const { where, single } = req.body || {}
+    const { where, single, limit } = req.body || {}
 
-    console.log(req.body)
-
-    // const where = Array.isArray(params.rangeDate) ? {
-    //   createdAt: {
-    //     [Op.between]: params.rangeDate
-    //   }
-    // } : {}
-
-    Service.findAll({ where }).then(users => {
+    Service.findAll({ where, limit }).then(users => {
       if (single) res.send(users[0])
       else res.send(users)
     }).catch(err => {

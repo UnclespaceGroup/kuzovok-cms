@@ -37,10 +37,9 @@ const works = function (app, passport, rootDirectory) {
 
   // GET DATA WITH POST PARAMS
   app.post(WORK_PATH, (req, res) => {
-    const { where, single } = req.body || {}
+    const { where, single, limit } = req.body || {}
 
-    Work.findAll({ where }).then(users => {
-      console.log('use', users)
+    Work.findAll({ where, limit: limit && +limit }).then(users => {
       if (single) res.send(users[0])
       else res.send(users)
     }).catch(err => {
