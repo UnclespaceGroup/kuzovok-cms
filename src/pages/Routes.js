@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Row, Col } from 'react-bootstrap'
 import ContainerSideMenu from 'containers/ContainerSideMenu/ContainerSideMenu'
 import { Route, Switch } from 'react-router'
 import AddWorkPage from 'pages/Work/AddWorkPage'
@@ -51,12 +50,12 @@ const Routes = () => {
 
   if (!user) return <PageLogin />
   return (
-    <Row>
-      <Col xs={2}>
+    <div className={css.row}>
+      <div className={css.side}>
         <Padding value={24} />
         <ContainerSideMenu />
-      </Col>
-      <Col xs={9}>
+      </div>
+      <div className={css.content}>
         <Padding value={24} />
         <div className={css.content}>
           <Switch>
@@ -89,8 +88,8 @@ const Routes = () => {
           </Switch>
         </div>
         <Padding value={120} />
-      </Col>
-    </Row>
+      </div>
+    </div>
   )
 }
 export default Routes

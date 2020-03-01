@@ -39,13 +39,8 @@ const works = function (app, passport, rootDirectory) {
   app.post(WORK_PATH, (req, res) => {
     const { where, single } = req.body || {}
 
-    // const where = Array.isArray(params.rangeDate) ? {
-    //   createdAt: {
-    //     [Op.between]: params.rangeDate
-    //   }
-    // } : {}
-
     Work.findAll({ where }).then(users => {
+      console.log('use', users)
       if (single) res.send(users[0])
       else res.send(users)
     }).catch(err => {
@@ -98,7 +93,7 @@ const works = function (app, passport, rootDirectory) {
     }).then((result) => {
       res.send(result)
     }).catch(err => {
-      res.status(404).send(err)
+      res.status(500).send(err)
       console.log(err)
     })
   })

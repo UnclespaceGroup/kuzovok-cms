@@ -1,13 +1,11 @@
 import React from 'react'
-import cn from 'classnames'
 import css from './Wysiwyg.module.scss'
-import { BASE_URL } from 'constants/url'
-const pathTemplate = '__path__'
+import useWysiwyg from 'components/Wysiwyg/useWysiwyg'
 
-const Wysiwyg = ({ children, width, className }) => {
-  const text = typeof children === 'string' && children.replace(new RegExp(pathTemplate, 'g'), BASE_URL)
+const Wysiwyg = ({ children, width }) => {
+  const { text } = useWysiwyg({ children })
   return (
-    <div className={cn(css.container, className)} style={{ width }} dangerouslySetInnerHTML={{ __html: text }} />
+    <div className={css.container} style={{ width }} dangerouslySetInnerHTML={{ __html: text }} />
   )
 }
 

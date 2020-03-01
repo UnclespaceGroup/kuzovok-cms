@@ -19,9 +19,9 @@ const useHandleAxios = ({
 
   const axiosInstance = getAxiosInstance({ accessString })
 
-  const handleSendData = data => {
+  const handleSendData = currentData => {
     setStatus(STATUS_PENDING)
-    axiosInstance.post(url, data)
+    axiosInstance.post(url, currentData)
       .then(res => {
         if (res.status === 401) {
           logOut()

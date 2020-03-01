@@ -1,49 +1,42 @@
-import React, { useRef } from 'react'
-import { getAxiosInstance } from 'axiosFetch'
+import React, { useRef, useState } from 'react'
 import css from './InputFile.module.scss'
 import { BASE_URL } from 'constants/url'
 import cn from 'classnames'
+import loader from 'static/loader.svg'
 import { MdEdit } from 'react-icons/md'
 import useUserStore from 'hooks/useUserStore'
+import { sendFile } from 'services/sendFile'
 
 const InputFile = ({ input, isSingleImage, id, categoryName, typeName }) => {
-  const { accessString, logOut } = useUserStore()
-  if (!id || !categoryName || !typeName) {
-    console.error('where is fucking PARAMS')
-  }
+  const { accessString } = useUserStore()
+  const [pending, setPending] = useState()
   const inputRef = useRef(null)
+
   const send = () => {
-    if (!id || !categoryName || !typeName) return
-    const axiosInstanse = getAxiosInstance({ accessString })
-
-    var bodyFormData = new FormData()
+    setPending(true)
     const files = inputRef.current && inputRef.current.files
-
-    bodyFormData.append('categoryName', categoryName)
-    bodyFormData.append('id', id)
-    bodyFormData.append('typeName', input.name)
-
-    isSingleImage && bodyFormData.append('clearOld', 'true')
-
-    bodyFormData.append('filedata', files[0])
-    axiosInstanse({
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `JWT ${accessString}`
-      },
-      method: 'post',
-      url: '/upload',
-      data: bodyFormData
-    }).then(res => {
-      if (res.status === 200) {
-        input.onChange(res.data.filePath)
-      }
-    }).catch(e => {
-      if (e.response.status === 401) logOut()
-      console.log(e)
+    sendFile({
+      id, categoryName, typeName, accessString, isSingleImage, name: input.name, file: files[0]
+    }).then(data => {
+      setPending(false)
+      input.onChange(data.filePath)
+    }).catch(err => {
+      setPending(false)
+      console.log(err)
     })
   }
+
   const imgPath = input.value && `${BASE_URL}${input.value}`
+
+  if (pending) {
+    return (
+      <div className={css.loader}>
+        <img src={loader} alt={'loader'} />
+        <div>Загрузка</div>
+      </div>
+    )
+  }
+
   return imgPath ?
     <div className={css.container}>
       <div className={css.img} style={{ backgroundImage: `url("${imgPath}")` }} />

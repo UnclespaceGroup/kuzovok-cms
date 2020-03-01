@@ -8,7 +8,6 @@ import {
 import Header from './components/Header/Header'
 import configureStore from './store/configureStore'
 import { Provider } from 'react-redux'
-import { Container } from 'react-bootstrap'
 import MainPage from 'pages/MainPage/MainPage'
 
 const store = configureStore()
@@ -16,16 +15,14 @@ const store = configureStore()
 function App () {
   return (
     <Provider store={store}>
-      <Container fluid>
-        <BrowserRouter>
-          <Header />
-          <Switch>
-            <Route component={Routes} path={HOME_PAGE} />
 
+      <BrowserRouter>
+        <Header />
+          <Switch>
+            <Route path={HOME_PAGE} component={Routes} />
             <Route exact component={MainPage} />
           </Switch>
-        </BrowserRouter>
-      </Container>
+      </BrowserRouter>
     </Provider>
   )
 }

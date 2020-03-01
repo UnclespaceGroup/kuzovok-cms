@@ -14,9 +14,9 @@ const MainPage = () => {
       <h2>CMS сайта кузовОК</h2>
       <Padding value={64} />
       <div className={'row-wrap-3'}>
-        <CardLink to={WORKS_PAGE} >Работы</CardLink>
-        <CardLink to={SERVICES_PAGE} >Услуги</CardLink>
-        <CardLink >Статьи</CardLink>
+        <CardLink theme={'green'} to={WORKS_PAGE} >Работы</CardLink>
+        <CardLink theme={'red'} to={SERVICES_PAGE} >Услуги</CardLink>
+        <CardLink theme={'blue'} >Статьи</CardLink>
       </div>
       <Padding value={24} />
       <div className={'row-wrap-3'}>

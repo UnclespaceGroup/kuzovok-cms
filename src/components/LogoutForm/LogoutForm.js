@@ -8,11 +8,9 @@ const LogoutForm = () => {
   const { logOut, user } = useUserStore()
   return (
     <div className={css.container}>
-      <div>{user.name}</div>
-      &nbsp;
-      <div>{user.lastName}</div>
+      <div>{user.name} {user.lastName}</div>
       <FaUser />
-      <Button variant="outline-success" onClick={() => { logOut() }}>Выход</Button>
+      <Button variant="light" onClick={() => { logOut() }}>Выход</Button>
     </div>
   )
 }

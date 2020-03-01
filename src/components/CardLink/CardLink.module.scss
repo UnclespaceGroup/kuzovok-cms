@@ -1,6 +1,5 @@
 .container {
   width: 30%;
-  border: solid 1px darkgrey;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -10,9 +9,40 @@
   transition: all 200ms ease-in;
   padding: 2rem 0;
   font-size: 1.4rem;
+  border-radius: .4rem;
 
   &:hover {
+    color: inherit;
     background-color: #dadada;
   }
 }
 
+.green {
+  background-color: #00b600;
+  color: white;
+
+  &:hover {
+    color: white;
+    background-color: #00d000;
+  }
+}
+
+.red {
+  background-color: #BB6BD9;
+  color: white;
+
+  &:hover {
+    background-color: #c26ee1;
+    color: white;
+  }
+}
+
+.blue {
+  background-color: #2D9CDB;
+  color: white;
+
+  &:hover {
+    background-color: #2fa8eb;
+    color: white;
+  }
+}

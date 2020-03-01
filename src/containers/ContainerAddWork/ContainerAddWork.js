@@ -13,6 +13,7 @@ import { generateId } from 'services/generateId'
 import useHandleAxios from 'hooks/useHandleAxios'
 import { METHOD_WORK } from 'constants/url'
 import { WORKS_PAGE } from 'constants/routes'
+import useAxiosInstance from 'hooks/useAxiosInstance'
 
 const ContainerAddWork = () => {
   const location = useLocation()
@@ -26,6 +27,8 @@ const ContainerAddWork = () => {
   const url = isUpdate ? `${METHOD_WORK}update/${id}` : METHOD_WORK + 'add'
 
   const { handleSendData, isError, isSuccess, isPending } = useHandleAxios({ url, backUrl: WORKS_PAGE })
+  const { data } = useAxiosInstance({ url: METHOD_WORK, single: true, where: { id } })
+
 
   const imageParams = {
     id,
@@ -37,7 +40,7 @@ const ContainerAddWork = () => {
       form={FORM_ADD_WORK}
       mutators={arrayMutators}
       onSubmit={handleSendData}
-      initialValues={{...prevData, id}}
+      initialValues={{...data, id}}
       render={({ handleSubmit }) => (
         <Form onSubmit={handleSubmit}>
           <h2>Форма добавления работы</h2>

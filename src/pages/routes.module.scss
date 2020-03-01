@@ -1,4 +1,15 @@
 .content {
+  width: 55rem;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
   background-color: white;
-  padding: 2.4rem;
+  min-height: 100vh;
+}
+
+.side {
+  width: 20rem;
+  background-color: #282c34;
 }
