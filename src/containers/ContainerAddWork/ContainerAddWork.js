@@ -17,6 +17,7 @@ const ContainerAddWork = () => {
 
   return (
     <ContainerForm
+      title={'Редактирование машины в ремонте'}
       name={'works'}
       prevData={data}
       backUrl={WORKS_PAGE}

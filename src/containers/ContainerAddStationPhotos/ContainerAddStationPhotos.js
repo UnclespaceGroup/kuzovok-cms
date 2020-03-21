@@ -10,6 +10,7 @@ const ContainerAddStationPhotos = () => {
 
   return (
     <ContainerForm
+      title={'Фото станции'}
       name={id}
       sendMethod={METHOD_OTHER_DATA}
       fields={fields}

@@ -1,4 +1,3 @@
-const CheckAuthorize = require('../services/checkAuthorize')
 const multer  = require("multer")
 const deleteImageFolder = require("../services/deleteImageFolder")
 const fs = require('fs-extra')
@@ -37,7 +36,6 @@ const fileUpload = function (app, passport, rootDirectory) {
       const { categoryName = 'tmp', id = 'id', typeName = 'type', clearOld } = req.body
 
       const currentAbsoluteImagePath = createImageFolderPath({ categoryName, id, typeName })
-      console.log(currentAbsoluteImagePath)
 
       if (clearOld && fs.exists(currentAbsoluteImagePath)) {
         fs.readdir(currentAbsoluteImagePath, function(err, items) {
@@ -48,6 +46,8 @@ const fileUpload = function (app, passport, rootDirectory) {
           })
         })
       }
+
+
       mkdirpAsync(currentAbsoluteImagePath)
         .then(() => {
           cb(null, currentAbsoluteImagePath)
@@ -66,6 +66,7 @@ const fileUpload = function (app, passport, rootDirectory) {
     handler(req, res, next)
   })
 
+
   app.post("/upload", function (req, res, next) {
     const pass = passport.authenticate('jwt', { session: false })
     pass(req, res, next)
@@ -83,6 +84,8 @@ const fileUpload = function (app, passport, rootDirectory) {
       })
     }
   })
+
+
   app.post("/delete-image-folder", function (req, res, next) {
     const pass = passport.authenticate('jwt', { session: false })
     pass(req, res, next)

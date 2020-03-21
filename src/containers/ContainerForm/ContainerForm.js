@@ -16,7 +16,8 @@ const ContainerForm = (
     sendMethod,
     fields = [],
     backUrl,
-    onBackClick
+    onBackClick,
+    title
   }) => {
 
 
@@ -39,7 +40,7 @@ const ContainerForm = (
       initialValues={{ ...prevData, id }}
       render={({ handleSubmit }) => (
         <Form onSubmit={handleSubmit}>
-          <h2>Форма добавления преимущества главной</h2>
+          <h2>{title}</h2>
           <FormConstructor isSingleImage {...imageParams} scheme={fields}/>
           <Button disabled={isPending} type="submit">Отправить</Button>
           <Padding value={20}/>

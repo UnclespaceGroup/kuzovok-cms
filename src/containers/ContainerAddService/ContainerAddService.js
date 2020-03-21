@@ -11,6 +11,7 @@ const ContainerAddService = () => {
 
   return (
     <ContainerForm
+      title={'Добавление услуги'}
       name={'services'}
       backUrl={SERVICES_PAGE}
       prevData={prevData}

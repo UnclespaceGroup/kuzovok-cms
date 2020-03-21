@@ -11,6 +11,7 @@ const ContainerAddPaper = () => {
 
   return (
     <ContainerForm
+      title={'Добавление статьи'}
       prevData={prevData}
       fields={fields}
       name={'paper'}

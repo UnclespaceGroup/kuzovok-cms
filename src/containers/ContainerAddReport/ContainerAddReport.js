@@ -13,6 +13,7 @@ const ContainerAddReport = () => {
 
   return (
     <ContainerForm
+      title={'Отчет по работе'}
       name={'report'}
       sendMethod={METHOD_REPORT}
       fields={fields}

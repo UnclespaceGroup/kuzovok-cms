@@ -11,6 +11,7 @@ const ContainerAddAdvantagesMain = () => {
 
   return (
     <ContainerForm
+      title={'Добавление преимущества на главной'}
       name={'advantages'}
       backUrl={EDIT_MAIN_PAGE}
       prevData={prevData}

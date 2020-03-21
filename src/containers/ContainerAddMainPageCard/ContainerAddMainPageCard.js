@@ -12,6 +12,7 @@ const ContainerAddMainPageCard = () => {
 
   return (
     <ContainerForm
+      title={'Добавление карточки главной'}
       name={'mainPageCards'}
       sendMethod={METHOD_MAIN_PAGE_CARDS}
       fields={fields}

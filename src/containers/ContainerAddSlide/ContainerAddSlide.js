@@ -12,6 +12,7 @@ const ContainerAddSlide = () => {
 
   return (
     <ContainerForm
+      title={'Добавить слайд'}
       name={'slides'}
       fields={fields}
       prevData={prevData}
