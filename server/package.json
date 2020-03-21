@@ -16,7 +16,7 @@
     "babel-plugin-transform-regenerator": "^6.1.4",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.1.4",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",

@@ -22,6 +22,13 @@ app.use(passport.initialize());
 
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.set("view options", {layout: false});
+app.use(express.static(__dirname + '/client'))
+
+app.use('/admin', function(req, res) {
+  res.sendfile('client/index.html');
+});
+
 require('./routes/auth/loginUser')(app);
 // require('./routes/auth/registerUser')(app);
 // require('./routes/auth/forgotPassword')(app);
