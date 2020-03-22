@@ -14,6 +14,7 @@ const ContainerAddPaper = () => {
       title={'Добавление статьи'}
       prevData={prevData}
       fields={fields}
+      fileFolder={'paper'}
       name={'paper'}
       backUrl={PAPERS_PAGE}
       sendMethod={METHOD_PAPER}

@@ -20,6 +20,7 @@ const ContainerAddWork = () => {
       title={'Редактирование машины в ремонте'}
       name={'works'}
       prevData={data}
+      fileFolder={'works'}
       backUrl={WORKS_PAGE}
       fields={fields}
       sendMethod={METHOD_WORK}

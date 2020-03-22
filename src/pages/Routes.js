@@ -38,8 +38,8 @@ import ContainerEditReports from 'containers/ContainerEditReports/ContainerEditR
 import ContainerEditServices from 'containers/ContainerEditServices/ContainerEditServices'
 import ContainerEditSlides from 'containers/ContainerEditSlides/ContainerEditSlides'
 import ContainerEditPapers from 'containers/ContainerEditPapers/ContainerEditPapers'
-import ContainerEditPage from 'containers/ContainerEditPage/ContainerEditPage'
 import ContainerEditContacts from 'containers/ContainerEditContacts/ContainerEditContacts'
+import ContainerAddPage from 'containers/ContainerAddPage/ContainerAddPage'
 
 const Routes = () => {
   const { initialization, user } = useUserStore()
@@ -79,7 +79,7 @@ const Routes = () => {
             <Route component={ContainerEditSlides} exact path={PAGE_SLIDES} />
             <Route component={ContainerEditPapers} exact path={PAPERS_PAGE} />
 
-            <Route component={ContainerEditPage} exact path={EDIT_PAGE + ':id'} />
+            <Route component={ContainerAddPage} exact path={EDIT_PAGE + ':id'} />
             <Route component={PageLogin} exact path={PAGE_LOGIN} />
 
             <Route component={ContainerEditContacts} path={PAGE_CONTACTS} />

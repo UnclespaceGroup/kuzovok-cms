@@ -1,6 +1,6 @@
 import React from 'react'
 import useAxiosInstance from 'hooks/useAxiosInstance'
-import { METHOD_MAIN_PAGE_CARDS } from 'constants/url'
+import { METHOD_CARDS } from 'constants/url'
 import _ from 'lodash'
 import Card from 'components/Card/Card'
 import { ADD_MAIN_PAGE_CARD } from 'constants/routes'
@@ -8,7 +8,7 @@ import Padding from 'components/Padding/Padding'
 import CardAdd from 'components/CardAdd/Card'
 
 const ContainerEditMainPageCards = () => {
-  const { data: cards, handleDeleteData } = useAxiosInstance({ url: METHOD_MAIN_PAGE_CARDS })
+  const { data: cards, handleDeleteData } = useAxiosInstance({ url: METHOD_CARDS, where: { type: 'mainPageCard' } })
 
   return (
     <div>

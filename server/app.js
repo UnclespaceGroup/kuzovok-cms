@@ -6,7 +6,8 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const helmet = require('helmet')
 const path  = require("path");
-const { Test, Paper } = require('./sequelize')
+const { Test, Paper, Slide, Data, Card, Service, Work, Report, Contact } = require('./sequelize')
+const routeFactory = require('./routes/routeFactory')
 
 var app = express()
 
@@ -23,6 +24,12 @@ app.use(passport.initialize());
 
 app.use(express.static(path.join(__dirname, 'public')))
 
+const routeFactoryData = {
+  app,
+  passport,
+  rootDirectory: __dirname,
+}
+
 require('./routes/auth/loginUser')(app);
 // require('./routes/auth/registerUser')(app);
 // require('./routes/auth/forgotPassword')(app);
@@ -35,33 +42,71 @@ require('./routes/auth/findUsers')(app);
 
 require('./routes/fileUpload')(app, passport, __dirname);
 
-// ModelCRUD(app, '/paper/', Paper, passport, __dirname)
+routeFactory({
+  ...routeFactoryData,
+  routePath: '/contact/',
+  Model: Contact
+})
 
-require('./routes/works')(app, passport, __dirname)
-require('./routes/services')(app, passport, __dirname)
-require('./routes/report')(app, passport, __dirname)
-require('./routes/pages')(app, passport, __dirname)
-require('./routes/advantagesMain')(app, passport, __dirname)
-require('./routes/mainPageCards')(app, passport, __dirname)
-require('./routes/slide')(app, passport, __dirname)
-require('./routes/contact')(app, passport, __dirname)
-require('./routes/data')(app, passport, __dirname)
-// require('./routes/paper')(app, passport, __dirname)
+routeFactory({
+  ...routeFactoryData,
+  routePath: '/report/',
+  Model: Report,
+  parentFolder: 'works',
+  filesFolder: 'reports'
+})
 
-require('./routes/routeFactory')({
-  app,
-  workPath: '/paper/',
-  passport,
-  rootDirectory: __dirname,
+/** Работы */
+routeFactory({
+  ...routeFactoryData,
+  routePath: '/work/',
+  Model: Work,
+  filesFolder: 'works'
+})
+
+/** Услуги */
+routeFactory({
+  ...routeFactoryData,
+  routePath: '/service/',
+  Model: Service,
+  filesFolder: 'services'
+})
+
+/** Карточки*/
+routeFactory({
+  ...routeFactoryData,
+  routePath: '/cards/',
+  Model: Card,
+  filesFolder: 'card'
+})
+
+/** Данные */
+routeFactory({
+  ...routeFactoryData,
+  routePath: '/data/',
+  Model: Data,
+  filesFolder: 'data'
+})
+/** Слайды */
+routeFactory({
+  ...routeFactoryData,
+  routePath: '/slide/',
+  Model: Slide,
+  filesFolder: 'slide'
+})
+
+/** Статьи */
+routeFactory({
+  ...routeFactoryData,
+  routePath: '/paper/',
   Model: Paper,
   filesFolder: 'paper'
 })
 
-require('./routes/routeFactory')({
-  app,
-  workPath: '/test/',
-  passport,
-  rootDirectory: __dirname,
+/** Тестовый роут */
+routeFactory({
+  ...routeFactoryData,
+  routePath: '/test/',
   Model: Test,
   filesFolder: 'test'
 })

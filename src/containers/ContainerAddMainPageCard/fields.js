@@ -3,7 +3,7 @@ export const fields = [
     type: 'image',
     label: 'Изображение баннера',
     name: 'banner',
-    typeName: 'mainBanner'
+    typeName: 'banner'
   },
   {
     type: 'text',
@@ -13,8 +13,8 @@ export const fields = [
   },
   {
     type: 'textarea',
-    label: 'Тескс',
-    name: 'text',
+    label: 'Аннотация',
+    name: 'annotation',
     placeholder: 'Текст'
   },
   {

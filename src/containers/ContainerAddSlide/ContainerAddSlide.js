@@ -15,6 +15,7 @@ const ContainerAddSlide = () => {
       title={'Добавить слайд'}
       name={'slides'}
       fields={fields}
+      fileFolder={'slide'}
       prevData={prevData}
       backUrl={PAGE_SLIDES}
       sendMethod={METHOD_SLIDES}

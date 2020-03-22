@@ -1,9 +1,9 @@
-function getFilePath (file) {
-  return file.split('__SERVER_PATH__').pop()
-}
+// function getFilePath (file) {
+//   return file.split('__SERVER_PATH__').pop()
+// }
 
 function getFileName (file) {
-  return file.split('/').pop()
+  return file && file.split('/').pop()
 }
 
 function getFilePathOnly (file) {
@@ -14,7 +14,6 @@ function getFilePathOnly (file) {
 }
 
 module.exports = {
-  getFilePath,
   getFileName,
   getFilePathOnly
 }

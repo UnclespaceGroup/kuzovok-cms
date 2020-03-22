@@ -10,23 +10,20 @@ const getFilesFromText = (text = '') => {
 const routeFactory = function (
   {
     app,
-    filesFolder, /** /public/images/@filesFolder/id/ */
-    workPath,
+    filesFolder = '__test__', /** /public/images/@filesFolder/id/ */
+    routePath,
     passport,
     rootDirectory,
     Model,
-    ChildModel
+    ChildModel,
+    parentFolder
   } = {}
 ) {
-  if (!filesFolder) {
-    console.warn('Не передано filesFolder')
-    return
-  }
-  // GET SINGLE DATA
-  app.get(workPath, (req, res) => {
+
+  // GET ALL DATA
+  app.get(routePath, (req, res) => {
     Model.findAll()
       .then(result => {
-        if (!result) return
         res.send(result)
       }).catch(err => {
       res.status(404).send(err)
@@ -34,8 +31,8 @@ const routeFactory = function (
     })
   })
 
-  // GET DATA WITH POST PARAMS
-  app.post(workPath, (req, res) => {
+  // GET ALL DATA WITH POST PARAMS
+  app.post(routePath, (req, res) => {
     const {
       where,
       single,
@@ -52,7 +49,7 @@ const routeFactory = function (
   })
 
   // GET SINGLE DATA
-  app.get(workPath + ':id', (req, res) => {
+  app.get(routePath + ':id', (req, res) => {
     const id = req.params.id
     Model.findByPk(id)
       .then(result => {
@@ -65,7 +62,7 @@ const routeFactory = function (
   })
 
   // ADD NEW
-  app.post(workPath + 'add', (req, res, next) => {
+  app.post(routePath + 'add', (req, res, next) => {
     const pass = passport.authenticate('jwt', { session: false })
     pass(req, res, next)
     const data = req.body
@@ -80,42 +77,39 @@ const routeFactory = function (
   })
 
   // update
-  app.post(workPath + 'update/:id', async (req, res, next) => {
+  app.post(routePath + 'update/:id', async (req, res, next) => {
     const pass = passport.authenticate('jwt', { session: false })
     pass(req, res, next)
 
     const {
       banner,
       text,
+      parentId,
       ...otherData
     } = req.body
     const id = req.params.id
 
-    const deletingBannerData = {
+    await deleteExcessImages({
+      rootDirectory,
       path: `${getFilePathOnly(banner)}/banner`,
       items: [ getFileName(banner) ]
-    }
-
-    await deleteExcessImages({
-      rootDirectory,
-      ...deletingBannerData
     })
 
-    const textFiles = getFilesFromText(text)
+    const editorFiles = text && getFilesFromText(text)
 
-    await deleteExcessImages({
+    const parentDirectory = parentFolder ? `${parentFolder}/${parentId}/` : ''
+
+    text && await deleteExcessImages({
       rootDirectory,
-      path: `images/${filesFolder}/${id}/editor`,
-      items: _.map(textFiles, item => item && item.split('/').pop())
+      path: `images/${parentDirectory}${filesFolder}/${id}/editor`,
+      items: _.map(editorFiles, item => item && item.split('/').pop())
     })
 
-    const newData = {
+    Model.update({
       banner,
       text,
       ...otherData
-    }
-
-    Model.update(newData, {
+    }, {
       where: {
         id
       }
@@ -128,7 +122,7 @@ const routeFactory = function (
   })
 
   // DELETE
-  app.delete(workPath + ':id', async (req, res, next) => {
+  app.delete(routePath + ':id', async (req, res, next) => {
     const pass = passport.authenticate('jwt', { session: false })
     pass(req, res, next)
 
@@ -140,7 +134,6 @@ const routeFactory = function (
       if (ChildModel) await ChildModel.destroy({ where: { parentId: id } })
       // Удаляем папку с картинками
       await deleteImageFolder(`images/${filesFolder}/${id}`, rootDirectory)
-
       res.status(200).send({ text: 'Успешно удалено' })
     } catch (err) {
       res.status(500).send({ text: 'Что то пошло не так', err })

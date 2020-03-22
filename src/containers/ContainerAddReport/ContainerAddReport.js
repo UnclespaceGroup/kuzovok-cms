@@ -15,6 +15,7 @@ const ContainerAddReport = () => {
     <ContainerForm
       title={'Отчет по работе'}
       name={'report'}
+      fileFolder={`works/${prevData.parentId}/reports`}
       sendMethod={METHOD_REPORT}
       fields={fields}
       prevData={prevData}

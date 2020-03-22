@@ -7,9 +7,8 @@ const DATA_DB = 'data'
 const PAGE_DB = 'page'
 const PAPER_DB = 'paper'
 const SLIDE_DB = 'slide'
-const ADVANTAGES_CARDS_DB = 'advantages'
-const MAIN_PAGE_CARDS_DB = 'mainPageCards'
+const CARD_DB = 'card'
 
 module.exports = {
-  WORK_DB, REPORT_DB, CONTACTS_DB, SLIDE_DB, SERVICE_DB, PAPER_DB, DATA_DB, PAGE_DB, ADVANTAGES_CARDS_DB, MAIN_PAGE_CARDS_DB, TEST_DB
+  WORK_DB, REPORT_DB, CONTACTS_DB, SLIDE_DB, SERVICE_DB, PAPER_DB, DATA_DB, PAGE_DB, CARD_DB, TEST_DB
 }

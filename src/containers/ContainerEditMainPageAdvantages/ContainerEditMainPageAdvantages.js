@@ -1,6 +1,6 @@
 import React from 'react'
 import useAxiosInstance from 'hooks/useAxiosInstance'
-import { METHOD_ADVANTAGES_MAIN } from 'constants/url'
+import { METHOD_CARDS } from 'constants/url'
 import _ from 'lodash'
 import Card from 'components/Card/Card'
 import { ADD_ADVANTAGES_MAIN } from 'constants/routes'
@@ -8,7 +8,7 @@ import Padding from 'components/Padding/Padding'
 import CardAdd from 'components/CardAdd/Card'
 
 const ContainerEditMainPageAdvantages = () => {
-  const { data: cards, handleDeleteData } = useAxiosInstance({ url: METHOD_ADVANTAGES_MAIN })
+  const { data: cards, handleDeleteData } = useAxiosInstance({ url: METHOD_CARDS, where: { type: 'advantagesCard' } })
 
   return (
     <div>

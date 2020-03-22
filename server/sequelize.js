@@ -4,13 +4,11 @@ const WorkModel = require('./models/work')
 const ReportModel = require('./models/report')
 const PaperModel = require('./models/paper')
 const ServiceModel = require('./models/service')
-const PageModel = require('./models/page')
-const AdvantagesMainModel = require('./models/advantagesMain')
-const mainPageCardsModel = require('./models/mainPageCards')
 const SlideModel = require('./models/slide')
 const ContactModel = require('./models/contact')
 const DataModel = require('./models/data')
 const TestModel = require('./models/test')
+const CardModel = require('./models/cards')
 
 const connectionConfig = require('./constants/index')
 
@@ -24,9 +22,7 @@ const Work = WorkModel(sequelize, Sequelize);
 const Report = ReportModel(sequelize, Sequelize);
 const Paper = PaperModel(sequelize, Sequelize);
 const Service = ServiceModel(sequelize, Sequelize);
-const Page = PageModel(sequelize, Sequelize);
-const AdvantagesMain = AdvantagesMainModel(sequelize, Sequelize)
-const MainPageCards = mainPageCardsModel(sequelize, Sequelize)
+const Card = CardModel(sequelize, Sequelize)
 const Slide = SlideModel(sequelize, Sequelize)
 const Contact = ContactModel(sequelize, Sequelize)
 const Data = DataModel(sequelize, Sequelize)
@@ -42,9 +38,7 @@ module.exports = {
   Report,
   Paper,
   Service,
-  Page,
-  AdvantagesMain,
-  MainPageCards,
+  Card,
   Slide,
   Contact,
   Data,

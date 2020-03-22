@@ -15,6 +15,7 @@ const ContainerAddService = () => {
       name={'services'}
       backUrl={SERVICES_PAGE}
       prevData={prevData}
+      fileFolder={'services'}
       fields={fields}
       sendMethod={METHOD_SERVICE}
     />

@@ -17,7 +17,8 @@ const ContainerForm = (
     fields = [],
     backUrl,
     onBackClick,
-    title
+    title,
+    fileFolder
   }) => {
 
   const id = prevData.id || generateId(name)
@@ -37,7 +38,7 @@ const ContainerForm = (
           <h2>{title}</h2>
           <FormConstructor
             id={id}
-            fileFolder={`paper`}
+            fileFolder={fileFolder}
             scheme={fields}/>
           <Button disabled={isPending} type="submit">Отправить</Button>
           <Padding value={20}/>

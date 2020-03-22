@@ -3,7 +3,7 @@ export const fields = [
     type: 'image',
     label: 'Изображение баннера',
     name: 'banner',
-    typeName: 'mainBanner'
+    typeName: 'banner'
   },
   {
     type: 'text',
