@@ -4,6 +4,7 @@ import { BASE_URL } from 'constants/url'
 import { Link } from 'react-router-dom'
 import { MdEdit, MdDelete } from 'react-icons/md'
 import { FaArrowRight } from 'react-icons/fa'
+import { getImageUrl } from 'services/getImageUrl'
 
 const Card = ({ editLink, onDelete, to, ...props }) => {
   const { banner, title, annotation } = props
@@ -11,7 +12,7 @@ const Card = ({ editLink, onDelete, to, ...props }) => {
   return (
     <div className={css.container}>
       <WrapperComponent  to={to}>
-        <div className={css.img} style={{ backgroundImage: `url(${BASE_URL + banner})` }} />
+        <div className={css.img} style={{ backgroundImage: `url(${getImageUrl(banner)})` }} />
         <div className={css.title}>{title}</div>
         <div className={css.text}>{annotation}</div>
 

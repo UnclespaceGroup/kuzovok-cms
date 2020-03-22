@@ -20,17 +20,11 @@ const ContainerForm = (
     title
   }) => {
 
-
   const id = prevData.id || generateId(name)
   const isUpdate = prevData && prevData.id
   const url = isUpdate ? `${sendMethod}update/${id}` : sendMethod + 'add'
-
+  console.log(id)
   const { handleSendData, isSuccess, isError, isPending } = useHandleAxios({ url, backUrl, onBackClick })
-
-  const imageParams = {
-    id,
-    categoryName: name
-  }
 
   return (
     <FinalForm
@@ -41,7 +35,10 @@ const ContainerForm = (
       render={({ handleSubmit }) => (
         <Form onSubmit={handleSubmit}>
           <h2>{title}</h2>
-          <FormConstructor isSingleImage {...imageParams} scheme={fields}/>
+          <FormConstructor
+            id={id}
+            fileFolder={`paper`}
+            scheme={fields}/>
           <Button disabled={isPending} type="submit">Отправить</Button>
           <Padding value={20}/>
           <SectionStatus status={isError ? FAIL : isSuccess ? OK : null}/>

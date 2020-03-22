@@ -6,8 +6,9 @@ import loader from 'static/loader.svg'
 import { MdEdit } from 'react-icons/md'
 import useUserStore from 'hooks/useUserStore'
 import { sendFile } from 'services/sendFile'
+import { getImageUrl } from 'services/getImageUrl'
 
-const InputFile = ({ input, isSingleImage, id, categoryName, typeName }) => {
+const InputFile = ({ input, fileFolder = 'test', typeName = 'test', id = 'test' }) => {
   const { accessString } = useUserStore()
   const [pending, setPending] = useState()
   const inputRef = useRef(null)
@@ -16,7 +17,9 @@ const InputFile = ({ input, isSingleImage, id, categoryName, typeName }) => {
     setPending(true)
     const files = inputRef.current && inputRef.current.files
     sendFile({
-      id, categoryName, typeName, accessString, isSingleImage, name: input.name, file: files[0]
+      accessString,
+      file: files[0],
+      filePath: [ fileFolder, id, typeName ].join('/')
     }).then(data => {
       setPending(false)
       input.onChange(data.filePath)
@@ -26,7 +29,7 @@ const InputFile = ({ input, isSingleImage, id, categoryName, typeName }) => {
     })
   }
 
-  const imgPath = input.value && `${BASE_URL}${input.value}`
+  const imgPath = input.value && getImageUrl(input.value)
 
   if (pending) {
     return (

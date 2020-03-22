@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build-server": "webpack --mode development",
-    "start": "node bin/www.js"
+    "start-server": "node bin/www.js"
   },
   "dependencies": {
     "@babel/core": "^7.5.5",

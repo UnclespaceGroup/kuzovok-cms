@@ -1,8 +1,8 @@
 import { getAxiosInstance } from 'axiosFetch'
 
-export const sendFile = async ({ id, categoryName, typeName, accessString, file, isSingleImage, name }) => {
+export const sendFile = async ({ filePath, accessString, file }) => {
 
-  if (!id || !categoryName || !typeName) {
+  if (!filePath) {
     console.log('params?????')
     return
   }
@@ -11,11 +11,7 @@ export const sendFile = async ({ id, categoryName, typeName, accessString, file,
 
     let bodyFormData = new FormData()
 
-    bodyFormData.append('categoryName', categoryName)
-    bodyFormData.append('id', id)
-    bodyFormData.append('typeName', name)
-
-    isSingleImage && bodyFormData.append('clearOld', 'true')
+    bodyFormData.append('path', filePath)
 
     bodyFormData.append('filedata', file)
     const { data } = await axiosInstanse({

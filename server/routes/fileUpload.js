@@ -4,26 +4,17 @@ const fs = require('fs-extra')
 const _ = require('lodash')
 const mkdirpAsync = require('async-mkdirp')
 
-/**
- * Файловая структура картинок
- * - public/images
- *      - {categoryName}
- *          - {id}
- *              {typeName}
- *
- * Папки, в которых должно быть гарантировано 1 картинка, заливаются с флагом clearOld */
-
 const fileUpload = function (app, passport, rootDirectory) {
   const imagesAbsoluteDirectory = `${rootDirectory}/public/images`
 
-  const createImageFolderPath = function ({ categoryName, id, typeName }) {
-    return `${imagesAbsoluteDirectory}/${categoryName}/${id}/${typeName}`
+  const createImageFolderPath = function (path) {
+    return `${imagesAbsoluteDirectory}/${path}`
   }
 
   const fileFilter = (req, file, cb) => {
-    const { categoryName, id, typeName } = req.body
-    if(!categoryName || !id || !typeName){
-      console.log(`Нет полей categoryName, id, typeName`)
+    const { path } = req.body
+    if(!path){
+      console.log(`Нет поля path`)
       cb(null, false);
     }
     else{
@@ -33,15 +24,13 @@ const fileUpload = function (app, passport, rootDirectory) {
 
   const storageConfig = multer.diskStorage({
     destination: (req, file, cb) => {
-      const { categoryName = 'tmp', id = 'id', typeName = 'type', clearOld } = req.body
+      const { path, clearOld } = req.body
 
-      const currentAbsoluteImagePath = createImageFolderPath({ categoryName, id, typeName })
+      const currentAbsoluteImagePath = createImageFolderPath(path)
 
       if (clearOld && fs.exists(currentAbsoluteImagePath)) {
         fs.readdir(currentAbsoluteImagePath, function(err, items) {
-          console.log(items)
           items && _.size(items) && _.forEach(items, item => {
-            console.log(item)
             fs.unlink(`${currentAbsoluteImagePath}/${item}`)
           })
         })
@@ -68,16 +57,17 @@ const fileUpload = function (app, passport, rootDirectory) {
 
 
   app.post("/upload", function (req, res, next) {
-    const pass = passport.authenticate('jwt', { session: false })
-    pass(req, res, next)
+    // const pass = passport.authenticate('jwt', { session: false })
+    // pass(req, res, next)
 
     let fileData = req.file
-    const { categoryName, id, typeName } = req.body
+    const { path } = req.body
 
-    if(!fileData || !categoryName || !id || !typeName)
+    if(!fileData || !path)
       res.status(500).send({ message: 'Ошибка при загрузке файла, или нет полей categoryName, id, typeName' })
     else {
-      const filePath = `images/${categoryName}/${id}/${typeName}/${fileData.originalname}`
+      const _path = '__SERVER_PATH__/images/' + path.split('/').filter(Boolean).join('/')
+      const filePath = `${_path}/${fileData.originalname}`
       res.send({
         message: 'Успешно загружено',
         filePath
@@ -90,8 +80,8 @@ const fileUpload = function (app, passport, rootDirectory) {
     const pass = passport.authenticate('jwt', { session: false })
     pass(req, res, next)
 
-    const { categoryName, id } = req.body
-    const folder = `${categoryName}/${id}`
+    const { path } = req.body
+    const folder = `${path}`
     deleteImageFolder(folder, rootDirectory)
       .then(() => {
         res.send(`Успешно удалено ${folder}`)

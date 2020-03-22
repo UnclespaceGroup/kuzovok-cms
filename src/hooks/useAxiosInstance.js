@@ -48,9 +48,9 @@ const useAxiosInstance = ({
 
   const handleDeleteData = id => {
     const a = window.confirm('Точно удалить')
-    console.log(a)
     if (!a) return
     setStatus(STATUS_PENDING)
+    console.log(id)
     axiosInstance.delete(url + id)
       .then(res => {
         if (res.status === 401) {

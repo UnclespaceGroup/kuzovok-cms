@@ -9,45 +9,48 @@ import 'bootstrap/js/src/tooltip'
 import css from './InputEditor.module.scss'
 import { sendFile } from 'services/sendFile'
 import useUserStore from 'hooks/useUserStore'
-import { BASE_URL } from 'constants/url'
+import { BASE_URL, SERVER_HASH } from 'constants/url'
 import _ from 'lodash'
 import loader from 'static/loader.svg'
+import { getImageUrl } from 'services/getImageUrl'
 
-const InputEditor = ({ input = {}, id, categoryName, typeName }) => {
+const InputEditor = ({ input = {}, fileFolder = 'test', typeName = 'test', id = 'test' }) => {
   let editorRef = useRef(null)
   const [ pending, setPending ] = useState()
 
   const { accessString, logOut } = useUserStore()
 
   const onImageUpload = (fileList) => {
-    console.log('upload')
     setPending(true)
     _.forEach(fileList, file => {
-      sendFile({file, id, categoryName, typeName, accessString, name: input.name})
+      sendFile({
+        file,
+        accessString,
+        filePath: [fileFolder, id, typeName].join('/')
+      })
         .then(res => {
           setPending(false)
           if (editorRef.current) {
-            editorRef.current.insertImage(BASE_URL + res.filePath, res.filePath)
+            editorRef.current.insertImage(getImageUrl(res.filePath), res.filePath)
           }
         })
         .catch(e => {
           setPending(false)
-          if (e.response.status === 401) logOut()
+          if (e.response && e.response.status === 401) logOut()
           console.log(e)
         })
     })
   }
 
-  const pathTemplate = '__path__'
-
   console.log(editorRef.current)
 
   const onChange = function (content) {
-    const _value = content.replace(new RegExp(BASE_URL, 'g'), pathTemplate)
+    const _value = content.replace(new RegExp(BASE_URL, 'g'), SERVER_HASH)
     input.onChange(_value)
   }
-  const formattedValue = input.value.replace(new RegExp(pathTemplate, 'g'), BASE_URL)
 
+  const formattedValue = input.value.replace(new RegExp(SERVER_HASH, 'g'), BASE_URL)
+  console.log(formattedValue)
   return (
     <div className={cn(css.container, {[css.pending]: pending})}>
       {

@@ -1,4 +1,5 @@
 const WORK_DB = 'work'
+const TEST_DB = 'test'
 const REPORT_DB = 'report'
 const CONTACTS_DB = 'contacts'
 const SERVICE_DB = 'service'
@@ -10,5 +11,5 @@ const ADVANTAGES_CARDS_DB = 'advantages'
 const MAIN_PAGE_CARDS_DB = 'mainPageCards'
 
 module.exports = {
-  WORK_DB, REPORT_DB, CONTACTS_DB, SLIDE_DB, SERVICE_DB, PAPER_DB, DATA_DB, PAGE_DB, ADVANTAGES_CARDS_DB, MAIN_PAGE_CARDS_DB
+  WORK_DB, REPORT_DB, CONTACTS_DB, SLIDE_DB, SERVICE_DB, PAPER_DB, DATA_DB, PAGE_DB, ADVANTAGES_CARDS_DB, MAIN_PAGE_CARDS_DB, TEST_DB
 }

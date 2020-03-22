@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const passport = require('passport')
 const helmet = require('helmet')
 const path  = require("path");
+const { Test, Paper } = require('./sequelize')
 
 var app = express()
 
@@ -45,7 +46,25 @@ require('./routes/mainPageCards')(app, passport, __dirname)
 require('./routes/slide')(app, passport, __dirname)
 require('./routes/contact')(app, passport, __dirname)
 require('./routes/data')(app, passport, __dirname)
-require('./routes/paper')(app, passport, __dirname)
+// require('./routes/paper')(app, passport, __dirname)
+
+require('./routes/routeFactory')({
+  app,
+  workPath: '/paper/',
+  passport,
+  rootDirectory: __dirname,
+  Model: Paper,
+  filesFolder: 'paper'
+})
+
+require('./routes/routeFactory')({
+  app,
+  workPath: '/test/',
+  passport,
+  rootDirectory: __dirname,
+  Model: Test,
+  filesFolder: 'test'
+})
 
 // error handler
 app.use(function(err, req, res, next) {

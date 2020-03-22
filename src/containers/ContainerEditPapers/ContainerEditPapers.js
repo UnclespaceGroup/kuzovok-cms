@@ -16,7 +16,7 @@ const ContainerEditPapers = () => {
       <div className={'row-wrap-3'}>
         <CardAdd text={'Добавить'} to={ADD_PAPER_PAGE} />
         {
-          _.map(sortedData, (item, key) => (
+          _.map(sortedData, (item, key) => console.log(item) || (
             <Card {...item} key={key}
                   onDelete={() => handleDeleteData(item.id)}
                   editLink={ADD_PAPER_PAGE}

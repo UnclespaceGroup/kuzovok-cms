@@ -2,9 +2,8 @@ const { PAPER_DB } = require('../constants/db')
 
 module.exports = (sequelize, type) => sequelize.define(PAPER_DB, {
   id: {
-    type: type.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+    type: type.STRING,
+    primaryKey: true
   },
   title: type.STRING,
   annotation: type.STRING,
