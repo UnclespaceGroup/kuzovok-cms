@@ -1,6 +1,8 @@
-const {getFileName, getFilePathOnly} = require('../services/files')
+const { getFileName, getFilePathOnly } = require('../services/files')
 const _ = require('lodash')
+const Sequelize = require('sequelize')
 const deleteExcessImages = require('../services/deleteExcessImages')
+const Op = Sequelize.Op
 
 const getFilesFromText = (text = '') => {
   return text.match(/__SERVER_PATH__.*?\..../ig)
@@ -22,7 +24,7 @@ const routeFactory = function (
 
   // GET ALL DATA
   app.get(routePath, (req, res) => {
-    Model.findAll()
+    Model.findAll({ order: [['createdAt', 'DESC']] })
       .then(result => {
         res.send(result)
       }).catch(err => {
@@ -36,10 +38,26 @@ const routeFactory = function (
     const {
       where,
       single,
-      limit
+      limit,
+      offset,
+      between
     } = req.body || {}
 
-    Model.findAll({ where, limit: limit && +limit }).then(users => {
+    const whereCreatedAt = between ? {
+      createdAt: {
+        [Op.between]: between
+      }
+    } : {}
+
+    Model.findAll({
+      where: {
+        ...where,
+        ...whereCreatedAt
+      },
+      offset: offset && +offset,
+      limit: limit && +limit,
+      order: [['createdAt', 'DESC']]
+    }).then(users => {
       if (single) res.send(users[0])
       else res.send(users)
     }).catch(err => {
@@ -92,7 +110,7 @@ const routeFactory = function (
     await deleteExcessImages({
       rootDirectory,
       path: `${getFilePathOnly(banner)}/banner`,
-      items: [ getFileName(banner) ]
+      items: [getFileName(banner)]
     })
 
     const editorFiles = text && getFilesFromText(text)
