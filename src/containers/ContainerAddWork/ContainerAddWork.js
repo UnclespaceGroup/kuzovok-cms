@@ -13,7 +13,9 @@ const ContainerAddWork = () => {
 
   const id = prevData.id
 
-  const { data } = useAxiosInstance({ url: METHOD_WORK, single: true, where: { id } })
+  console.log('najndjfnjd', id)
+
+  const { data } = useAxiosInstance({ url: id ? METHOD_WORK : undefined, single: true, where: { id } })
 
   return (
     <ContainerForm

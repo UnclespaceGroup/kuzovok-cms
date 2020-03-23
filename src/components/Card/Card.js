@@ -1,6 +1,5 @@
 import React from 'react'
 import css from './Card.module.scss'
-import { BASE_URL } from 'constants/url'
 import { Link } from 'react-router-dom'
 import { MdEdit, MdDelete } from 'react-icons/md'
 import { FaArrowRight } from 'react-icons/fa'

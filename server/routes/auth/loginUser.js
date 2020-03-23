@@ -4,7 +4,7 @@ const jwtSecret = require('../../config/jwtConfig')
 const { User } = require('../../sequelize')
 
 module.exports = app => {
-  app.post('/login', (req, res, next) => {
+  app.post('/api/login', (req, res, next) => {
     passport.authenticate('login', (err, users, info) => {
       if (err) {
         console.error(`error ${err}`);

@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import css from './InputFile.module.scss'
-import { BASE_URL } from 'constants/url'
 import cn from 'classnames'
 import loader from 'static/loader.svg'
 import { MdEdit } from 'react-icons/md'

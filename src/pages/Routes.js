@@ -47,6 +47,7 @@ const Routes = () => {
     initialization()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  console.log(window.location.host)
 
   if (!user) return <PageLogin />
   return (

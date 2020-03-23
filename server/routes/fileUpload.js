@@ -56,7 +56,7 @@ const fileUpload = function (app, passport, rootDirectory) {
   })
 
 
-  app.post("/upload", function (req, res, next) {
+  app.post("/api/upload", function (req, res, next) {
     // const pass = passport.authenticate('jwt', { session: false })
     // pass(req, res, next)
 
@@ -76,7 +76,7 @@ const fileUpload = function (app, passport, rootDirectory) {
   })
 
 
-  app.post("/delete-image-folder", function (req, res, next) {
+  app.post("/api/delete-image-folder", function (req, res, next) {
     const pass = passport.authenticate('jwt', { session: false })
     pass(req, res, next)
 

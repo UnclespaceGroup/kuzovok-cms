@@ -6,7 +6,7 @@ import ContainerForm from 'containers/ContainerForm/ContainerForm'
 
 const ContainerAddStationPhotos = () => {
   const id = 'stationPhotos'
-  const { data } = useAxiosInstance({ url: METHOD_OTHER_DATA, where: { id }, single: true })
+  const { data } = useAxiosInstance({ url: id ? METHOD_OTHER_DATA : undefined, where: { id }, single: true })
 
   return (
     <ContainerForm

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { BASE_URL } from 'constants/url'
 
-axios.defaults.baseURL = BASE_URL
+axios.defaults.baseURL = BASE_URL + 'api'
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 

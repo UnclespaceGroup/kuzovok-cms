@@ -1,4 +1,4 @@
-export const BASE_URL_PROD = 'https://server.mdf-center.ru/'
+export const BASE_URL_PROD = 'http://cms.kuzovok11.ru/'
 export const BASE_URL_DEV = 'http://localhost:3002/'
 export const BASE_URL = process.env.REACT_APP_DEV === 'true' ? BASE_URL_DEV : BASE_URL_PROD
 

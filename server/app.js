@@ -22,8 +22,6 @@ app.use(helmet());
 
 app.use(passport.initialize());
 
-app.use(express.static(path.join(__dirname, 'public')))
-
 const routeFactoryData = {
   app,
   passport,
@@ -44,13 +42,13 @@ require('./routes/fileUpload')(app, passport, __dirname);
 
 routeFactory({
   ...routeFactoryData,
-  routePath: '/contact/',
+  routePath: '/api/contact/',
   Model: Contact
 })
 
 routeFactory({
   ...routeFactoryData,
-  routePath: '/report/',
+  routePath: '/api/report/',
   Model: Report,
   parentFolder: 'works',
   filesFolder: 'reports'
@@ -59,7 +57,7 @@ routeFactory({
 /** Работы */
 routeFactory({
   ...routeFactoryData,
-  routePath: '/work/',
+  routePath: '/api/work/',
   Model: Work,
   filesFolder: 'works'
 })
@@ -67,7 +65,7 @@ routeFactory({
 /** Услуги */
 routeFactory({
   ...routeFactoryData,
-  routePath: '/service/',
+  routePath: '/api/service/',
   Model: Service,
   filesFolder: 'services'
 })
@@ -75,7 +73,7 @@ routeFactory({
 /** Карточки*/
 routeFactory({
   ...routeFactoryData,
-  routePath: '/cards/',
+  routePath: '/api/cards/',
   Model: Card,
   filesFolder: 'card'
 })
@@ -83,14 +81,14 @@ routeFactory({
 /** Данные */
 routeFactory({
   ...routeFactoryData,
-  routePath: '/data/',
+  routePath: '/api/data/',
   Model: Data,
   filesFolder: 'data'
 })
 /** Слайды */
 routeFactory({
   ...routeFactoryData,
-  routePath: '/slide/',
+  routePath: '/api/slide/',
   Model: Slide,
   filesFolder: 'slide'
 })
@@ -98,7 +96,7 @@ routeFactory({
 /** Статьи */
 routeFactory({
   ...routeFactoryData,
-  routePath: '/paper/',
+  routePath: '/api/paper/',
   Model: Paper,
   filesFolder: 'paper'
 })
@@ -106,10 +104,18 @@ routeFactory({
 /** Тестовый роут */
 routeFactory({
   ...routeFactoryData,
-  routePath: '/test/',
+  routePath: '/api/test/',
   Model: Test,
   filesFolder: 'test'
 })
+
+
+app.use('/images/', express.static(path.join(__dirname, 'public/images/')))
+
+// app.use('/', express.static('build'))
+
+app.use(express.static(path.join(__dirname, 'build')))
+app.use('/*', express.static(path.join(__dirname, 'build')))
 
 // error handler
 app.use(function(err, req, res, next) {

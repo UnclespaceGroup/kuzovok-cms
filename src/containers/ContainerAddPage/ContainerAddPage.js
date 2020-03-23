@@ -9,7 +9,7 @@ import ContainerForm from 'containers/ContainerForm/ContainerForm'
 const ContainerAddPage = () => {
   const { id } = useParams()
 
-  const { data: prevData } = useAxiosInstance({ url: METHOD_CARDS, where: { id }, single: true })
+  const { data: prevData } = useAxiosInstance({ url: id ? METHOD_CARDS : undefined, where: { id }, single: true })
 
   return (
     <ContainerForm
