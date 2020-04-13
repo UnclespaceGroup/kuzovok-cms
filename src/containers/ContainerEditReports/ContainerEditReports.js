@@ -4,7 +4,7 @@ import useAxiosInstance from 'hooks/useAxiosInstance'
 import { METHOD_REPORT, METHOD_WORK } from 'constants/url'
 import _ from 'lodash'
 import SectionReport from 'components/SectionReport/SectionReport'
-import { ADD_REPORT_PAGE, ADD_WORK_PAGE } from 'constants/routes'
+import { ADD_REPORT_PAGE, ADD_WORK_PAGE, NEW_ITEM } from 'constants/routes'
 import Banner from 'components/Banner/Banner'
 import CardAdd from 'components/CardAdd/Card'
 import moment from 'moment'
@@ -24,16 +24,17 @@ const ContainerEditReports = () => {
               text={parent.annotation}
               banner={parent.banner}
               path={ADD_WORK_PAGE}
+              id={parent.id}
       />
       <CardAdd big to={{
-        pathname: ADD_REPORT_PAGE,
+        pathname: ADD_REPORT_PAGE + NEW_ITEM,
         state: {parentTitle: parent.title, parentId}
       }} />
       {
         _.map(sortedData, (item, key) => (
           <SectionReport
             toEditLink={{
-              pathname: ADD_REPORT_PAGE,
+              pathname: ADD_REPORT_PAGE + item.id,
               state: {...item, parentTitle: parent.title, parentId}
             }}
             key={key} {...item}

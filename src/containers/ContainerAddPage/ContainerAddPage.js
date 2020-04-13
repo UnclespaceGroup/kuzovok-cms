@@ -18,6 +18,7 @@ const ContainerAddPage = () => {
       fileFolder={'card'}
       backUrl={PAGE_BANNERS}
       fields={fields}
+      id={id}
       sendMethod={METHOD_CARDS}
       name={'page'}
     />

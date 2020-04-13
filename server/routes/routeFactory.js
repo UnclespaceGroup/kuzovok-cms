@@ -6,7 +6,18 @@ const Op = Sequelize.Op
 
 const getFilesFromText = (text = '') => {
   return text.match(/__SERVER_PATH__.*?\..../ig)
+}
 
+const createWhere = ({ where, between } = {}) => {
+  const whereCreatedAt = between ? {
+    createdAt: {
+      [Op.between]: between
+    }
+  } : {}
+  return {
+      ...where,
+      ...whereCreatedAt
+  }
 }
 
 const routeFactory = function (
@@ -21,6 +32,23 @@ const routeFactory = function (
     parentFolder
   } = {}
 ) {
+  // POST COUNT
+  app.post(routePath + 'count', (req, res) => {
+    const {
+      where,
+      between
+    } = req.body || {}
+    Model.count({
+      where: createWhere({ where, between }),
+    })
+      .then(result => {
+        res.send({ count: result })
+      })
+      .catch(err => {
+        res.status(404).send(err)
+        console.log(err)
+      })
+  })
 
   // GET ALL DATA
   app.get(routePath, (req, res) => {
@@ -43,17 +71,9 @@ const routeFactory = function (
       between
     } = req.body || {}
 
-    const whereCreatedAt = between ? {
-      createdAt: {
-        [Op.between]: between
-      }
-    } : {}
 
     Model.findAll({
-      where: {
-        ...where,
-        ...whereCreatedAt
-      },
+      where: createWhere({ where, between }),
       offset: offset && +offset,
       limit: limit && +limit,
       order: [['createdAt', 'DESC']]

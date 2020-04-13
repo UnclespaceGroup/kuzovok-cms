@@ -3,7 +3,7 @@ import useAxiosInstance from 'hooks/useAxiosInstance'
 import { METHOD_PAPER } from 'constants/url'
 import Card from 'components/Card/Card'
 import _ from 'lodash'
-import { ADD_PAPER_PAGE } from 'constants/routes'
+import { ADD_PAPER_PAGE, NEW_ITEM } from 'constants/routes'
 import CardAdd from 'components/CardAdd/Card'
 import moment from 'moment'
 
@@ -14,12 +14,12 @@ const ContainerEditPapers = () => {
     <div>
       <h1>Редактирование статей</h1>
       <div className={'row-wrap-3'}>
-        <CardAdd text={'Добавить'} to={ADD_PAPER_PAGE} />
+        <CardAdd text={'Добавить'} to={ADD_PAPER_PAGE + NEW_ITEM} />
         {
-          _.map(sortedData, (item, key) => console.log(item) || (
+          _.map(sortedData, (item, key) => (
             <Card {...item} key={key}
                   onDelete={() => handleDeleteData(item.id)}
-                  editLink={ADD_PAPER_PAGE}
+                  editLink={ADD_PAPER_PAGE + item.id}
             />
           ))
         }

@@ -15,7 +15,7 @@ import {
   EDIT_MAIN_PAGE,
   ADD_ADVANTAGES_MAIN,
   PAGE_BANNERS,
-  ADD_MAIN_PAGE_CARD, PAGE_SLIDES, ADD_SLIDE, PAGE_CONTACTS, ADD_STATION_PHOTOS, HOME_DOCUMENT
+  ADD_MAIN_PAGE_CARD, PAGE_SLIDE, ADD_SLIDE, PAGE_CONTACTS, ADD_STATION_PHOTOS, HOME_DOCUMENT
 } from 'constants/routes'
 import useUserStore from 'hooks/useUserStore'
 import PageLogin from 'pages/PageLogin/PageLogin'
@@ -47,7 +47,6 @@ const Routes = () => {
     initialization()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  console.log(window.location.host)
 
   if (!user) return <PageLogin />
   return (
@@ -64,20 +63,21 @@ const Routes = () => {
 
             <Route component={EditMainPage} exact path={EDIT_MAIN_PAGE} />
 
-            <Route component={ContainerAddAdvantagesMain} exact path={ADD_ADVANTAGES_MAIN} />
-            <Route component={ContainerAddMainPageCard} exact path={ADD_MAIN_PAGE_CARD} />
-            <Route component={ContainerAddWork} exact path={ADD_WORK_PAGE} />
-            <Route component={ContainerAddPaper} exact path={ADD_PAPER_PAGE} />
-            <Route component={ContainerAddReport} exact path={ADD_REPORT_PAGE} />
-            <Route component={ContainerAddService} exact path={ADD_SERVICE_PAGE} />
+            <Route component={ContainerAddAdvantagesMain} exact path={ADD_ADVANTAGES_MAIN + ':id'} />
+            <Route component={ContainerAddMainPageCard} exact path={ADD_MAIN_PAGE_CARD + ':id'} />
+            <Route component={ContainerAddWork} exact path={ADD_WORK_PAGE + ':id'} />
+            <Route component={ContainerAddPaper} exact path={ADD_PAPER_PAGE + ':id'} />
+            <Route component={ContainerAddReport} exact path={ADD_REPORT_PAGE + ':id'} />
+            <Route component={ContainerAddService} exact path={ADD_SERVICE_PAGE + ':id'} />
+            <Route component={ContainerAddSlide} exact path={ADD_SLIDE + ':id'} />
+
             <Route component={ContainerAddStationPhotos} path={ADD_STATION_PHOTOS} />
-            <Route component={ContainerAddSlide} exact path={ADD_SLIDE} />
 
             <Route component={ContainerPageBanners} exact path={PAGE_BANNERS} />
             <Route component={ContainerEditWork} exact path={WORKS_PAGE} />
             <Route component={ContainerEditReports} exact path={REPORTS_PAGE + ':parentId'} />
             <Route component={ContainerEditServices} exact path={SERVICES_PAGE} />
-            <Route component={ContainerEditSlides} exact path={PAGE_SLIDES} />
+            <Route component={ContainerEditSlides} exact path={PAGE_SLIDE} />
             <Route component={ContainerEditPapers} exact path={PAPERS_PAGE} />
 
             <Route component={ContainerAddPage} exact path={EDIT_PAGE + ':id'} />

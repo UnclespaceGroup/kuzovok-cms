@@ -4,7 +4,7 @@ import {
   ADD_WORK_PAGE,
   WORKS_PAGE,
   EDIT_MAIN_PAGE,
-  PAGE_BANNERS, PAGE_SLIDES, PAGE_CONTACTS, ADD_STATION_PHOTOS, PAPERS_PAGE, ADD_PAPER_PAGE
+  PAGE_BANNERS, PAGE_CONTACTS, ADD_STATION_PHOTOS, PAPERS_PAGE, ADD_PAPER_PAGE
 } from 'constants/routes'
 
 export const blocks = [
@@ -55,23 +55,14 @@ export const blocks = [
     ]
   },
   {
-    title: 'Редактировать главную',
-    items: [
-      {
-        title: 'Слайдер на главной',
-        to: PAGE_SLIDES
-      },
-      {
-        title: 'Блоки',
-        to: EDIT_MAIN_PAGE
-      },
-    ]
-  },
-  {
     title: 'Прочее',
     items: [
       {
-        title: 'Баннеры страниц',
+        title: 'Редактировать главную',
+        to: EDIT_MAIN_PAGE
+      },
+      {
+        title: 'Страницы',
         to: PAGE_BANNERS
       },
       {

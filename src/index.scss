@@ -43,3 +43,40 @@ a:hover {
 h2 {
   font-weight: 400;
 }
+
+h1 {
+  margin: 4rem 0;
+}
+
+h2 {
+  margin: 2rem 0;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.row-wrap-3 {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  & > * {
+    width: 32%!important;
+    margin-bottom: 2rem;
+
+    &:not(:nth-child(3n)) {
+      margin-right: 2%;
+    }
+  }
+}
+
+.mb-24 {
+  margin-bottom: 2.4rem;
+}
+

@@ -1,21 +1,17 @@
 import React from 'react'
 import { fields } from 'containers/ContainerAddWork/fields'
-import { useLocation } from 'react-router'
+import { useParams } from 'react-router'
 import { METHOD_WORK } from 'constants/url'
 import { WORKS_PAGE } from 'constants/routes'
 import useAxiosInstance from 'hooks/useAxiosInstance'
 import ContainerForm from 'containers/ContainerForm/ContainerForm'
+import { getLoadDataByIdUrl } from 'services/getLoadDataByIdUrl'
 
 const ContainerAddWork = () => {
-  const location = useLocation()
+  const { id } = useParams()
+  const url = getLoadDataByIdUrl(METHOD_WORK, id)
 
-  const prevData = location.state || {}
-
-  const id = prevData.id
-
-  console.log('najndjfnjd', id)
-
-  const { data } = useAxiosInstance({ url: id ? METHOD_WORK : undefined, single: true, where: { id } })
+  const { data } = useAxiosInstance({ url, single: true, where: { id } })
 
   return (
     <ContainerForm

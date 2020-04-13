@@ -3,7 +3,7 @@ import useAxiosInstance from 'hooks/useAxiosInstance'
 import { METHOD_SERVICE } from 'constants/url'
 import _ from 'lodash'
 import Card from 'components/Card/Card'
-import { ADD_SERVICE_PAGE } from 'constants/routes'
+import { ADD_SERVICE_PAGE, NEW_ITEM } from 'constants/routes'
 import CardAdd from 'components/CardAdd/Card'
 import moment from 'moment'
 
@@ -16,7 +16,7 @@ const ContainerEditServices = () => {
     <div>
       <h1>Просмотр услуг</h1>
       <div className={'row-wrap-3'}>
-        <CardAdd to={ADD_SERVICE_PAGE} />
+        <CardAdd to={ADD_SERVICE_PAGE + NEW_ITEM} />
         {
           _.map(sortedData, ({ title, banner, id, ...props }, key) => (
             <Card key={key}
@@ -25,7 +25,7 @@ const ContainerEditServices = () => {
                   title={title}
                   banner={banner}
                   onDelete={() => handleDeleteData(id)}
-                  editLink={ADD_SERVICE_PAGE}
+                  editLink={ADD_SERVICE_PAGE + id}
             />
           ))
         }

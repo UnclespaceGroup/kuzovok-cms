@@ -14,7 +14,7 @@ import _ from 'lodash'
 import loader from 'static/loader.svg'
 import { getImageUrl } from 'services/getImageUrl'
 
-const InputEditor = ({ input = {}, fileFolder = 'test', typeName = 'test', id = 'test' }) => {
+const InputEditor = ({ input = {}, fileFolder = 'test', typeName = 'test', id = 'test', size }) => {
   let editorRef = useRef(null)
   const [ pending, setPending ] = useState()
 
@@ -42,15 +42,13 @@ const InputEditor = ({ input = {}, fileFolder = 'test', typeName = 'test', id = 
     })
   }
 
-  console.log(editorRef.current)
-
   const onChange = function (content) {
     const _value = content.replace(new RegExp(BASE_URL, 'g'), SERVER_HASH)
     input.onChange(_value)
   }
 
   const formattedValue = input.value.replace(new RegExp(SERVER_HASH, 'g'), BASE_URL)
-  console.log(formattedValue)
+
   return (
     <div className={cn(css.container, {[css.pending]: pending})}>
       {
@@ -64,7 +62,7 @@ const InputEditor = ({ input = {}, fileFolder = 'test', typeName = 'test', id = 
         value={formattedValue}
         options={{
           lang: 'ru-RU',
-          height: 800,
+          height: size || 800,
           toolbar: [
             ['style', ['style']],
             ['font', ['strikethrough', 'superscript', 'subscript']],

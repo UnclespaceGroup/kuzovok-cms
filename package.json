@@ -91,6 +91,7 @@
   },
   "scripts": {
     "start": "cross-env node scripts/start.js",
+    "start with server": "cross-env REACT_APP_DEV=false node scripts/start.js",
     "build": "cross-env REACT_APP_DEV=false node scripts/build.js",
     "test": "node scripts/test.js",
     "start-server": "node server/bin/www.js"

@@ -18,13 +18,14 @@ const ContainerForm = (
     backUrl,
     onBackClick,
     title,
-    fileFolder
+    fileFolder,
+    id: prevId
   }) => {
 
-  const id = prevData.id || generateId(name)
+  const id = prevData.id || prevId || generateId(name)
   const isUpdate = prevData && prevData.id
   const url = isUpdate ? `${sendMethod}update/${id}` : sendMethod + 'add'
-  console.log(id)
+
   const { handleSendData, isSuccess, isError, isPending } = useHandleAxios({ url, backUrl, onBackClick })
 
   return (
