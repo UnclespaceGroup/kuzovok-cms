@@ -38,7 +38,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-vkontakte": "^0.3.2",
-    "pug": "2.0.0-beta11",
+    "pug": "3.0.1",
     "request": "^2.65.0",
     "sequelize": "^5.21.1",
     "webpack": "^4.39.2",
