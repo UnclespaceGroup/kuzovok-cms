@@ -64,7 +64,7 @@
     "react-collapse": "^5.0.1",
     "react-dev-utils": "^9.0.3",
     "react-dom": "^16.9.0",
-    "react-draft-wysiwyg": "^1.13.2",
+    "react-draft-wysiwyg": "^1.14.6",
     "react-final-form": "^4.1.0",
     "react-final-form-arrays": "2.0.3",
     "react-icons": "^3.8.0",
